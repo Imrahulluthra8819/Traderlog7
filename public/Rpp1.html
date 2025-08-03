@@ -1087,7 +1087,9 @@
                         // Include affiliate ID in payment notes
                         notes: {
                             affiliate_id: activeAffiliate || "direct",
-                            user_email: email
+                          user_name: name,
+                          user_email: email,
+                          user_phone: phone
                         },
                         handler: function(response) {
                             // Hide loading overlay immediately when payment succeeds
@@ -1137,4 +1139,5 @@
         });
     </script>
 </body>
+
 </html>
