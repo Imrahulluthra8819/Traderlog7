@@ -923,111 +923,121 @@
 
 </style>
 <style>
-    .comparison-section-3d {
+    /* START: REDESIGNED COMPARISON TABLE STYLES */
+    .comparison-section {
         padding: 6rem 0;
-        perspective: 2000px;
     }
-    .comparison-table-3d {
+
+    .comparison-grid {
         display: grid;
         grid-template-columns: 1fr 1.5fr 1.8fr;
-        background: var(--darker);
-        border-radius: 15px;
+        gap: 2rem;
+        align-items: stretch;
+    }
+
+    .comparison-column {
+        background: var(--dark);
+        border-radius: 16px;
         border: 1px solid rgba(100, 116, 139, 0.2);
-        overflow: hidden;
-    }
-    .col-header {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
-        font-weight: 600;
-        padding: 1.5rem;
-        background: rgba(30, 41, 59, 0.7);
-    }
-    .col-header, .cell {
-        border-bottom: 1px solid rgba(100, 116, 139, 0.2);
-    }
-    .column:not(:last-child) .col-header,
-    .column:not(:last-child) .cell {
-        border-right: 1px solid rgba(100, 116, 139, 0.2);
-    }
-    .column:last-child .cell:last-child,
-    .column:last-child .col-header {
-         border-bottom: none;
-    }
-     .column .cell:last-child {
-        border-bottom: none;
-    }
-    .cell {
-        padding: 1.5rem;
-        min-height: 150px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .comparison-column:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .comparison-header {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        padding: 1.5rem;
+        border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+    }
+
+    .comparison-cell {
+        padding: 1.5rem;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Style for rows, not just cells, for borders */
+    .comparison-column > div:not(:last-child) {
+        border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+    }
+    
     .cell-scenario {
         font-weight: 600;
-        font-family: 'Poppins', sans-serif;
         color: white;
     }
+
     .cell-traditional {
-        font-family: 'Roboto Mono', monospace;
-        color: var(--gray);
-        font-size: 0.95rem;
+        color: var(--gray-light);
+        font-size: 0.9rem;
         line-height: 1.5;
     }
+    
     .cell-traderlog {
         color: var(--light);
+        font-size: 0.95rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
     }
+
+    .cell-traderlog i {
+        color: var(--success);
+        font-size: 1.1rem;
+        margin-top: 4px;
+    }
+
+    /* Special Styling for TraderLog Column */
+    .comparison-column.traderlog-col {
+        background: var(--darker);
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+        transform: scale(1.05);
+    }
+
+    .comparison-column.traderlog-col::before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -1;
+        margin: -2px; /* Same as border-width */
+        border-radius: inherit; /* Inherit the border-radius */
+        background: linear-gradient(135deg, var(--accent), var(--secondary));
+    }
+
+    .traderlog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .traderlog-badge {
         background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
         color: white;
-        padding: 3px 10px;
+        padding: 4px 12px;
         border-radius: 20px;
         font-size: 0.8rem;
         font-weight: 600;
-        margin-left: 0.5rem;
-    }
-    .column.traderlog-col-3d {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-        transform: scale(1.05) rotateY(-5deg);
-        box-shadow: 20px 0 50px -10px rgba(0,0,0,0.5);
-        border-radius: 0 15px 15px 0;
-        transition: transform 0.4s ease;
-    }
-    .column.traderlog-col-3d:hover {
-        transform: scale(1.07) rotateY(0);
     }
 
-    /* Mobile Styles */
+    /* Responsive Styles for Comparison Table */
     @media (max-width: 992px) {
-        .comparison-section-3d {
-            perspective: none;
+        .comparison-grid {
+            grid-template-columns: 1fr;
         }
-        .comparison-table-3d {
-            display: block;
-            background: transparent;
-            border: none;
-        }
-        .column {
-            margin-bottom: 2rem;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(100, 116, 139, 0.2);
-        }
-        .column.traderlog-col-3d {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
-        }
-         .column.traderlog-col-3d:hover {
-            transform: scale(1.03);
-        }
-        .col-header, .cell {
-            border: none !important;
-            border-bottom: 1px solid rgba(100, 116, 139, 0.2) !important;
-        }
-        .column > div:last-child {
-            border-bottom: none !important;
+        .comparison-column.traderlog-col {
+            transform: scale(1); /* Reset scale on mobile */
         }
     }
+    /* END: REDESIGNED COMPARISON TABLE STYLES */
 </style>
 </head>
 <body>
@@ -1253,36 +1263,54 @@
   }
 }</style>
 
-    <section class="comparison-section-3d" id="comparison">
+    <section class="comparison-section" id="comparison">
         <div class="container">
             <div class="section-title">
                 <h2>The TraderLog Difference</h2>
                 <p>We translate confusing numbers into simple advice you can act on immediately.</p>
             </div>
-            <div class="comparison-table-3d">
-                <div class="column">
-                    <div class="col-header">Scenario</div>
-                    <div class="cell cell-scenario">Win Rate & RR</div>
-                    <div class="cell cell-scenario">Lot Size Behavior</div>
-                    <div class="cell cell-scenario">Strategy Success</div>
-                    <div class="cell cell-scenario">Profit Factor</div>
-                    <div class="cell cell-scenario">Behavioral Pattern</div>
+            <div class="comparison-grid">
+                <div class="comparison-column">
+                    <div class="comparison-header">Scenario</div>
+                    <div class="comparison-cell cell-scenario">Win Rate & RR</div>
+                    <div class="comparison-cell cell-scenario">Lot Size Behavior</div>
+                    <div class="comparison-cell cell-scenario">Strategy Success</div>
+                    <div class="comparison-cell cell-scenario">Profit Factor</div>
+                    <div class="comparison-cell cell-scenario">Behavioral Pattern</div>
                 </div>
-                <div class="column">
-                    <div class="col-header">Traditional Journal</div>
-                    <div class="cell cell-traditional">Win rate: <b>43.27%</b> — Avg RR: <b>0.82</b> — Std Dev: <b>0.36</b></div>
-                    <div class="cell cell-traditional">Avg lot: <b>1.27</b> — Max lot: <b>3.54</b> — Variance: <b>1.73</b></div>
-                    <div class="cell cell-traditional">SR: <b>70.18% WR</b> — Breakout: <b>19.84% WR</b> — Avg RR: <b>0.65</b></div>
-                    <div class="cell cell-traditional">Profit factor: <b>0.84</b> — Gross profit: <b>$2,356</b> — Gross loss: <b>$2,804</b></div>
-                    <div class="cell cell-traditional">Max DD: <b>-12.43%</b> — Recovery trades: <b>18</b> — Avg hold: <b>14m 22s</b></div>
+                <div class="comparison-column">
+                    <div class="comparison-header">Traditional Journal</div>
+                    <div class="comparison-cell cell-traditional">Win rate: <b>43.27%</b> — Avg RR: <b>0.82</b> — Std Dev: <b>0.36</b></div>
+                    <div class="comparison-cell cell-traditional">Avg lot: <b>1.27</b> — Max lot: <b>3.54</b> — Variance: <b>1.73</b></div>
+                    <div class="comparison-cell cell-traditional">SR: <b>70.18% WR</b> — Breakout: <b>19.84% WR</b> — Avg RR: <b>0.65</b></div>
+                    <div class="comparison-cell cell-traditional">Profit factor: <b>0.84</b> — Gross profit: <b>$2,356</b> — Gross loss: <b>$2,804</b></div>
+                    <div class="comparison-cell cell-traditional">Max DD: <b>-12.43%</b> — Recovery trades: <b>18</b> — Avg hold: <b>14m 22s</b></div>
                 </div>
-                <div class="column traderlog-col-3d">
-                    <div class="col-header">TraderLog <span class="traderlog-badge">AI POWERED</span></div>
-                    <div class="cell cell-traderlog">“Losses are 2x bigger than wins → Cut losses faster or aim for better RR.”</div>
-                    <div class="cell cell-traderlog">“You increase lot size after wins → Stick to fixed lot size to reduce risk.”</div>
-                    <div class="cell cell-traderlog">“SR works well → Use more. Breakout fails → Avoid until improved.”</div>
-                    <div class="cell cell-traderlog">“You lose more than you gain → Adjust strategy to improve profit factor above 1.”</div>
-                    <div class="cell cell-traderlog">“You chase losses after drawdowns → Pause trading after a big loss.”</div>
+                <div class="comparison-column traderlog-col">
+                    <div class="comparison-header traderlog-header">
+                        TraderLog
+                        <span class="traderlog-badge">AI POWERED</span>
+                    </div>
+                    <div class="comparison-cell cell-traderlog">
+                        <i class="fas fa-check-circle"></i>
+                        <span>“Losses are 2x bigger than wins → Cut losses faster or aim for better RR.”</span>
+                    </div>
+                    <div class="comparison-cell cell-traderlog">
+                        <i class="fas fa-check-circle"></i>
+                        <span>“You increase lot size after wins → Stick to fixed lot size to reduce risk.”</span>
+                    </div>
+                    <div class="comparison-cell cell-traderlog">
+                        <i class="fas fa-check-circle"></i>
+                        <span>“SR works well → Use more. Breakout fails → Avoid until improved.”</span>
+                    </div>
+                    <div class="comparison-cell cell-traderlog">
+                        <i class="fas fa-check-circle"></i>
+                        <span>“You lose more than you gain → Adjust strategy to improve profit factor above 1.”</span>
+                    </div>
+                    <div class="comparison-cell cell-traderlog">
+                        <i class="fas fa-check-circle"></i>
+                        <span>“You chase losses after drawdowns → Pause trading after a big loss.”</span>
+                    </div>
                 </div>
             </div>
         </div>
