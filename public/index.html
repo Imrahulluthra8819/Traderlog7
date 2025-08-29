@@ -924,65 +924,96 @@
 
 </style>
 <style>
-    /* START: NEW COMPACT COMPARISON TABLE STYLES */
+    /* START: COMPARISON TABLE STYLES WITH 3D EFFECT */
     .comparison-section {
         padding: 6rem 0;
     }
 
     .comparison-wrapper {
-        max-width: 1000px; /* Controls the overall width */
+        max-width: 1000px;
         margin: 0 auto;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        overflow-x: auto; /* Allows horizontal scroll on small screens */
+        overflow-x: auto;
+        padding: 2rem 0; /* Add padding to prevent shadow clipping */
     }
 
     .comparison-table {
         width: 100%;
-        min-width: 800px; /* Prevents table from becoming too squished */
-        border-collapse: collapse;
-        background-color: var(--darker);
+        min-width: 800px;
+        border-collapse: separate; /* Changed for border-radius */
+        border-spacing: 0;
+        background-color: transparent; /* Table itself is transparent */
     }
 
     .comparison-table th,
     .comparison-table td {
-        padding: 0.75rem 1rem; /* Reduced padding */
+        padding: 1rem 1.5rem;
         text-align: left;
         vertical-align: top;
         border-bottom: 1px solid var(--border-color);
+        background-color: var(--darker);
     }
-
+    
+    /* Remove bottom border from the last row */
     .comparison-table tr:last-child td {
         border-bottom: none;
     }
-
+    
+    /* Style the header */
     .comparison-table thead {
         background-color: rgba(30, 41, 59, 0.5);
     }
 
     .comparison-table th {
         font-family: 'Poppins', sans-serif;
-        font-size: 0.9rem; /* Reduced font size */
+        font-size: 1rem;
         font-weight: 600;
         color: var(--light);
     }
     
     .comparison-table td {
-        font-size: 0.85rem; /* Reduced font size */
+        font-size: 0.9rem;
         color: var(--gray-light);
-        line-height: 1.5;
+        line-height: 1.6;
     }
 
-    .col-scenario { width: 20%; font-weight: 600; color: white; }
+    .col-scenario { width: 25%; font-weight: 600; color: white; }
     .col-traditional { width: 35%; }
-    .col-traderlog { width: 45%; border-left: 1px solid var(--border-color); }
+    .col-traderlog { width: 40%; }
     
     .traderlog-insight b {
         font-weight: 600;
-        color: white;
+        color: var(--accent);
     }
 
-    /* END: NEW COMPACT COMPARISON TABLE STYLES */
+    /* 3D POP-UP EFFECT FOR TRADERLOG COLUMN */
+    .col-traderlog {
+        position: relative;
+        background: linear-gradient(145deg, var(--dark), #1a2436);
+        border-left: 2px solid var(--accent);
+        border-right: 2px solid var(--accent);
+        transform: scale(1.05) translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 5px 15px rgba(139, 92, 246, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .comparison-table tr:hover .col-traderlog {
+        transform: scale(1.07) translateY(-12px);
+    }
+
+    /* Apply border radius to the corners of the popped-up column */
+    .comparison-table thead tr:first-child th.col-traderlog {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-top: 2px solid var(--accent);
+    }
+
+    .comparison-table tbody tr:last-child td.col-traderlog {
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        border-bottom: 2px solid var(--accent);
+    }
+
+    /* END: COMPARISON TABLE STYLES */
 </style>
 <!-- =================================================================== -->
 <!-- ============== MOBILE OPTIMIZATION STYLES START HERE ============== -->
