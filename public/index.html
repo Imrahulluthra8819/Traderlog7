@@ -1012,8 +1012,80 @@
         border-bottom-right-radius: 12px;
         border-bottom: 2px solid var(--accent);
     }
-
     /* END: COMPARISON TABLE STYLES */
+
+    /* =============================================== */
+    /* ===== MOBILE CARD LAYOUT FOR COMPARISON TABLE ===== */
+    /* =============================================== */
+    @media (max-width: 860px) {
+        .comparison-wrapper {
+            overflow-x: visible; /* No horizontal scroll on mobile */
+        }
+        .comparison-table {
+            display: block;
+            min-width: 0;
+        }
+        .comparison-table thead {
+            display: none; /* Hide table headers */
+        }
+        .comparison-table tbody,
+        .comparison-table tr,
+        .comparison-table td {
+            display: block;
+            width: 100%;
+        }
+        .comparison-table tr {
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+        }
+        .comparison-table td {
+            border: none;
+            padding: 1rem;
+        }
+        .comparison-table .col-scenario {
+            background-color: var(--dark);
+            font-size: 1.2rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .comparison-table .col-traditional,
+        .comparison-table .col-traderlog {
+            padding: 1.5rem 1rem;
+        }
+        .comparison-table .col-traditional {
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+        .comparison-table .col-traderlog {
+            background-color: var(--dark);
+            border-top: 1px solid var(--border-color);
+            /* Reset desktop 3D styles */
+            transform: none;
+            box-shadow: none;
+            border-left: 4px solid var(--accent);
+            border-right: none;
+            border-radius: 0;
+        }
+        .comparison-table .col-traditional::before,
+        .comparison-table .col-traderlog::before {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .comparison-table .col-traditional::before {
+            content: 'Traditional';
+            color: var(--gray);
+        }
+        .comparison-table .col-traderlog::before {
+            content: 'TraderLog';
+            color: var(--accent);
+        }
+    }
 </style>
 <!-- =================================================================== -->
 <!-- ============== MOBILE OPTIMIZATION STYLES START HERE ============== -->
