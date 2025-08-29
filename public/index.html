@@ -923,174 +923,117 @@
 
 </style>
 <style>
-    .comparison-section-pricing-style {
+    .comparison-section-blended {
         padding: 6rem 0;
+        background: var(--darker);
     }
-
-    .comparison-wrapper {
-        display: grid;
-        grid-template-columns: 0.8fr 1fr 1.2fr;
-        align-items: stretch;
-        gap: 0;
-    }
-
-    .features-list-col {
-        padding-top: 10rem; /* Align with content */
-    }
-
-    .features-list-col h4 {
-        font-size: 1rem;
-        padding: 0 2rem;
-        margin-bottom: 1.5rem;
-        color: var(--light);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .features-list-col ul {
-        list-style: none;
-    }
-
-    .features-list-col ul li {
-        font-weight: 500;
-        color: var(--gray-light);
-        height: 140px;
-        display: flex;
-        align-items: center;
-        padding: 1rem 2rem;
-        border-top: 1px solid rgba(100, 116, 139, 0.2);
-    }
-     .features-list-col ul li:first-child {
-        border-top: none;
-    }
-
-    .plan-col {
-        background: var(--dark);
+    .comparison-table {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 15px;
         border: 1px solid rgba(100, 116, 139, 0.2);
-        padding: 2.5rem;
-        color: var(--darker);
+        overflow: hidden;
     }
-    
-    .plan-col.traditional {
-        border-radius: 20px 0 0 20px;
-        background: var(--light);
-    }
-    
-    .plan-col.traderlog {
-        border-radius: 0 20px 20px 0;
-        background: var(--primary);
-        color: white;
-        transform: scale(1.05);
-        position: relative;
-        z-index: 10;
-        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
-    }
-    
-    .plan-header h3 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    .plan-header p {
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-        color: var(--gray);
-    }
-    
-    .plan-col.traderlog .plan-header p {
-        color: rgba(255, 255, 255, 0.8);
-    }
-
-    .plan-features {
-        list-style: none;
-        margin-top: 2rem;
-    }
-
-    .plan-features li {
-        height: 140px;
-        display: flex;
+    .comparison-header, .comparison-row {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 2fr;
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 1rem;
+    }
+    .comparison-header {
+        padding: 1rem 1.5rem;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--gray-light);
+        background: rgba(15, 23, 42, 0.7);
+    }
+    .comparison-row {
         border-top: 1px solid rgba(100, 116, 139, 0.2);
+        transition: background-color 0.3s;
     }
-     .plan-features li:first-child {
-        border-top: none;
+    .comparison-row:hover {
+        background-color: rgba(30, 41, 59, 0.8);
     }
-
-    .plan-col.traditional .plan-features li {
+    .comparison-row > div {
+        padding: 1.5rem;
+        height: 100%;
+    }
+    .scenario-col {
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        font-size: 1.1rem;
+    }
+    .traditional-col {
         font-family: 'Roboto Mono', monospace;
         color: var(--gray);
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 0.95rem;
     }
-    
-     .plan-col.traderlog .plan-features li {
-        color: white;
-        flex-direction: column;
-        gap: 0.5rem;
-        justify-content: center;
-        align-items: flex-start;
-        text-align: left;
+    .traderlog-col {
+        border-left: 4px solid var(--accent);
+        background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), transparent);
     }
-    
-    .traderlog-insight, .traderlog-solution {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem;
+    .traderlog-col .insight {
+        display: block;
+        color: var(--light);
+        margin-bottom: 0.75rem;
     }
-    .traderlog-insight i {
-        color: var(--secondary);
-        margin-top: 4px;
+    .traderlog-col .solution {
+        display: block;
+        color: var(--gray-light);
     }
-     .traderlog-solution i {
-        color: #fff;
-        margin-top: 4px;
+    .traderlog-col strong {
+        font-weight: 600;
+        color: var(--accent);
     }
 
-    /* Responsive Design for Pricing-Style Table */
-    @media (max-width: 992px) {
-        .comparison-wrapper {
-            grid-template-columns: 1fr;
-        }
-        .features-list-col {
+    /* Mobile Optimization */
+    @media (max-width: 899px) {
+        .comparison-header {
             display: none;
         }
-        .plan-col {
-            border-radius: 20px !important;
+        .comparison-table {
+            background: transparent;
+            border: none;
         }
-        .plan-col.traderlog {
-            transform: none;
-            margin-top: 2rem;
+        .comparison-row {
+            grid-template-columns: 1fr;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
         }
-        .plan-features li, .features-list-col ul li {
-            height: auto;
-            min-height: 120px;
+        .comparison-row:last-child {
+            margin-bottom: 0;
         }
-        .plan-features li::before {
-            content: attr(data-label);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.75rem;
-            color: var(--dark);
-        }
-        .plan-col.traderlog .plan-features li::before {
-            color: rgba(255, 255, 255, 0.8);
-        }
-         .plan-features li {
-            flex-direction: column;
+        .scenario-col {
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
             text-align: center;
         }
-        .plan-col.traderlog .plan-features li {
-             align-items: center;
-             text-align: center;
+        .traditional-col, .traderlog-col {
+            position: relative;
+            padding-top: 3.5rem;
         }
-        .traderlog-insight, .traderlog-solution {
-             justify-content: center;
+        .traderlog-col {
+            border-left: none;
+            background: transparent;
+        }
+        .traditional-col::before, .traderlog-col::before {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-light);
+        }
+        .traditional-col::before {
+            content: 'Traditional Journal';
+        }
+         .traderlog-col::before {
+            content: 'TraderLog Analysis';
         }
     }
 </style>
@@ -1317,6 +1260,54 @@
     margin: 0 auto;
   }
 }</style>
+
+    <section class="comparison-section-blended" id="comparison">
+        <div class="container">
+            <div class="section-title">
+                <h2>The TraderLog Difference</h2>
+                <p>We translate confusing numbers into simple advice you can act on immediately.</p>
+            </div>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div>Scenario</div>
+                    <div>Traditional Journal</div>
+                    <div>TraderLog</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="scenario-col">Strategy Success</div>
+                    <div class="traditional-col">`Strategy A (SR) WR: 70.18% vs Strategy B (BO) WR: 19.84%`</div>
+                    <div class="traderlog-col">
+                        <span class="insight"><strong>Insight:</strong> Your SR strategy is highly profitable.</span>
+                        <span class="solution"><strong>Solution:</strong> Focus on SR setups and stop trading the failing Breakout strategy.</span>
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="scenario-col">Behavioral Pattern</div>
+                    <div class="traditional-col">`Max DD: -12.43%, Post-DD Trade Freq: 18, Avg. Duration: 862s`</div>
+                    <div class="traderlog-col">
+                        <span class="insight"><strong>Insight:</strong> You trade impulsively after a loss.</span>
+                        <span class="solution"><strong>Solution:</strong> Implement a rule: take a 30-minute break after every big losing trade.</span>
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="scenario-col">Profit Factor</div>
+                    <div class="traditional-col">`PF: 0.84, Gross P/L: -$448 ($2356P / $2804L)`</div>
+                    <div class="traderlog-col">
+                        <span class="insight"><strong>Insight:</strong> Your overall trading is unprofitable.</span>
+                        <span class="solution"><strong>Solution:</strong> Your goal is to get the Profit Factor above 1.0. Start by cutting your losing trades faster.</span>
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="scenario-col">Lot Size Behavior</div>
+                    <div class="traditional-col">`μ-Lot: 1.27, Max-Lot: 3.54, σ²: 1.73`</div>
+                    <div class="traderlog-col">
+                        <span class="insight"><strong>Insight:</strong> You get overconfident and risk too much after wins.</span>
+                        <span class="solution"><strong>Solution:</strong> Use a consistent lot size for every trade to manage risk properly.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
@@ -1464,63 +1455,6 @@
         </div>
     </section>
 
-    <section class="comparison-section-pricing-style" id="comparison">
-        <div class="container">
-            <div class="section-title">
-                <h2>The TraderLog Difference</h2>
-                <p>We translate confusing numbers into simple advice you can act on immediately.</p>
-            </div>
-            <div class="comparison-wrapper">
-                <div class="features-list-col">
-                    <h4>FEATURES</h4>
-                    <ul>
-                        <li>Strategy Success</li>
-                        <li>Behavioral Pattern</li>
-                        <li>Profit Factor</li>
-                        <li>Lot Size Behavior</li>
-                    </ul>
-                </div>
-
-                <div class="plan-col traditional">
-                    <div class="plan-header">
-                        <h3>TRADITIONAL JOURNAL</h3>
-                        <p>Just provides raw, confusing data.</p>
-                    </div>
-                    <ul class="plan-features">
-                        <li data-label="Strategy Success">`Strategy A (SR) WR: 70.18% vs Strategy B (BO) WR: 19.84%`</li>
-                        <li data-label="Behavioral Pattern">`Max DD: -12.43%, Post-DD Trade Freq: 18, Avg. Duration: 862s`</li>
-                        <li data-label="Profit Factor">`PF: 0.84, Gross P/L: -$448 ($2356P / $2804L)`</li>
-                        <li data-label="Lot Size Behavior">`μ-Lot: 1.27, Max-Lot: 3.54, σ²: 1.73`</li>
-                    </ul>
-                </div>
-
-                <div class="plan-col traderlog">
-                    <div class="plan-header">
-                        <h3>TRADERLOG</h3>
-                        <p>Gives you clear insights & solutions.</p>
-                    </div>
-                    <ul class="plan-features">
-                        <li data-label="Strategy Success">
-                           <span class="traderlog-insight"><i class="fas fa-lightbulb"></i><strong>Insight:</strong> Your SR strategy is highly profitable.</span>
-                           <span class="traderlog-solution"><i class="fas fa-check-circle"></i><strong>Solution:</strong> Focus on SR setups and stop trading the failing Breakout strategy.</span>
-                        </li>
-                         <li data-label="Behavioral Pattern">
-                           <span class="traderlog-insight"><i class="fas fa-lightbulb"></i><strong>Insight:</strong> You trade impulsively after a loss.</span>
-                           <span class="traderlog-solution"><i class="fas fa-check-circle"></i><strong>Solution:</strong> Implement a rule: take a 30-minute break after every big losing trade.</span>
-                        </li>
-                         <li data-label="Profit Factor">
-                           <span class="traderlog-insight"><i class="fas fa-lightbulb"></i><strong>Insight:</strong> Your overall trading is unprofitable.</span>
-                           <span class="traderlog-solution"><i class="fas fa-check-circle"></i><strong>Solution:</strong> Your goal is to get the Profit Factor above 1.0. Start by cutting your losing trades faster.</span>
-                        </li>
-                         <li data-label="Lot Size Behavior">
-                           <span class="traderlog-insight"><i class="fas fa-lightbulb"></i><strong>Insight:</strong> You get overconfident and risk too much after wins.</span>
-                           <span class="traderlog-solution"><i class="fas fa-check-circle"></i><strong>Solution:</strong> Use a consistent lot size for every trade to manage risk properly.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="features" style="padding: 6rem 0; background: #0f172a;">
         <div class="container">
             <div class="section-title">
