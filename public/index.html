@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TraderLog - AI-Powered Trading Journal</title>
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="icon" type="image/svg+xml" href="/logo.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Added Inter font as requested -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -27,20 +29,12 @@
             --gray-light: #cbd5e1;
             --border-color: #334155; 
             
-            /* New Card Variables */
-            --bg-1: #071127;
-            --bg-2: #071726;
-            --card-bg: #0b2133;
-            --card-back-grad-end: #0d2a3b;
-            --front-bg: #071b2b;
-            --trader-stroke: #12B6FF;
-            --insight-color: #0EB7FF;
-            --divider-purple: #9b6bff;
-            --text: #e6eef6;
-            --muted: #9aa4b2;
-            --card-shadow: 0 20px 40px rgba(2,6,23,0.6);
-            --front-shadow: 0 24px 48px rgba(3,10,20,0.65);
-            --radius: 20px;
+            /* CSS Variables for the new mobile card */
+            --card-bg: #161630;
+            --traderlog-panel-bg: #10102A;
+            --trader-stroke: #00F0FF;
+            --title-color: #FFFFFF;
+            --divider-color: #8A3FFC;
         }
         
         * {
@@ -50,8 +44,8 @@
         }
         
         body {
-            font-family: 'Inter', 'Roboto', sans-serif;
-            background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
@@ -1035,118 +1029,106 @@
 <!-- ============== MOBILE OPTIMIZATION STYLES START HERE ============== -->
 <!-- =================================================================== -->
 <style>
-    /* START: MOBILE CAROUSEL STYLES */
+    /* START: REPLACEMENT MOBILE CARD STYLES */
     .comparison-carousel {
-        display: none; /* Hidden by default */
+        display: none; /* Hidden by default, shown in media query */
         position: relative;
-        overflow: visible;
         width: 100%;
-        padding: 2rem 0;
+        font-family: 'Inter', sans-serif;
     }
 
     .carousel-track {
         display: flex;
         transition: transform 0.5s ease-in-out;
+        padding-bottom: 48px; /* Add padding to avoid content being cut off by overflow */
     }
 
     .carousel-card {
         flex: 0 0 100%;
         width: 100%;
-        padding: 0 10px;
+        padding: 2rem 0;
         box-sizing: border-box;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
-    .card-wrapper {
+    .mobile-main-card {
         width: 320px;
-        max-width: 100%;
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 32px 32px 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         position: relative;
-        padding-bottom: 40px; /* room for overlap */
+        color: var(--title-color);
+        box-sizing: border-box;
     }
 
-    .card-back {
-        width: 100%;
-        border-radius: var(--radius);
-        padding: 32px 28px 60px;
-        background: linear-gradient(180deg, var(--card-bg), var(--card-back-grad-end));
-        box-shadow: var(--card-shadow);
-        border: 1px solid rgba(255,255,255,0.02);
-        position: relative;
-        z-index: 1;
-        overflow: visible;
-    }
-
-    .card-title {
-        text-align: center;
+    .mobile-card-title {
+        font-size: 32px;
         font-weight: 700;
-        font-size: 16px;
-        margin: 0 0 10px 0;
-        color: var(--text);
-        letter-spacing: 0.2px;
+        text-align: center;
+        margin: 0 0 16px 0;
     }
 
-    .divider {
+    .mobile-card-divider {
         width: 60%;
         height: 3px;
-        background: var(--divider-purple);
-        margin: 0 auto 18px;
-        border-radius: 3px;
+        background-color: var(--divider-color);
+        margin: 0 auto 24px;
+        border-radius: 2px;
     }
 
-    .subheading {
-        font-weight: 700;
+    .traditional-section h4 {
         font-size: 20px;
-        margin-bottom: 12px;
-        color: var(--text);
+        font-weight: 700;
+        margin-bottom: 8px;
     }
 
-    .trad-text {
+    .traditional-section p {
         font-size: 16px;
-        color: var(--text);
-        line-height: 1.45;
-        max-width: 100%;
+        line-height: 1.4;
+        color: var(--gray-light);
     }
 
-    .card-front {
+    .traderlog-panel {
         width: 300px;
+        background: var(--traderlog-panel-bg);
         border-radius: 22px;
-        padding: 20px;
-        background: var(--front-bg);
+        padding: 22px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        border: 6px solid var(--trader-stroke);
         position: absolute;
+        bottom: -48px; /* Overlap amount */
         left: 50%;
         transform: translateX(-50%);
-        bottom: 10px;
-        z-index: 3;
-        box-shadow: var(--front-shadow);
-        border: 6px solid var(--trader-stroke);
-        filter: drop-shadow(0 12px 28px rgba(18,182,255,0.10));
-        -webkit-backface-visibility: hidden;
+        box-sizing: border-box;
     }
 
-    .front-heading {
+    .traderlog-panel h4 {
         font-size: 22px;
         font-weight: 700;
-        margin: 0 0 10px 0;
-        color: var(--trader-stroke);
-    }
-
-    .front-insight {
-        font-size: 20px;
-        font-weight: 800;
         margin: 0 0 8px 0;
-        color: var(--insight-color);
+        color: var(--title-color);
     }
 
-    .front-body {
+    .traderlog-panel .traderlog-insight {
         font-size: 16px;
-        color: var(--text);
         line-height: 1.45;
+        color: var(--gray-light);
+    }
+
+    .traderlog-panel .traderlog-insight b {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--trader-stroke);
+        display: block;
+        margin-bottom: 4px;
     }
     
     .carousel-dots {
         text-align: center;
-        margin-top: 1.5rem;
+        margin-top: 1.5rem; /* Reduced from 40px to account for track padding */
     }
 
     .dot {
@@ -1161,10 +1143,10 @@
     }
 
     .dot.active {
-        background-color: var(--accent);
+        background-color: var(--divider-color);
         transform: scale(1.3);
     }
-    /* END: MOBILE CAROUSEL STYLES */
+    /* END: REPLACEMENT MOBILE CARD STYLES */
 
 
     @media (max-width: 860px) {
@@ -1239,11 +1221,6 @@
         .section-title p {
             font-size: 0.95rem;
         }
-    }
-
-    @media (max-width:360px){
-        .card-back{width:300px;padding-left:20px;padding-right:20px;}
-        .card-front{width:270px; left:50%; transform:translateX(-50%); bottom:-26px;}
     }
 </style>
 <!-- ================================================================= -->
@@ -1864,7 +1841,7 @@
             <!-- Mobile Carousel -->
             <div class="comparison-carousel">
                 <div class="carousel-track">
-                    <!-- Cards will be populated by JavaScript -->
+                    <!-- Cards will be populated by JavaScript with the new design -->
                 </div>
                 <div class="carousel-dots">
                     <!-- Dots will be populated by JavaScript -->
@@ -2375,27 +2352,22 @@
                 // Create Card
                 const card = document.createElement('div');
                 card.classList.add('carousel-card');
-                
-                const insightMatch = item.traderlog.match(/<b>(.*?)<\/b>/);
-                const insightText = insightMatch ? insightMatch[1] : '';
-                const bodyText = item.traderlog.replace(/<b>.*?<\/b> /g, '');
-
-
+                // <!-- START: MODIFIED CARD STRUCTURE FOR NEW DESIGN -->
                 card.innerHTML = `
-                    <div class="card-wrapper" role="group" aria-label="TraderLog sample card">
-                        <div class="card-back" aria-hidden="false">
-                            <h1 class="card-title">${item.scenario}</h1>
-                            <div class="divider" aria-hidden="true"></div>
-                            <div class="subheading">Traditional Journal</div>
-                            <div class="trad-text">${item.traditional}</div>
+                    <div class="mobile-main-card">
+                        <h3 class="mobile-card-title">${item.scenario}</h3>
+                        <div class="mobile-card-divider"></div>
+                        <div class="traditional-section">
+                            <h4>Traditional Journal</h4>
+                            <p>${item.traditional}</p>
                         </div>
-                        <div class="card-front" aria-hidden="false" role="article" aria-label="TraderLog insights">
-                            <div class="front-heading">TraderLog</div>
-                            <div class="front-insight">${insightText}</div>
-                            <div class="front-body">${bodyText}</div>
+                        <div class="traderlog-panel">
+                            <h4>TraderLog</h4>
+                            <div class="traderlog-insight">${item.traderlog}</div>
                         </div>
                     </div>
                 `;
+                // <!-- END: MODIFIED CARD STRUCTURE FOR NEW DESIGN -->
                 carouselTrack.appendChild(card);
 
                 // Create Dot
@@ -2429,7 +2401,7 @@
 
             function startAutoSlide() {
                 stopAutoSlide(); // Prevent multiple intervals
-                autoSlideInterval = setInterval(showNextCard, 4500);
+                autoSlideInterval = setInterval(showNextCard, 3000); // CHANGED TO 3 SECONDS
             }
 
             function stopAutoSlide() {
