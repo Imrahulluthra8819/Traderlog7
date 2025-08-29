@@ -848,6 +848,10 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        border-radius: 20px;
+        background-size: cover;
+        background-position: center;
+        padding: 2rem;
     }
     
     .feature-display-item.active {
@@ -855,14 +859,50 @@
         visibility: visible;
         transform: translateY(0);
     }
+
+    /* MODIFIED: Card Background Designs */
+    .feature-display-item[data-content="1"] { /* Ask AI */
+        background-image: 
+            radial-gradient(at 0% 0%, hsla(262, 83%, 58%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, hsla(204, 90%, 54%, 0.3) 0px, transparent 50%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='ai-pattern' patternUnits='userSpaceOnUse' width='20' height='20'%3E%3Cpath d='M 5 5 L 15 15 M 15 5 L 5 15' stroke='%238b5cf6' stroke-width='1'/%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%230ea5e9'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23ai-pattern)'/%3E%3C/svg%3E");
+    }
+    .feature-display-item[data-content="2"] { /* Live Market */
+        background-image: 
+            radial-gradient(at 50% 100%, hsla(158, 82%, 57%, 0.2) 0px, transparent 50%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cdefs%3E%3Cpattern id='candles' patternUnits='userSpaceOnUse' width='40' height='40'%3E%3Crect x='5' y='10' width='10' height='20' fill='%2310b981'/%3E%3Cline x1='10' y1='5' x2='10' y2='35' stroke='%2310b981' stroke-width='2'/%3E%3Crect x='25' y='5' width='10' height='15' fill='%23ef4444'/%3E%3Cline x1='30' y1='0' x2='30' y2='25' stroke='%23ef4444' stroke-width='2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23candles)' opacity='0.5'/%3E%3C/svg%3E");
+    }
+    .feature-display-item[data-content="3"] { /* AI Analytics */
+       background-image:
+            radial-gradient(at 0% 100%, hsla(204, 90%, 54%, 0.25) 0px, transparent 50%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cdefs%3E%3Cpattern id='analytics' patternUnits='userSpaceOnUse' width='30' height='30'%3E%3Crect x='2' y='15' width='8' height='10' fill='%232563eb'/%3E%3Crect x='12' y='10' width='8' height='15' fill='%230ea5e9'/%3E%3Crect x='22' y='5' width='8' height='20' fill='%238b5cf6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23analytics)' opacity='0.6'/%3E%3C/svg%3E");
+    }
+    .feature-display-item[data-content="4"] { /* Multiple Currency */
+        background-image:
+            radial-gradient(at 90% 10%, hsla(39, 92%, 53%, 0.3) 0px, transparent 50%),
+            url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='25' font-family='Arial' font-size='20' font-weight='bold' fill='%23f59e0b' fill-opacity='0.5'%3E$%3C/text%3E%3Ctext x='50' y='60' font-family='Arial' font-size='20' font-weight='bold' fill='%23f59e0b' fill-opacity='0.5'%3E€%3C/text%3E%3Ctext x='20' y='55' font-family='Arial' font-size='20' font-weight='bold' fill='%23f59e0b' fill-opacity='0.5'%3E¥%3C/text%3E%3Ctext x='45' y='30' font-family='Arial' font-size='20' font-weight='bold' fill='%23f59e0b' fill-opacity='0.5'%3E£%3C/text%3E%3C/svg%3E");
+    }
+
+
+    .feature-display-item > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    .feature-display-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(15, 23, 42, 0.85); /* Slightly increased opacity for better text contrast */
+        border-radius: 20px;
+        z-index: 1;
+    }
     
     .feature-display-item img {
-        width: 100%;
-        max-width: 500px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        border: 1px solid rgba(100, 116, 139, 0.3);
-        margin-bottom: 2rem;
+        display: none; /* Hide the placeholder images */
     }
 
     .feature-display-item h3 {
@@ -886,7 +926,7 @@
             max-width: 100%;
         }
         .feature-display {
-            min-height: auto;
+            min-height: 350px; /* Adjusted height for mobile */
             width: 100%;
         }
         .feature-display-item {
@@ -930,9 +970,9 @@
     }
 
     .comparison-wrapper {
-        max-width: 1000px;
+        max-width: 1050px; /* MODIFIED: Increased width by 5% */
         margin: 0 auto;
-        overflow-x: auto;
+        /* MODIFIED: Removed overflow-x: auto; to remove scroller */
         padding: 2rem 0; /* Add padding to prevent shadow clipping */
     }
 
@@ -1560,19 +1600,39 @@
         animation: pulse 2s infinite;
     }
     
-    /* Mobile-specific reductions (480px and below) */
+    /* MODIFIED: Mobile-specific reductions (for offer bar) */
     @media (max-width: 480px) {
         .offer-bar {
-            padding: 6.8px 12.75px; /* 15% reduction */
-            gap: 17px; /* Reduced gap */
+            padding: 8px 10px; 
+            gap: 10px; 
+            flex-wrap: nowrap; /* Ensure it stays in one line */
         }
         
         .pricing {
-            gap: 10px; /* Reduced gap */
+            gap: 8px; /* Reduced gap */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .original-price {
+            font-size: 0.8rem;
+        }
+    
+        .discounted-price {
+            font-size: 1.1rem;
+        }
+    
+        .discount-badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
         }
         
         .avail-btn-container {
-            gap: 10px; /* Reduced gap */
+            gap: 8px; /* Reduced gap */
+        }
+
+        .avail-btn {
+            padding: 7px 15px;
+            font-size: 0.85rem;
         }
     }
 </style>
@@ -2493,7 +2553,7 @@
             });
         });
     </script>
-    <script async src="https://www.googagletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -2503,6 +2563,3 @@
     </script>
     </body>
 </html>
-
-
-
