@@ -924,109 +924,112 @@
 
 </style>
 <style>
-    /* START: COMPARISON TABLE STYLES WITH 3D EFFECT */
-    .comparison-section {
-        padding: 6rem 0;
-    }
+    /* START: COMPARISON TABLE STYLES - DESKTOP */
+    @media (min-width: 861px) {
+        .comparison-section {
+            padding: 6rem 0;
+        }
 
-    .comparison-wrapper {
-        max-width: 1000px;
-        margin: 0 auto;
-        overflow-x: auto;
-        padding: 2rem 0; /* Add padding to prevent shadow clipping */
-    }
+        .comparison-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto;
+            padding: 2rem 0;
+        }
 
-    .comparison-table {
-        width: 100%;
-        min-width: 800px;
-        border-collapse: separate; /* Changed for border-radius */
-        border-spacing: 0;
-        background-color: transparent; /* Table itself is transparent */
-    }
+        .comparison-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: transparent;
+        }
 
-    .comparison-table th,
-    .comparison-table td {
-        padding: 1rem 1.5rem;
-        text-align: left;
-        vertical-align: top;
-        border-bottom: 1px solid var(--border-color);
-        background-color: var(--darker);
-    }
-    
-    /* Remove bottom border from the last row */
-    .comparison-table tr:last-child td {
-        border-bottom: none;
-    }
-    
-    /* Style the header */
-    .comparison-table thead {
-        background-color: rgba(30, 41, 59, 0.5);
-    }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--darker);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table thead {
+            background-color: rgba(30, 41, 59, 0.5);
+        }
 
-    .comparison-table th {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--light);
-    }
-    
-    .comparison-table td {
-        font-size: 0.9rem;
-        color: var(--gray-light);
-        line-height: 1.6;
-    }
+        .comparison-table th {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+        
+        .comparison-table td {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            line-height: 1.6;
+        }
 
-    .col-scenario { width: 25%; font-weight: 600; color: white; }
-    .col-traditional { width: 35%; }
-    .col-traderlog { width: 40%; }
-    
-    .traderlog-insight b {
-        font-weight: 600;
-        color: var(--accent);
-    }
+        .col-scenario { width: 25%; font-weight: 600; color: white; }
+        .col-traditional { width: 35%; }
+        .col-traderlog { width: 40%; }
+        
+        .traderlog-insight b {
+            font-weight: 600;
+            color: var(--accent);
+        }
 
-    /* 3D POP-UP EFFECT FOR TRADERLOG COLUMN */
-    .col-traderlog {
-        position: relative;
-        background: linear-gradient(145deg, var(--dark), #1a2436);
-        border-left: 2px solid var(--accent);
-        border-right: 2px solid var(--accent);
-        transform: scale(1.05) translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 5px 15px rgba(139, 92, 246, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .comparison-table tr:hover .col-traderlog {
-        transform: scale(1.07) translateY(-12px);
-    }
+        .col-traderlog {
+            position: relative;
+            background: linear-gradient(145deg, var(--dark), #1a2436);
+            border-left: 2px solid var(--accent);
+            border-right: 2px solid var(--accent);
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 5px 15px rgba(139, 92, 246, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .comparison-table tr:hover .col-traderlog {
+            transform: scale(1.07) translateY(-12px);
+        }
 
-    /* Apply border radius to the corners of the popped-up column */
-    .comparison-table thead tr:first-child th.col-traderlog {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        border-top: 2px solid var(--accent);
-    }
+        .comparison-table thead tr:first-child th.col-traderlog {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-top: 2px solid var(--accent);
+        }
 
-    .comparison-table tbody tr:last-child td.col-traderlog {
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-        border-bottom: 2px solid var(--accent);
+        .comparison-table tbody tr:last-child td.col-traderlog {
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            border-bottom: 2px solid var(--accent);
+        }
     }
-    /* END: COMPARISON TABLE STYLES */
+    /* END: COMPARISON TABLE STYLES - DESKTOP */
 
     /* =============================================== */
-    /* ===== MOBILE CARD LAYOUT FOR COMPARISON TABLE ===== */
+    /* ===== MOBILE CAROUSEL FOR COMPARISON TABLE ==== */
     /* =============================================== */
     @media (max-width: 860px) {
         .comparison-wrapper {
-            overflow-x: visible; /* No horizontal scroll on mobile */
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 0;
+            perspective: 1000px;
         }
         .comparison-table {
-            display: block;
+            display: flex;
             min-width: 0;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
         }
         .comparison-table thead {
-            display: none; /* Hide table headers */
+            display: none;
         }
         .comparison-table tbody,
         .comparison-table tr,
@@ -1035,38 +1038,51 @@
             width: 100%;
         }
         .comparison-table tr {
-            margin-bottom: 1.5rem;
-            border-radius: 12px;
+            flex: 0 0 90%; /* Show a peek of the next card */
+            margin: 0 5%;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             border: 1px solid var(--border-color);
+            background: var(--dark);
+            transform: scale(0.9);
+            opacity: 0.7;
+            transition: transform 0.5s, opacity 0.5s;
         }
+
+        .comparison-table tr.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        @media (max-width: 500px) {
+            .comparison-table tr {
+                flex: 0 0 100%;
+                margin: 0;
+            }
+        }
+        
         .comparison-table td {
             border: none;
-            padding: 1rem;
+            padding: 0;
         }
         .comparison-table .col-scenario {
-            background-color: var(--dark);
+            background-color: var(--darker);
             font-size: 1.2rem;
-            padding: 1rem;
+            padding: 1rem 1.5rem;
+            text-align: center;
             border-bottom: 1px solid var(--border-color);
         }
         .comparison-table .col-traditional,
         .comparison-table .col-traderlog {
-            padding: 1.5rem 1rem;
+            padding: 1.5rem;
         }
         .comparison-table .col-traditional {
-            background-color: rgba(30, 41, 59, 0.5);
+            background-color: rgba(15, 23, 42, 0.5);
         }
         .comparison-table .col-traderlog {
-            background-color: var(--dark);
+            background: linear-gradient(145deg, var(--dark), #1a2436);
             border-top: 1px solid var(--border-color);
-            /* Reset desktop 3D styles */
-            transform: none;
-            box-shadow: none;
-            border-left: 4px solid var(--accent);
-            border-right: none;
-            border-radius: 0;
         }
         .comparison-table .col-traditional::before,
         .comparison-table .col-traderlog::before {
@@ -1084,6 +1100,25 @@
         .comparison-table .col-traderlog::before {
             content: 'TraderLog';
             color: var(--accent);
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .carousel-dots .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .carousel-dots .dot.active {
+            background-color: var(--accent);
+            transform: scale(1.2);
         }
     }
 </style>
@@ -1764,9 +1799,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Data is populated by JavaScript -->
+                        <!-- Data is populated by JavaScript, which will also handle the carousel structure -->
                     </tbody>
                 </table>
+                 <div class="carousel-dots"></div>
             </div>
         </div>
     </section>
@@ -2220,51 +2256,103 @@
         });
         // END: SCRIPT FOR NEW INTERACTIVE FEATURES SECTION
 
-        // START: SCRIPT FOR NEW COMPARISON TABLE
+        // START: SCRIPT FOR COMPARISON TABLE & CAROUSEL
         document.addEventListener('DOMContentLoaded', () => {
             const comparisonData = [
-                {
-                    scenario: "Win Rate & RR",
-                    traditional: "- Win rate: 43.27% - Avg RR: 0.82 - Std Dev RR: 0.36",
-                    traderlog: "<b>Losses are 2x your wins</b> Cut losses sooner or target higher RR. Action: tighter stops | Goal: RR ≥ 1.5"
-                },
-                {
-                    scenario: "Lot Size Behavior",
-                    traditional: "- Avg lot: 1.27 - Max lot: 3.54 - Variance: 1.73",
-                    traderlog: "<b>You upsize after wins</b> Use fixed lot or capped scaling to limit drawdown."
-                },
-                {
-                    scenario: "Strategy Success",
-                    traditional: "- SR WR: 70.18% - Breakout WR: 19.84% - Avg RR (all): 0.65.",
-                    traderlog: "<b>SR wins 70% — Breakout wins 20%</b> Shift allocation to SR; pause Breakouts until fixed."
-                },
-                {
-                    scenario: "Profit Factor",
-                    traditional: "- Profit factor: 0.84 - Gross profit: $2,356 - Gross loss: $2,804.",
-                    traderlog: "<b>You lose more than you make</b> Stop low-edge setups; tighten exits & sizing."
-                },
-                {
-                    scenario: "Behavioral Pattern",
-                    traditional: "- Max DD: -12.43% - Recovery trades: 18 - Avg hold: 14m 22s.",
-                    traderlog: "<b>You chase losses after drawdowns</b> Auto-pause after big loss; review plan before next trade."
-                }
+                { scenario: "Win Rate & RR", traditional: "- Win rate: 43.27%<br>- Avg RR: 0.82", traderlog: "<b>Losses are 2x your wins.</b> Cut losses sooner or target higher RR. Action: tighter stops." },
+                { scenario: "Lot Size Behavior", traditional: "- Avg lot: 1.27<br>- Max lot: 3.54", traderlog: "<b>You upsize after wins.</b> Use fixed lot or capped scaling to limit drawdown." },
+                { scenario: "Strategy Success", traditional: "- SR WR: 70.18%<br>- Breakout WR: 19.84%", traderlog: "<b>SR wins 70% — Breakout wins 20%.</b> Shift allocation to SR; pause Breakouts." },
+                { scenario: "Profit Factor", traditional: "- Profit factor: 0.84<br>- Gross profit: $2,356", traderlog: "<b>You lose more than you make.</b> Stop low-edge setups; tighten exits & sizing." },
+                { scenario: "Behavioral Pattern", traditional: "- Max DD: -12.43%<br>- Avg hold: 14m 22s", traderlog: "<b>You chase losses after drawdowns.</b> Auto-pause after a big loss; review your plan." }
             ];
 
             const tableBody = document.querySelector('.comparison-table tbody');
-            tableBody.innerHTML = ''; // Clear existing content
+            const dotsContainer = document.querySelector('.carousel-dots');
+            tableBody.innerHTML = ''; 
+            dotsContainer.innerHTML = '';
 
-            comparisonData.forEach(item => {
+            comparisonData.forEach((item, index) => {
                 const row = document.createElement('tr');
-                
                 row.innerHTML = `
                     <td class="col-scenario">${item.scenario}</td>
                     <td class="col-traditional">${item.traditional}</td>
                     <td class="col-traderlog"><div class="traderlog-insight">${item.traderlog}</div></td>
                 `;
                 tableBody.appendChild(row);
+
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                dot.dataset.index = index;
+                dotsContainer.appendChild(dot);
             });
+
+            // CAROUSEL LOGIC
+            if (window.innerWidth <= 860) {
+                const carousel = document.querySelector('.comparison-table');
+                const slides = document.querySelectorAll('.comparison-table tr');
+                const dots = document.querySelectorAll('.carousel-dots .dot');
+                let currentIndex = 0;
+                let autoRotateInterval;
+                let touchStartX = 0;
+                let touchEndX = 0;
+
+                function updateCarousel() {
+                    const offset = -currentIndex * 100;
+                    carousel.style.transform = `translateX(${offset}%)`;
+                    slides.forEach((slide, index) => {
+                        slide.classList.toggle('active', index === currentIndex);
+                    });
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+
+                function startAutoRotate() {
+                    stopAutoRotate();
+                    autoRotateInterval = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % slides.length;
+                        updateCarousel();
+                    }, 2000);
+                }
+
+                function stopAutoRotate() {
+                    clearInterval(autoRotateInterval);
+                }
+
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = parseInt(dot.dataset.index);
+                        updateCarousel();
+                        startAutoRotate(); 
+                    });
+                });
+
+                carousel.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    stopAutoRotate();
+                });
+
+                carousel.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    startAutoRotate();
+                });
+
+                function handleSwipe() {
+                    if (touchEndX < touchStartX - 50) { // Swiped left
+                        currentIndex = (currentIndex + 1) % slides.length;
+                    }
+                    if (touchEndX > touchStartX + 50) { // Swiped right
+                        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    }
+                    updateCarousel();
+                }
+
+                updateCarousel();
+                startAutoRotate();
+            }
         });
-        // END: SCRIPT FOR NEW COMPARISON TABLE
+        // END: SCRIPT FOR COMPARISON TABLE & CAROUSEL
 
         // Popup and Offer Bar Script
         document.addEventListener('DOMContentLoaded', function() {
