@@ -923,121 +923,122 @@
 
 </style>
 <style>
-    /* START: REDESIGNED COMPARISON TABLE STYLES */
+    /* START: REDESIGNED STATIC COMPARISON STYLES V4 */
     .comparison-section {
         padding: 6rem 0;
     }
 
     .comparison-grid {
-        display: grid;
-        grid-template-columns: 1fr 1.5fr 1.8fr;
+        display: flex;
+        flex-direction: column;
         gap: 2rem;
-        align-items: stretch;
     }
 
-    .comparison-column {
+    .comparison-row {
         background: var(--dark);
         border-radius: 16px;
         border: 1px solid rgba(100, 116, 139, 0.2);
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .comparison-column:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-    
-    .comparison-header {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.25rem;
-        font-weight: 600;
-        padding: 1.5rem;
-        border-bottom: 1px solid rgba(100, 116, 139, 0.2);
-    }
-
-    .comparison-cell {
-        padding: 1.5rem;
-        min-height: 120px;
-        display: flex;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr; /* Mobile first: single column */
+        gap: 1.5rem;
         align-items: center;
     }
 
-    /* Style for rows, not just cells, for borders */
-    .comparison-column > div:not(:last-child) {
-        border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+    .scenario-title {
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
     }
-    
-    .cell-scenario {
-        font-weight: 600;
+
+    .scenario-title h4 {
+        font-size: 1.5rem;
         color: white;
     }
 
-    .cell-traditional {
-        color: var(--gray-light);
-        font-size: 0.9rem;
-        line-height: 1.5;
+    .comparison-card {
+        border-radius: 12px;
+        padding: 1.5rem;
+        height: 100%;
     }
-    
-    .cell-traderlog {
-        color: var(--light);
-        font-size: 0.95rem;
+
+    .comparison-card-header {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 0.75rem;
+        margin-bottom: 1rem;
     }
-
-    .cell-traderlog i {
-        color: var(--success);
+    .comparison-card-header i {
+        font-size: 1.5rem;
+    }
+    .comparison-card-header h5 {
         font-size: 1.1rem;
-        margin-top: 4px;
-    }
-
-    /* Special Styling for TraderLog Column */
-    .comparison-column.traderlog-col {
-        background: var(--darker);
-        border: 2px solid transparent;
-        background-clip: padding-box;
-        position: relative;
-        transform: scale(1.05);
-    }
-
-    .comparison-column.traderlog-col::before {
-        content: '';
-        position: absolute;
-        top: 0; right: 0; bottom: 0; left: 0;
-        z-index: -1;
-        margin: -2px; /* Same as border-width */
-        border-radius: inherit; /* Inherit the border-radius */
-        background: linear-gradient(135deg, var(--accent), var(--secondary));
-    }
-
-    .traderlog-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .traderlog-badge {
-        background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.8rem;
         font-weight: 600;
     }
 
-    /* Responsive Styles for Comparison Table */
-    @media (max-width: 992px) {
-        .comparison-grid {
-            grid-template-columns: 1fr;
+    .comparison-card-body p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+    /* Traditional Card Styling */
+    .comparison-card.traditional {
+        background-color: rgba(15, 23, 42, 0.5); /* darker, muted */
+    }
+    .comparison-card.traditional .comparison-card-header i {
+        color: var(--gray);
+    }
+    .comparison-card.traditional .comparison-card-header h5 {
+        color: var(--gray-light);
+    }
+    .comparison-card.traditional .comparison-card-body p {
+        color: var(--gray-light);
+    }
+
+    /* TraderLog Card Styling - The POPPY one */
+    .comparison-card.traderlog {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(37, 99, 235, 0.15));
+        border: 1px solid var(--accent);
+        position: relative;
+        box-shadow: 0 0 25px rgba(139, 92, 246, 0.2);
+    }
+    .comparison-card.traderlog .comparison-card-header i {
+        color: var(--accent);
+    }
+    .comparison-card.traderlog .comparison-card-header h5 {
+        color: white;
+    }
+    .comparison-card.traderlog .comparison-card-body p {
+        color: white;
+        font-weight: 500;
+    }
+
+
+    /* Desktop Layout */
+    @media (min-width: 992px) {
+        .comparison-row {
+            grid-template-columns: 250px 1fr 1fr;
+            padding: 0;
+            gap: 0;
         }
-        .comparison-column.traderlog-col {
-            transform: scale(1); /* Reset scale on mobile */
+        .scenario-title {
+            padding: 2rem;
+            border-bottom: none;
+            border-right: 1px solid rgba(100, 116, 139, 0.2);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .comparison-card {
+            padding: 2rem;
+        }
+        .comparison-card.traditional {
+            border-right: 1px solid rgba(100, 116, 139, 0.2);
         }
     }
-    /* END: REDESIGNED COMPARISON TABLE STYLES */
+    /* END: REDESIGNED STATIC COMPARISON STYLES V4 */
 </style>
 </head>
 <body>
@@ -1263,6 +1264,7 @@
   }
 }</style>
 
+    <!-- START: REDESIGNED COMPARISON SECTION -->
     <section class="comparison-section" id="comparison">
         <div class="container">
             <div class="section-title">
@@ -1270,51 +1272,12 @@
                 <p>We translate confusing numbers into simple advice you can act on immediately.</p>
             </div>
             <div class="comparison-grid">
-                <div class="comparison-column">
-                    <div class="comparison-header">Scenario</div>
-                    <div class="comparison-cell cell-scenario">Win Rate & RR</div>
-                    <div class="comparison-cell cell-scenario">Lot Size Behavior</div>
-                    <div class="comparison-cell cell-scenario">Strategy Success</div>
-                    <div class="comparison-cell cell-scenario">Profit Factor</div>
-                    <div class="comparison-cell cell-scenario">Behavioral Pattern</div>
-                </div>
-                <div class="comparison-column">
-                    <div class="comparison-header">Traditional Journal</div>
-                    <div class="comparison-cell cell-traditional">Win rate: <b>43.27%</b> — Avg RR: <b>0.82</b> — Std Dev: <b>0.36</b></div>
-                    <div class="comparison-cell cell-traditional">Avg lot: <b>1.27</b> — Max lot: <b>3.54</b> — Variance: <b>1.73</b></div>
-                    <div class="comparison-cell cell-traditional">SR: <b>70.18% WR</b> — Breakout: <b>19.84% WR</b> — Avg RR: <b>0.65</b></div>
-                    <div class="comparison-cell cell-traditional">Profit factor: <b>0.84</b> — Gross profit: <b>$2,356</b> — Gross loss: <b>$2,804</b></div>
-                    <div class="comparison-cell cell-traditional">Max DD: <b>-12.43%</b> — Recovery trades: <b>18</b> — Avg hold: <b>14m 22s</b></div>
-                </div>
-                <div class="comparison-column traderlog-col">
-                    <div class="comparison-header traderlog-header">
-                        TraderLog
-                        <span class="traderlog-badge">AI POWERED</span>
-                    </div>
-                    <div class="comparison-cell cell-traderlog">
-                        <i class="fas fa-check-circle"></i>
-                        <span>“Losses are 2x bigger than wins → Cut losses faster or aim for better RR.”</span>
-                    </div>
-                    <div class="comparison-cell cell-traderlog">
-                        <i class="fas fa-check-circle"></i>
-                        <span>“You increase lot size after wins → Stick to fixed lot size to reduce risk.”</span>
-                    </div>
-                    <div class="comparison-cell cell-traderlog">
-                        <i class="fas fa-check-circle"></i>
-                        <span>“SR works well → Use more. Breakout fails → Avoid until improved.”</span>
-                    </div>
-                    <div class="comparison-cell cell-traderlog">
-                        <i class="fas fa-check-circle"></i>
-                        <span>“You lose more than you gain → Adjust strategy to improve profit factor above 1.”</span>
-                    </div>
-                    <div class="comparison-cell cell-traderlog">
-                        <i class="fas fa-check-circle"></i>
-                        <span>“You chase losses after drawdowns → Pause trading after a big loss.”</span>
-                    </div>
-                </div>
+                <!-- Data is now populated by JavaScript -->
             </div>
         </div>
     </section>
+    <!-- END: REDESIGNED COMPARISON SECTION -->
+
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
@@ -1691,24 +1654,81 @@
 
         featureTabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Get the data-tab value from the clicked tab
                 const tabNumber = tab.dataset.tab;
-
-                // Handle active state for tabs
                 featureTabs.forEach(item => item.classList.remove('active'));
                 tab.classList.add('active');
-
-                // Handle active state for display items
                 featureDisplayItems.forEach(item => {
-                    if (item.dataset.content === tabNumber) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
+                    item.classList.toggle('active', item.dataset.content === tabNumber);
                 });
             });
         });
         // END: SCRIPT FOR NEW INTERACTIVE FEATURES SECTION
+
+        // START: SCRIPT FOR STATIC COMPARISON TABLE
+        document.addEventListener('DOMContentLoaded', () => {
+            const comparisonData = [
+                {
+                    scenario: "Win Rate & RR",
+                    traditional: "Win rate: <b>43.27%</b> — Avg RR: <b>0.82</b> — Std Dev: <b>0.36</b>",
+                    traderlog: "“Your losses are 2x bigger than your wins. Focus on cutting losses faster or finding trades with a better risk/reward ratio.”"
+                },
+                {
+                    scenario: "Lot Size Behavior",
+                    traditional: "Avg lot: <b>1.27</b> — Max lot: <b>3.54</b> — Variance: <b>1.73</b>",
+                    traderlog: "“You significantly increase your lot size after a few wins, a sign of overconfidence. Stick to a consistent lot size to manage risk.”"
+                },
+                {
+                    scenario: "Strategy Success",
+                    traditional: "SR: <b>70.18% WR</b> — Breakout: <b>19.84% WR</b> — Avg RR: <b>0.65</b>",
+                    traderlog: "“Your SR strategy is highly effective. The Breakout strategy is not working. Focus more on SR and pause or re-evaluate the Breakout strategy.”"
+                },
+                {
+                    scenario: "Profit Factor",
+                    traditional: "Profit factor: <b>0.84</b> — Gross profit: <b>$2,356</b> — Gross loss: <b>$2,804</b>",
+                    traderlog: "“You are losing more money than you are making. A profit factor below 1 is unsustainable. Your strategy needs adjustment to become profitable.”"
+                },
+                {
+                    scenario: "Behavioral Pattern",
+                    traditional: "Max DD: <b>-12.43%</b> — Recovery trades: <b>18</b> — Avg hold: <b>14m 22s</b>",
+                    traderlog: "“After a significant drawdown, you tend to overtrade to recover, which often leads to more losses. Consider taking a break after a large loss.”"
+                }
+            ];
+
+            const gridContainer = document.querySelector('.comparison-grid');
+            gridContainer.innerHTML = ''; // Clear existing content
+
+            comparisonData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'comparison-row';
+
+                row.innerHTML = `
+                    <div class="scenario-title">
+                        <h4>${item.scenario}</h4>
+                    </div>
+                    <div class="comparison-card traditional">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-file-alt"></i>
+                            <h5>Traditional Journal</h5>
+                        </div>
+                        <div class="comparison-card-body">
+                            <p>${item.traditional}</p>
+                        </div>
+                    </div>
+                    <div class="comparison-card traderlog">
+                        <div class="comparison-card-header">
+                            <i class="fas fa-brain"></i>
+                            <h5>TraderLog AI Insight</h5>
+                        </div>
+                        <div class="comparison-card-body">
+                            <p>${item.traderlog}</p>
+                        </div>
+                    </div>
+                `;
+                gridContainer.appendChild(row);
+            });
+        });
+        // END: SCRIPT FOR STATIC COMPARISON TABLE
+
     </script>
 <!DOCTYPE html>
 <html lang="en">
