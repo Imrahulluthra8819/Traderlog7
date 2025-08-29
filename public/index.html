@@ -1096,7 +1096,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://placehold.co/600x450/0f172a/ffffff?text=Dashboard" alt="Trading Journal" class="dashboard-preview" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0f172a/ffffff?text=Image+Not+Found';">
+                <img src="Trading Journal.jpg" alt="Trading Journal" class="dashboard-preview" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0f172a/ffffff?text=Image+Not+Found';">
             </div>
         </div>
     </section>
@@ -1469,17 +1469,17 @@
         </div>
         <div class="features-grid">
             <div class="feature-card" style="text-align: center;">
-                <img src="https://placehold.co/80x80/1e293b/ffffff?text=A" alt="Alex" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=A';">
+                <img src="Trader Alex.jpg" alt="Alex" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=A';">
                 <h3>Alex.</h3>
                 <p>"TraderLog helped me understand my emotions during trades. My confidence is at an all-time high."</p>
             </div>
             <div class="feature-card" style="text-align: center;">
-                <img src="https://placehold.co/80x80/1e293b/ffffff?text=A" alt="Ananya" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=A';">
+                <img src="Trader Ananya.jpg" alt="Ananya" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=A';">
                 <h3>Ananya.</h3>
                 <p>"The AI insights are mind-blowing. I'm now journaling every trade and seeing real progress."</p>
             </div>
             <div class="feature-card" style="text-align: center;">
-                <img src="https://placehold.co/80x80/1e293b/ffffff?text=M" alt="Mohit T." style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=M';">
+                <img src="Trader Mohit.jpg" alt="Mohit T." style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=M';">
                 <h3>Mohit T.</h3>
                 <p>"I always knew psychology was key. But this tool showed me *why* I was making poor decisions."</p>
             </div>
@@ -1736,10 +1736,7 @@
         // END: SCRIPT FOR NEW COMPARISON TABLE
 
     </script>
-    <!-- The following HTML sections were duplicated in the original file and have been removed for cleanliness -->
-    <!-- The popup, sticky offer bar, and tracking scripts are included below -->
-
-    <div class="traderlog-popup-container" id="traderlog-popup">
+<div class="traderlog-popup-container" id="traderlog-popup">
         <div class="traderlog-popup-content">
             <div class="traderlog-popup-close" id="traderlog-close-popup">
                 <i class="fas fa-times"></i>
@@ -1788,89 +1785,179 @@
             </div>
             
             <div class="avail-btn-container">
-                <a href="Rpp1" 
-                   target="_blank" 
-                   class="avail-btn pulse tracked-payment-link"
-                   style="display: inline-block; padding: 8px 20px; font-size: 14px; font-weight: bold; text-align: center; border-radius: 40px; text-decoration: none; color: white; background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 4px 10px rgba(33, 113, 248, 0.3); min-width: 140px;">
-                    AVAIL NOW
-                </a>
+    <a href="Rpp1" 
+       target="_blank" 
+       class="avail-btn pulse tracked-payment-link"
+       style="display: inline-block; padding: 8px 20px; font-size: 14px; font-weight: bold; text-align: center; border-radius: 40px; text-decoration: none; color: white; background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 4px 10px rgba(33, 113, 248, 0.3); min-width: 140px;">
+        AVAIL NOW
+    </a>
+</div>
+                <button class="close-btn" id="closeOffer">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <button class="close-btn" id="closeOffer">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
+<style>
+/* Mobile responsiveness for Avail Now button */
+@media (max-width: 460px) {
+  .avail-btn {
+    padding: 8px 18px !important;
+    font-size: 14px !important;
+    min-width: 135px !important;
+  }
+}
+</style>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-0KFBLK283C');
-    </script>
-    <script>
+        // Show offer bar after delay
         document.addEventListener('DOMContentLoaded', function() {
-            const popup = document.getElementById('traderlog-popup');
-            const closePopupBtn = document.getElementById('traderlog-close-popup');
-            
-            function showPopup() {
-                if(popup) popup.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            function closePopup() {
-                if(popup) popup.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            if(closePopupBtn) closePopupBtn.addEventListener('click', closePopup);
-            if(popup) popup.addEventListener('click', (e) => {
-                if (e.target === popup) closePopup();
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && popup && popup.classList.contains('active')) {
-                    closePopup();
-                }
-            });
-            
-            setTimeout(showPopup, 9000);
-
             const offerContainer = document.getElementById('offerContainer');
             const closeOffer = document.getElementById('closeOffer');
             
+            // Show offer bar after 3 seconds
             setTimeout(() => {
-                if(offerContainer) offerContainer.classList.add('active');
+                offerContainer.classList.add('active');
             }, 3000);
             
-            if(closeOffer) closeOffer.addEventListener('click', function() {
-                if(offerContainer) offerContainer.classList.remove('active');
+            // Close offer bar
+            closeOffer.addEventListener('click', function() {
+                offerContainer.classList.remove('active');
             });
+        });
+    </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const affiliateId = urlParams.get('affiliate') || urlParams.get('ref') || urlParams.get('utm_source');
             
+            // 2. Store affiliate ID in localStorage (expires in 30 days)
             if (affiliateId) {
                 localStorage.setItem('affiliate_id', affiliateId);
                 localStorage.setItem('affiliate_timestamp', Date.now());
+                console.log('Affiliate ID stored:', affiliateId);
             }
             
+            // 3. Update all payment links with tracking parameters
             document.querySelectorAll('.tracked-payment-link').forEach(link => {
                 try {
                     const url = new URL(link.href, window.location.origin);
+                    
+                    // Get stored affiliate ID
                     const storedAffiliateId = localStorage.getItem('affiliate_id');
                     
+                    // Add tracking parameters if affiliate exists
                     if (storedAffiliateId) {
                         url.searchParams.set('affiliate', storedAffiliateId);
                         url.searchParams.set('utm_source', storedAffiliateId);
                         url.searchParams.set('utm_medium', 'affiliate');
+                        
+                        // Update the link
                         link.href = url.toString();
+                        console.log('Updated payment link:', link.href);
                     }
                 } catch (e) {
                     console.error('Error updating payment link:', e);
                 }
             });
+            
+            // 4. Track link clicks (optional)
+            document.querySelectorAll('.tracked-payment-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    const affiliateId = localStorage.getItem('affiliate_id') || 'direct';
+                    console.log('Payment link clicked - Affiliate:', affiliateId);
+                    
+                    // You can send this data to your analytics here
+                    // Example: 
+                    // fetch('/api/track-click', { method: 'POST', body: JSON.stringify({ affiliateId }) });
+                });
+            });
         });
     </script>
-</body>
+
+    <script>
+        // This would be implemented on your payment page (Rpp1)
+        // Here's a template of what you would include there:
+        /*
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get affiliate ID from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            let affiliateId = urlParams.get('affiliate') || 
+                              urlParams.get('utm_source') || 
+                              localStorage.getItem('affiliate_id');
+            
+            // If no affiliate in URL but one in localStorage (from previous visit)
+            if (!urlParams.get('affiliate') && localStorage.getItem('affiliate_id')) {
+                affiliateId = localStorage.getItem('affiliate_id');
+                // Update URL without reloading to maintain tracking
+                history.replaceState(null, null, `?affiliate=${affiliateId}`);
+            }
+            
+            // Initialize Razorpay with affiliate tracking
+            const options = {
+                key: 'YOUR_RAZORPAY_KEY',
+                amount: 19900, // ₹199 in paise
+                currency: 'INR',
+                name: 'TraderLog',
+                description: 'Premium Subscription',
+                image: '/logo.png',
+                handler: function(response) {
+                    // On successful payment
+                    console.log('Payment successful:', response);
+                    
+                    // Send payment data to your server with affiliate info
+                    if (affiliateId) {
+                        const paymentData = {
+                            payment_id: response.razorpay_payment_id,
+                            amount: 199,
+                            affiliate_id: affiliateId,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        // Send to your backend
+                        fetch('/api/record-payment', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(paymentData)
+                        }).then(res => {
+                            console.log('Payment recorded with affiliate');
+                            // Redirect to success page
+                            window.location.href = '/payment-success';
+                        });
+                    } else {
+                        // No affiliate - regular payment processing
+                        window.location.href = '/payment-success';
+                    }
+                },
+                prefill: {
+                    name: 'Customer Name',
+                    email: 'customer@example.com',
+                    contact: '9999999999'
+                },
+                notes: {
+                    affiliate_id: affiliateId || 'direct'
+                }
+            };
+            
+            // Initialize Razorpay button
+            const rzp = new Razorpay(options);
+            document.getElementById('pay-button').onclick = function(e) {
+                rzp.open();
+                e.preventDefault();
+            };
+        });
+        */
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-0KFBLK283C');
+    </script>
+    </body>
 </html>
