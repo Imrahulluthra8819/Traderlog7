@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TraderLog - AI-Powered Trading Journal</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="icon" type="image/svg+xml" href="/logo.svg">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Added Inter font as requested -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -28,13 +25,6 @@
             --gray: #64748b;
             --gray-light: #cbd5e1;
             --border-color: #334155; 
-            
-            /* CSS Variables for the new mobile card */
-            --card-bg: #161630;
-            --traderlog-panel-bg: #10102A;
-            --trader-stroke: #00F0FF;
-            --title-color: #FFFFFF;
-            --divider-color: #8A3FFC;
         }
         
         * {
@@ -1029,106 +1019,100 @@
 <!-- ============== MOBILE OPTIMIZATION STYLES START HERE ============== -->
 <!-- =================================================================== -->
 <style>
-    /* START: REPLACEMENT MOBILE CARD STYLES */
+    /* START: MOBILE CAROUSEL STYLES */
     .comparison-carousel {
-        display: none; /* Hidden by default, shown in media query */
+        display: none; /* Hidden by default */
         position: relative;
+        overflow: hidden;
         width: 100%;
-        font-family: 'Inter', sans-serif;
+        padding: 2rem 0;
     }
 
     .carousel-track {
         display: flex;
         transition: transform 0.5s ease-in-out;
-        padding-bottom: 48px; /* Add padding to avoid content being cut off by overflow */
     }
 
     .carousel-card {
         flex: 0 0 100%;
         width: 100%;
-        padding: 2rem 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .mobile-main-card {
-        width: 320px;
-        background: var(--card-bg);
-        border-radius: 20px;
-        padding: 32px 32px 40px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        position: relative;
-        color: var(--title-color);
+        padding: 0 20px; /* Provides margin on the sides */
         box-sizing: border-box;
     }
 
-    .mobile-card-title {
-        font-size: 32px;
-        font-weight: 700;
+    .card-content {
+        background: transparent;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        padding: 0;
+    }
+
+    .carousel-card.active .card-content {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(139, 92, 246, 0.2);
+    }
+    
+    .top-card-section {
+        background-color: #192a41;
+        padding: 1.5rem;
+        color: white;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .top-card-section h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.3rem;
+        color: var(--light);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--accent);
         text-align: center;
-        margin: 0 0 16px 0;
     }
 
-    .mobile-card-divider {
-        width: 60%;
-        height: 3px;
-        background-color: var(--divider-color);
-        margin: 0 auto 24px;
-        border-radius: 2px;
+    .top-card-section h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
     }
 
-    .traditional-section h4 {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    .traditional-section p {
-        font-size: 16px;
-        line-height: 1.4;
+    .top-card-section p {
+        font-size: 0.9rem;
         color: var(--gray-light);
     }
 
-    .traderlog-panel {
-        width: 300px;
-        background: var(--traderlog-panel-bg);
-        border-radius: 22px;
-        padding: 22px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-        border: 6px solid var(--trader-stroke);
-        position: absolute;
-        bottom: -48px; /* Overlap amount */
-        left: 50%;
-        transform: translateX(-50%);
-        box-sizing: border-box;
+    .bottom-card-section {
+        background-color: #007bff;
+        padding: 1.5rem;
+        border-radius: 0 0 15px 15px;
+        position: relative;
     }
 
-    .traderlog-panel h4 {
-        font-size: 22px;
+    .bottom-card-section h4 {
+        font-size: 1.2rem;
         font-weight: 700;
-        margin: 0 0 8px 0;
-        color: var(--title-color);
+        color: #1a2a41;
+        margin-bottom: 0.75rem;
     }
 
-    .traderlog-panel .traderlog-insight {
-        font-size: 16px;
-        line-height: 1.45;
-        color: var(--gray-light);
+    .bottom-card-section p {
+        font-size: 1.05rem;
+        color: var(--light);
+        line-height: 1.6;
     }
 
-    .traderlog-panel .traderlog-insight b {
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--trader-stroke);
+    .bottom-card-section .traderlog-insight b {
+        color: #ade8ff;
+        font-size: 1.15rem;
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 0.5rem;
     }
     
     .carousel-dots {
         text-align: center;
-        margin-top: 1.5rem; /* Reduced from 40px to account for track padding */
+        margin-top: 1.5rem;
     }
 
     .dot {
@@ -1143,10 +1127,10 @@
     }
 
     .dot.active {
-        background-color: var(--divider-color);
+        background-color: var(--accent);
         transform: scale(1.3);
     }
-    /* END: REPLACEMENT MOBILE CARD STYLES */
+    /* END: MOBILE CAROUSEL STYLES */
 
 
     @media (max-width: 860px) {
@@ -1841,7 +1825,7 @@
             <!-- Mobile Carousel -->
             <div class="comparison-carousel">
                 <div class="carousel-track">
-                    <!-- Cards will be populated by JavaScript with the new design -->
+                    <!-- Cards will be populated by JavaScript -->
                 </div>
                 <div class="carousel-dots">
                     <!-- Dots will be populated by JavaScript -->
@@ -2352,22 +2336,19 @@
                 // Create Card
                 const card = document.createElement('div');
                 card.classList.add('carousel-card');
-                // <!-- START: MODIFIED CARD STRUCTURE FOR NEW DESIGN -->
                 card.innerHTML = `
-                    <div class="mobile-main-card">
-                        <h3 class="mobile-card-title">${item.scenario}</h3>
-                        <div class="mobile-card-divider"></div>
-                        <div class="traditional-section">
+                    <div class="card-content">
+                        <div class="top-card-section">
+                            <h3>${item.scenario}</h3>
                             <h4>Traditional Journal</h4>
                             <p>${item.traditional}</p>
                         </div>
-                        <div class="traderlog-panel">
+                        <div class="bottom-card-section">
                             <h4>TraderLog</h4>
-                            <div class="traderlog-insight">${item.traderlog}</div>
+                            <p class="traderlog-insight">${item.traderlog}</p>
                         </div>
                     </div>
                 `;
-                // <!-- END: MODIFIED CARD STRUCTURE FOR NEW DESIGN -->
                 carouselTrack.appendChild(card);
 
                 // Create Dot
