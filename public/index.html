@@ -1071,50 +1071,43 @@
         margin-bottom: 0;
     }
 
-    .card-section h4 {
+    /* Specific styles for Traditional Journal section */
+    .traditional-section h4 {
         font-size: 1rem;
-        font-weight: 600;
-        color: var(--secondary);
+        font-weight: 500;
+        color: var(--light) !important; /* Simple white color */
         margin-bottom: 0.5rem;
     }
 
-    .card-section p {
-        font-size: 0.95rem;
+    .traditional-section p {
+        font-size: 0.9rem; /* Smaller text */
         color: var(--gray-light);
         line-height: 1.6;
     }
+
+    /* Specific styles for TraderLog section */
+    .traderlog-section {
+        margin-top: 2rem;
+    }
+
+    .traderlog-section h4 {
+        font-size: 1.2rem; /* Bigger heading */
+        font-weight: 700;
+        color: var(--secondary) !important; /* Poppy Blue color */
+        margin-bottom: 0.75rem;
+    }
+
+    .traderlog-section p {
+        font-size: 1.05rem; /* Bigger text */
+        color: var(--light);
+        line-height: 1.7;
+    }
+
+    .traderlog-section b {
+        color: var(--secondary);
+        font-weight: 700;
+    }
     
-    /* Styles for Traditional Journal text */
-    .traditional-text {
-        font-size: 0.85rem !important; /* Reduced text size */
-        opacity: 0.8; /* Slightly faded */
-    }
-
-    /* Styles for TraderLog highlight */
-    .traderlog-highlight {
-        background: rgba(30, 41, 59, 0.7);
-        border-radius: 10px;
-        padding: 1rem;
-        margin-top: 1rem;
-        transform: translateZ(20px); /* 3D effect */
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        border: 1px solid var(--border-color);
-        transition: transform 0.3s;
-    }
-    
-    .carousel-card.active .traderlog-highlight {
-        transform: scale(1.03) translateZ(20px);
-    }
-
-    .traderlog-highlight h4 {
-        color: var(--accent) !important;
-    }
-
-    .traderlog-insight b {
-        color: var(--accent);
-        font-weight: 600;
-    }
-
     .carousel-dots {
         text-align: center;
         margin-top: 1.5rem;
@@ -2344,11 +2337,11 @@
                 card.innerHTML = `
                     <div class="card-content">
                         <h3>${item.scenario}</h3>
-                        <div class="card-section">
+                        <div class="card-section traditional-section">
                             <h4>Traditional Journal</h4>
-                            <p class="traditional-text">${item.traditional}</p>
+                            <p>${item.traditional}</p>
                         </div>
-                        <div class="card-section traderlog-highlight">
+                        <div class="card-section traderlog-section">
                             <h4>TraderLog</h4>
                             <p class="traderlog-insight">${item.traderlog}</p>
                         </div>
