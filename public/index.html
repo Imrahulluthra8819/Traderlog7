@@ -753,6 +753,175 @@
   }
 }
 </style>
+<style>
+    .interactive-features {
+        padding: 6rem 0;
+        background: var(--darker);
+        position: relative;
+    }
+
+    .interactive-features-container {
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .feature-tabs {
+        flex: 1;
+        max-width: 450px;
+    }
+
+    .feature-tab {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border-radius: 15px;
+        cursor: pointer;
+        border: 1px solid rgba(100, 116, 139, 0.2);
+        background: rgba(30, 41, 59, 0.5);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .feature-tab:last-child {
+        margin-bottom: 0;
+    }
+
+    .feature-tab:hover {
+        transform: translateX(10px);
+        background: rgba(30, 41, 59, 0.9);
+    }
+    
+    .feature-tab.active {
+        background: var(--dark);
+        border-color: var(--accent);
+        box-shadow: 0 10px 25px rgba(139, 92, 246, 0.15);
+        transform: translateX(10px);
+    }
+    
+    .feature-tab-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .feature-tab-title i {
+        font-size: 1.8rem;
+        color: var(--accent);
+        transition: transform 0.3s;
+    }
+
+    .feature-tab.active .feature-tab-title i {
+        transform: scale(1.1);
+    }
+
+    .feature-tab-title h3 {
+        font-size: 1.3rem;
+        margin: 0;
+    }
+
+    .feature-tab-content {
+        color: var(--gray-light);
+        margin-top: 0.75rem;
+        padding-left: 3.3rem;
+        font-size: 0.95rem;
+    }
+
+    .feature-display {
+        flex: 1;
+        position: relative;
+        min-height: 450px;
+    }
+
+    .feature-display-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translateY(20px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .feature-display-item.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .feature-display-item img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        margin-bottom: 2rem;
+    }
+
+    .feature-display-item h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-display-item p {
+        color: var(--gray-light);
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    
+    /* Responsive styles for the new section */
+    @media (max-width: 992px) {
+        .interactive-features-container {
+            flex-direction: column;
+        }
+        .feature-tabs {
+            width: 100%;
+            max-width: 100%;
+        }
+        .feature-display {
+            min-height: auto;
+            width: 100%;
+        }
+        .feature-display-item {
+            position: relative; /* Change from absolute for stacking */
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            display: none; /* Hide all items */
+            margin-bottom: 2rem;
+        }
+        .feature-display-item.active {
+            display: flex; /* Show only the active one */
+        }
+        .feature-tab:hover, .feature-tab.active {
+            transform: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .feature-tab {
+            padding: 1rem;
+        }
+        .feature-tab-title h3 {
+            font-size: 1.1rem;
+        }
+        .feature-tab-content {
+            padding-left: 0;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .feature-tab-title {
+            justify-content: center;
+        }
+    }
+
+</style>
 </head>
 <body>
     <nav id="navbar">
@@ -992,38 +1161,24 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-comment-dots"></i>
-                    </div>
-                    <h3>Ask AI</h3>
-                    <p>Ask about trades, get analysis in simple language, and news on Crypto, Forex, and Stocks with their market impact.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3>AI Analytics & Suggestions</h3>
-                    <p>Leverage AI to deep dive into performance, identify patterns, and receive personalized suggestions to refine your strategy.</p>
+                    <h3>AI Trade Suggestions</h3>
+                    <p>Get personalized recommendations based on your trading patterns and market conditions.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-chart-pie"></i>
                     </div>
-                    <h3>Live Market Data & Charts</h3>
-                    <p>Access live market updates, customizable tickers, and advanced charts to analyze assets in real-time.</p>
+                    <h3>Advanced Analytics</h3>
+                    <p>Deep dive into your performance metrics with customizable reports and visualizations.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3>Multiple Currency Support</h3>
-                    <p>Journal and analyze trades seamlessly across various currencies for a complete view of your global portfolio.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-flask"></i>
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3>Backtesting and Paper Trading</h3>
-                    <p>Backtest strategies, Paper Trade & Demo Trading to prepare before entering the Market. (Coming Soon).</p>
+                    <p>Backtest your strategies, Paper Trade & Demo Trading to prepare before entering the Market. (Coming Soon).</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1043,6 +1198,69 @@
         </div>
     </section>
 
+    <section class="interactive-features" id="new-features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Our Next-Gen AI Features</h2>
+                <p>Harness cutting-edge technology to gain a unique trading advantage.</p>
+            </div>
+            <div class="interactive-features-container">
+                <div class="feature-tabs">
+                    <div class="feature-tab active" data-tab="1">
+                        <div class="feature-tab-title">
+                            <i class="fas fa-comment-dots"></i>
+                            <h3>Ask AI</h3>
+                        </div>
+                        <p class="feature-tab-content">Get detailed analysis in simple language.</p>
+                    </div>
+                    <div class="feature-tab" data-tab="2">
+                        <div class="feature-tab-title">
+                            <i class="fas fa-stream"></i>
+                            <h3>Live Market Updates</h3>
+                        </div>
+                        <p class="feature-tab-content">Integrated tickers and charts to analyse.</p>
+                    </div>
+                    <div class="feature-tab" data-tab="3">
+                        <div class="feature-tab-title">
+                            <i class="fas fa-cogs"></i>
+                            <h3>AI Analytics and Suggestions</h3>
+                        </div>
+                        <p class="feature-tab-content">Go beyond metrics with predictive insights.</p>
+                    </div>
+                    <div class="feature-tab" data-tab="4">
+                        <div class="feature-tab-title">
+                            <i class="fas fa-coins"></i>
+                            <h3>Multiple Currency Support</h3>
+                        </div>
+                        <p class="feature-tab-content">Journal and analyze in your home currency.</p>
+                    </div>
+                </div>
+
+                <div class="feature-display">
+                    <div class="feature-display-item active" data-content="1">
+                        <img src="https://placehold.co/600x400/0f172a/8b5cf6?text=Ask+AI" alt="Ask AI Feature">
+                        <h3>Conversational Market Analysis</h3>
+                        <p>Ask about your trades and get detailed analysis in simple language, plus news on any Crypto, Forex, and Stocks and its Short and Long Term Impacts on the Markets.</p>
+                    </div>
+                    <div class="feature-display-item" data-content="2">
+                         <img src="https://placehold.co/600x400/0f172a/0ea5e9?text=Live+Charts" alt="Live Market Updates">
+                        <h3>Real-Time Data at Your Fingertips</h3>
+                        <p>Stay ahead of the market with our integrated live market updates, complete with customizable tickers and advanced charts to analyse every move.</p>
+                    </div>
+                    <div class="feature-display-item" data-content="3">
+                         <img src="https://placehold.co/600x400/0f172a/10b981?text=AI+Analytics" alt="AI Analytics and Suggestions">
+                        <h3>Predictive Insights and Strategy</h3>
+                        <p>Leverage the power of AI Analytics and Suggestions to uncover hidden patterns in your trading and receive data-driven recommendations to enhance your strategy.</p>
+                    </div>
+                    <div class="feature-display-item" data-content="4">
+                        <img src="https://placehold.co/600x400/0f172a/f59e0b?text=$,€,¥,£" alt="Multiple Currency Support">
+                        <h3>Trade The World</h3>
+                        <p>Seamlessly track your performance with our Multiple Currency Support. Journal and analyze your trades in your local currency for ultimate clarity and convenience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="psychology" id="psychology">
         <div class="container">
             <div class="psychology-content">
@@ -1303,6 +1521,31 @@
                 bar.style.height = height;
             }, 500);
         });
+
+        // START: SCRIPT FOR NEW INTERACTIVE FEATURES SECTION
+        const featureTabs = document.querySelectorAll('.feature-tab');
+        const featureDisplayItems = document.querySelectorAll('.feature-display-item');
+
+        featureTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Get the data-tab value from the clicked tab
+                const tabNumber = tab.dataset.tab;
+
+                // Handle active state for tabs
+                featureTabs.forEach(item => item.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Handle active state for display items
+                featureDisplayItems.forEach(item => {
+                    if (item.dataset.content === tabNumber) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+        // END: SCRIPT FOR NEW INTERACTIVE FEATURES SECTION
     </script>
 <!DOCTYPE html>
 <html lang="en">
