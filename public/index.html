@@ -984,6 +984,76 @@
 
     /* END: NEW COMPACT COMPARISON TABLE STYLES */
 </style>
+<!-- =================================================================== -->
+<!-- ============== MOBILE OPTIMIZATION STYLES START HERE ============== -->
+<!-- =================================================================== -->
+<style>
+    @media (max-width: 768px) {
+        /* 1. Reduce heading font sizes for specified sections */
+        .section-title h2,
+        .psychology-text h2,
+        .cta-content h2 {
+            font-size: 2rem; /* Reduced from 2.5rem */
+            line-height: 1.3;
+        }
+
+        /* 2. Optimize section padding for a more compact view */
+        .features,
+        .psychology,
+        .how-it-works,
+        .cta-section,
+        .comparison-section,
+        .interactive-features {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        /* 3. Reduce bottom margin on section titles */
+        .section-title {
+            margin-bottom: 3rem;
+        }
+
+        /* 4. Tweak padding on individual cards for better spacing */
+        .feature-card,
+        .step {
+            padding: 1.5rem;
+        }
+
+        /* 5. Adjust psychology section chart for smaller screens */
+        .mood-chart {
+            padding: 1.5rem;
+            transform: scale(0.9);
+            transform-origin: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        /* Further reduce heading sizes for very small screens */
+        .section-title h2,
+        .psychology-text h2,
+        .cta-content h2 {
+            font-size: 1.8rem;
+        }
+
+        /* Further reduce section padding */
+        .features,
+        .psychology,
+        .how-it-works,
+        .cta-section,
+        .comparison-section,
+        .interactive-features {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        
+        .section-title p {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+<!-- ================================================================= -->
+<!-- ============== MOBILE OPTIMIZATION STYLES END HERE ============== -->
+<!-- ================================================================= -->
 </head>
 <body>
     <nav id="navbar">
@@ -1026,7 +1096,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="Trading Journal.jpg" alt="Trading Journal" class="dashboard-preview">
+                <img src="https://placehold.co/600x450/0f172a/ffffff?text=Dashboard" alt="Trading Journal" class="dashboard-preview" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0f172a/ffffff?text=Image+Not+Found';">
             </div>
         </div>
     </section>
@@ -1399,17 +1469,17 @@
         </div>
         <div class="features-grid">
             <div class="feature-card" style="text-align: center;">
-                <img src="Trader Alex.jpg" alt="Alex" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                <img src="https://placehold.co/80x80/1e293b/ffffff?text=A" alt="Alex" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=A';">
                 <h3>Alex.</h3>
                 <p>"TraderLog helped me understand my emotions during trades. My confidence is at an all-time high."</p>
             </div>
             <div class="feature-card" style="text-align: center;">
-                <img src="Trader Ananya.jpg" alt="Ananya" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                <img src="https://placehold.co/80x80/1e293b/ffffff?text=A" alt="Ananya" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=A';">
                 <h3>Ananya.</h3>
                 <p>"The AI insights are mind-blowing. I'm now journaling every trade and seeing real progress."</p>
             </div>
             <div class="feature-card" style="text-align: center;">
-                <img src="Trader Mohit.jpg" alt="Mohit T." style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                <img src="https://placehold.co/80x80/1e293b/ffffff?text=M" alt="Mohit T." style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;" onerror="this.onerror=null;this.src='https://placehold.co/80x80/1e293b/ffffff?text=M';">
                 <h3>Mohit T.</h3>
                 <p>"I always knew psychology was key. But this tool showed me *why* I was making poor decisions."</p>
             </div>
@@ -1666,219 +1736,9 @@
         // END: SCRIPT FOR NEW COMPARISON TABLE
 
     </script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraderLog Popup</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .traderlog-popup-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(5px);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .traderlog-popup-container.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .traderlog-popup-content {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            width: 90%;
-            max-width: 280px;
-            border-radius: 12px;
-            padding: 1.5rem 1.2rem;
-            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            position: relative;
-            transform: translateY(50px);
-            transition: transform 0.5s ease;
-            text-align: center;
-        }
-        
-        .traderlog-popup-container.active .traderlog-popup-content {
-            transform: translateY(0);
-        }
-        
-        .traderlog-popup-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: rgba(30, 41, 59, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #cbd5e1;
-            font-size: 0.8rem;
-            border: 1px solid rgba(100, 116, 139, 0.3);
-        }
-        
-        .traderlog-popup-close:hover {
-            background: #8b5cf6;
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        .traderlog-popup-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #2563eb 0%, #8b5cf6 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.5rem;
-            color: white;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-        }
-        
-        .traderlog-popup-content h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.7rem;
-            color: white;
-            letter-spacing: -0.3px;
-        }
-        
-        .traderlog-popup-content h2 span {
-            background: linear-gradient(90deg, #8b5cf6 0%, #0ea5e9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
-        
-        .traderlog-popup-content p {
-            color: #cbd5e1;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            font-size: 0.85rem;
-            font-weight: 400;
-        }
-        
-        .traderlog-download-btn {
-            background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            margin-top: 0.3rem;
-            letter-spacing: 0.3px;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-        }
-        
-        .traderlog-download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
-            background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
-        }
-        
-        .traderlog-popup-footer {
-            margin-top: 1.2rem;
-            color: #64748b;
-            font-size: 0.7rem;
-            line-height: 1.4;
-            font-weight: 300;
-        }
-        
-        .traderlog-popup-footer a {
-            color: #8b5cf6;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        
-        .traderlog-popup-footer a:hover {
-            color: #0ea5e9;
-            text-decoration: underline;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        
-        .traderlog-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
-            color: white;
-            font-size: 0.65rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-            z-index: 10;
-            box-shadow: 0 3px 8px rgba(255, 107, 107, 0.3);
-            transform: rotate(5deg);
-        }
-        
-        .traderlog-features {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            margin: 1rem 0;
-        }
-        
-        .feature-item {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .feature-item i {
-            color: #8b5cf6;
-            font-size: 0.8rem;
-        }
-    </style>
-</head>
-<body>
+    <!-- The following HTML sections were duplicated in the original file and have been removed for cleanliness -->
+    <!-- The popup, sticky offer bar, and tracking scripts are included below -->
+
     <div class="traderlog-popup-container" id="traderlog-popup">
         <div class="traderlog-popup-content">
             <div class="traderlog-popup-close" id="traderlog-close-popup">
@@ -1916,229 +1776,6 @@
         </div>
     </div>
 
-    <script>
-        // Wait for the DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get DOM elements
-            const popup = document.getElementById('traderlog-popup');
-            const closePopup = document.getElementById('traderlog-close-popup');
-            
-            // Show popup function
-            function showPopup() {
-                popup.classList.add('active');
-                // Prevent body from scrolling
-                document.body.style.overflow = 'hidden';
-            }
-            
-            // Close popup function
-            function closePopupFunc() {
-                popup.classList.remove('active');
-                // Restore body scrolling
-                document.body.style.overflow = 'auto';
-            }
-            
-            // Event listeners
-            closePopup.addEventListener('click', closePopupFunc);
-            
-            // Close popup when clicking outside the content
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    closePopupFunc();
-                }
-            });
-            
-            // Close popup with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && popup.classList.contains('active')) {
-                    closePopupFunc();
-                }
-            });
-            
-            // Show popup after  seconds
-            setTimeout(showPopup, 9000);
-        });
-    </script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sticky Offer Bar</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* STICKY OFFER BAR STYLES */
-        .offer-container {
-            position: fixed;
-            bottom: -150px;
-            left: 0;
-            right: 0;
-            z-index: 10000;
-            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .offer-container.active {
-            bottom: 0;
-        }
-        
-        .offer-banner {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            color: white;
-            text-align: center;
-            padding: 5px;
-            font-weight: 700;
-            font-size: 0.7rem;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .offer-bar {
-            background: rgba(15, 23, 42, 0.98);
-            padding: 8px 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.4);
-            border-top: 2px solid rgba(139, 92, 246, 0.5);
-            gap: 20px;
-        }
-        
-        .pricing {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .original-price {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            text-decoration: line-through;
-        }
-        
-        .discounted-price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .discount-badge {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            box-shadow: 0 4px 10px rgba(79, 172, 254, 0.4);
-        }
-        
-        .avail-btn-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .avail-btn {
-            background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%);
-            color: white;
-            border: none;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.5);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            text-decoration: none;
-        }
-        
-        .avail-btn:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
-            z-index: -1;
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-        
-        .avail-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.7);
-        }
-        
-        .avail-btn:hover:after {
-            opacity: 1;
-        }
-        
-        .close-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            border: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .close-btn:hover {
-            background: #8b5cf6;
-            color: white;
-            transform: rotate(90deg);
-        }
-        
-        /* Animation */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Mobile-specific reductions (480px and below) */
-        @media (max-width: 480px) {
-            .offer-bar {
-                padding: 6.8px 12.75px; /* 15% reduction */
-                gap: 17px; /* Reduced gap */
-            }
-            
-            .pricing {
-                gap: 10px; /* Reduced gap */
-            }
-            
-            .avail-btn-container {
-                gap: 10px; /* Reduced gap */
-            }
-        }
-    </style>
-</head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0KFBLK283C');
-</script>
-<body>
     <div class="offer-container" id="offerContainer">
         <div class="offer-banner">
             ONLY FOR EARLY USERS
@@ -2151,172 +1788,89 @@
             </div>
             
             <div class="avail-btn-container">
-    <a href="Rpp1" 
-       target="_blank" 
-       class="avail-btn pulse tracked-payment-link"
-       style="display: inline-block; padding: 8px 20px; font-size: 14px; font-weight: bold; text-align: center; border-radius: 40px; text-decoration: none; color: white; background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 4px 10px rgba(33, 113, 248, 0.3); min-width: 140px;">
-        AVAIL NOW
-    </a>
-</div>
-                <button class="close-btn" id="closeOffer">
-                    <i class="fas fa-times"></i>
-                </button>
+                <a href="Rpp1" 
+                   target="_blank" 
+                   class="avail-btn pulse tracked-payment-link"
+                   style="display: inline-block; padding: 8px 20px; font-size: 14px; font-weight: bold; text-align: center; border-radius: 40px; text-decoration: none; color: white; background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 4px 10px rgba(33, 113, 248, 0.3); min-width: 140px;">
+                    AVAIL NOW
+                </a>
             </div>
+            <button class="close-btn" id="closeOffer">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </div>
-<style>
-/* Mobile responsiveness for Avail Now button */
-@media (max-width: 460px) {
-  .avail-btn {
-    padding: 8px 18px !important;
-    font-size: 14px !important;
-    min-width: 135px !important;
-  }
-}
-</style>
+
+    <!-- Scripts -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
     <script>
-        // Show offer bar after delay
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0KFBLK283C');
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('traderlog-popup');
+            const closePopupBtn = document.getElementById('traderlog-close-popup');
+            
+            function showPopup() {
+                if(popup) popup.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closePopup() {
+                if(popup) popup.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            if(closePopupBtn) closePopupBtn.addEventListener('click', closePopup);
+            if(popup) popup.addEventListener('click', (e) => {
+                if (e.target === popup) closePopup();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && popup && popup.classList.contains('active')) {
+                    closePopup();
+                }
+            });
+            
+            setTimeout(showPopup, 9000);
+
             const offerContainer = document.getElementById('offerContainer');
             const closeOffer = document.getElementById('closeOffer');
             
-            // Show offer bar after 3 seconds
             setTimeout(() => {
-                offerContainer.classList.add('active');
+                if(offerContainer) offerContainer.classList.add('active');
             }, 3000);
             
-            // Close offer bar
-            closeOffer.addEventListener('click', function() {
-                offerContainer.classList.remove('active');
+            if(closeOffer) closeOffer.addEventListener('click', function() {
+                if(offerContainer) offerContainer.classList.remove('active');
             });
-        });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const affiliateId = urlParams.get('affiliate') || urlParams.get('ref') || urlParams.get('utm_source');
             
-            // 2. Store affiliate ID in localStorage (expires in 30 days)
             if (affiliateId) {
                 localStorage.setItem('affiliate_id', affiliateId);
                 localStorage.setItem('affiliate_timestamp', Date.now());
-                console.log('Affiliate ID stored:', affiliateId);
             }
             
-            // 3. Update all payment links with tracking parameters
             document.querySelectorAll('.tracked-payment-link').forEach(link => {
                 try {
                     const url = new URL(link.href, window.location.origin);
-                    
-                    // Get stored affiliate ID
                     const storedAffiliateId = localStorage.getItem('affiliate_id');
                     
-                    // Add tracking parameters if affiliate exists
                     if (storedAffiliateId) {
                         url.searchParams.set('affiliate', storedAffiliateId);
                         url.searchParams.set('utm_source', storedAffiliateId);
                         url.searchParams.set('utm_medium', 'affiliate');
-                        
-                        // Update the link
                         link.href = url.toString();
-                        console.log('Updated payment link:', link.href);
                     }
                 } catch (e) {
                     console.error('Error updating payment link:', e);
                 }
             });
-            
-            // 4. Track link clicks (optional)
-            document.querySelectorAll('.tracked-payment-link').forEach(link => {
-                link.addEventListener('click', function() {
-                    const affiliateId = localStorage.getItem('affiliate_id') || 'direct';
-                    console.log('Payment link clicked - Affiliate:', affiliateId);
-                    
-                    // You can send this data to your analytics here
-                    // Example: 
-                    // fetch('/api/track-click', { method: 'POST', body: JSON.stringify({ affiliateId }) });
-                });
-            });
         });
     </script>
-
-    <script>
-        // This would be implemented on your payment page (Rpp1)
-        // Here's a template of what you would include there:
-        /*
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get affiliate ID from URL or localStorage
-            const urlParams = new URLSearchParams(window.location.search);
-            let affiliateId = urlParams.get('affiliate') || 
-                              urlParams.get('utm_source') || 
-                              localStorage.getItem('affiliate_id');
-            
-            // If no affiliate in URL but one in localStorage (from previous visit)
-            if (!urlParams.get('affiliate') && localStorage.getItem('affiliate_id')) {
-                affiliateId = localStorage.getItem('affiliate_id');
-                // Update URL without reloading to maintain tracking
-                history.replaceState(null, null, `?affiliate=${affiliateId}`);
-            }
-            
-            // Initialize Razorpay with affiliate tracking
-            const options = {
-                key: 'YOUR_RAZORPAY_KEY',
-                amount: 19900, // ₹199 in paise
-                currency: 'INR',
-                name: 'TraderLog',
-                description: 'Premium Subscription',
-                image: '/logo.png',
-                handler: function(response) {
-                    // On successful payment
-                    console.log('Payment successful:', response);
-                    
-                    // Send payment data to your server with affiliate info
-                    if (affiliateId) {
-                        const paymentData = {
-                            payment_id: response.razorpay_payment_id,
-                            amount: 199,
-                            affiliate_id: affiliateId,
-                            timestamp: new Date().toISOString()
-                        };
-                        
-                        // Send to your backend
-                        fetch('/api/record-payment', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(paymentData)
-                        }).then(res => {
-                            console.log('Payment recorded with affiliate');
-                            // Redirect to success page
-                            window.location.href = '/payment-success';
-                        });
-                    } else {
-                        // No affiliate - regular payment processing
-                        window.location.href = '/payment-success';
-                    }
-                },
-                prefill: {
-                    name: 'Customer Name',
-                    email: 'customer@example.com',
-                    contact: '9999999999'
-                },
-                notes: {
-                    affiliate_id: affiliateId || 'direct'
-                }
-            };
-            
-            // Initialize Razorpay button
-            const rzp = new Razorpay(options);
-            document.getElementById('pay-button').onclick = function(e) {
-                rzp.open();
-                e.preventDefault();
-            };
-        });
-        */
-    </script>
-
-    </body>
+</body>
 </html>
