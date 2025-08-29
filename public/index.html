@@ -10,6 +10,7 @@
 <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -25,6 +26,21 @@
             --gray: #64748b;
             --gray-light: #cbd5e1;
             --border-color: #334155; 
+            
+            /* New Card Variables */
+            --bg-1: #071127;
+            --bg-2: #071726;
+            --card-bg: #0b2133;
+            --card-back-grad-end: #0d2a3b;
+            --front-bg: #071b2b;
+            --trader-stroke: #12B6FF;
+            --insight-color: #0EB7FF;
+            --divider-purple: #9b6bff;
+            --text: #e6eef6;
+            --muted: #9aa4b2;
+            --card-shadow: 0 20px 40px rgba(2,6,23,0.6);
+            --front-shadow: 0 24px 48px rgba(3,10,20,0.65);
+            --radius: 20px;
         }
         
         * {
@@ -34,8 +50,8 @@
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            font-family: 'Inter', 'Roboto', sans-serif;
+            background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
@@ -1023,7 +1039,7 @@
     .comparison-carousel {
         display: none; /* Hidden by default */
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         width: 100%;
         padding: 2rem 0;
     }
@@ -1036,93 +1052,96 @@
     .carousel-card {
         flex: 0 0 100%;
         width: 100%;
-        padding: 0 20px; /* Provides margin on the sides */
+        padding: 0 10px;
         box-sizing: border-box;
+        display: flex;
+        justify-content: center;
     }
 
-    .card-content {
-        background: transparent;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(2,6,23,0.6);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: none;
-        padding: 0;
-    }
-
-    .carousel-card.active .card-content {
-        transform: scale(1.02);
-    }
-    
-    .top-card-section {
-        background-color: #0b2133;
-        padding: 32px 32px 40px;
-        color: white;
-        border-radius: 20px 20px 0 0;
-    }
-
-    .top-card-section h3 {
-        font-family: 'Inter', sans-serif;
-        font-size: 32px;
-        font-weight: 700;
-        letter-spacing: 0.2px;
-        color: #FFFFFF;
-        margin-bottom: 18px;
-        padding-bottom: 18px;
-        border-bottom: 3px solid #9b6bff;
-        text-align: center;
-    }
-
-    .top-card-section h4 {
-        font-family: 'Inter', sans-serif;
-        font-size: 20px;
-        font-weight: 700;
-        color: #e6eef6;
-        margin-bottom: 0.5rem;
-    }
-
-    .top-card-section p {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        color: #cfe7ff;
-        line-height: 1.4;
-    }
-
-    .bottom-card-section {
-        background-color: #071B2B;
-        padding: 22px;
-        border-radius: 22px;
-        margin: -48px auto 0;
-        width: 300px;
+    .card-wrapper {
+        width: 320px;
+        max-width: 100%;
         position: relative;
-        border: 6px solid #12B6FF;
-        box-shadow: 0 6px 20px rgba(18,182,255,0.12);
+        padding-bottom: 40px; /* room for overlap */
     }
 
-    .bottom-card-section h4 {
-        font-family: 'Inter', sans-serif;
-        font-size: 22px;
+    .card-back {
+        width: 100%;
+        border-radius: var(--radius);
+        padding: 32px 28px 60px;
+        background: linear-gradient(180deg, var(--card-bg), var(--card-back-grad-end));
+        box-shadow: var(--card-shadow);
+        border: 1px solid rgba(255,255,255,0.02);
+        position: relative;
+        z-index: 1;
+        overflow: visible;
+    }
+
+    .card-title {
+        text-align: center;
         font-weight: 700;
-        color: #e6eef6;
-        margin-bottom: 0.75rem;
-    }
-
-    .bottom-card-section p {
-        font-family: 'Inter', sans-serif;
         font-size: 16px;
-        font-weight: 400;
-        color: #cfe7ff;
-        line-height: 1.45;
+        margin: 0 0 10px 0;
+        color: var(--text);
+        letter-spacing: 0.2px;
     }
 
-    .bottom-card-section .traderlog-insight b {
-        font-family: 'Inter', sans-serif;
+    .divider {
+        width: 60%;
+        height: 3px;
+        background: var(--divider-purple);
+        margin: 0 auto 18px;
+        border-radius: 3px;
+    }
+
+    .subheading {
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: var(--text);
+    }
+
+    .trad-text {
+        font-size: 16px;
+        color: var(--text);
+        line-height: 1.45;
+        max-width: 100%;
+    }
+
+    .card-front {
+        width: 300px;
+        border-radius: 22px;
+        padding: 20px;
+        background: var(--front-bg);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        z-index: 3;
+        box-shadow: var(--front-shadow);
+        border: 6px solid var(--trader-stroke);
+        filter: drop-shadow(0 12px 28px rgba(18,182,255,0.10));
+        -webkit-backface-visibility: hidden;
+    }
+
+    .front-heading {
         font-size: 22px;
         font-weight: 700;
-        color: #0EB7FF;
-        display: block;
-        margin-bottom: 0.5rem;
+        margin: 0 0 10px 0;
+        color: var(--trader-stroke);
+    }
+
+    .front-insight {
+        font-size: 20px;
+        font-weight: 800;
+        margin: 0 0 8px 0;
+        color: var(--insight-color);
+    }
+
+    .front-body {
+        font-size: 16px;
+        color: var(--text);
+        line-height: 1.45;
     }
     
     .carousel-dots {
@@ -1220,6 +1239,11 @@
         .section-title p {
             font-size: 0.95rem;
         }
+    }
+
+    @media (max-width:360px){
+        .card-back{width:300px;padding-left:20px;padding-right:20px;}
+        .card-front{width:270px; left:50%; transform:translateX(-50%); bottom:-26px;}
     }
 </style>
 <!-- ================================================================= -->
@@ -2351,16 +2375,24 @@
                 // Create Card
                 const card = document.createElement('div');
                 card.classList.add('carousel-card');
+                
+                const insightMatch = item.traderlog.match(/<b>(.*?)<\/b>/);
+                const insightText = insightMatch ? insightMatch[1] : '';
+                const bodyText = item.traderlog.replace(/<b>.*?<\/b> /g, '');
+
+
                 card.innerHTML = `
-                    <div class="card-content">
-                        <div class="top-card-section">
-                            <h3>${item.scenario}</h3>
-                            <h4>Traditional Journal</h4>
-                            <p>${item.traditional}</p>
+                    <div class="card-wrapper" role="group" aria-label="TraderLog sample card">
+                        <div class="card-back" aria-hidden="false">
+                            <h1 class="card-title">${item.scenario}</h1>
+                            <div class="divider" aria-hidden="true"></div>
+                            <div class="subheading">Traditional Journal</div>
+                            <div class="trad-text">${item.traditional}</div>
                         </div>
-                        <div class="bottom-card-section">
-                            <h4>TraderLog</h4>
-                            <p class="traderlog-insight">${item.traderlog}</p>
+                        <div class="card-front" aria-hidden="false" role="article" aria-label="TraderLog insights">
+                            <div class="front-heading">TraderLog</div>
+                            <div class="front-insight">${insightText}</div>
+                            <div class="front-body">${bodyText}</div>
                         </div>
                     </div>
                 `;
