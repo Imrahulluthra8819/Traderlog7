@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TraderLog - AI-Powered Trading Journal</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -424,6 +428,15 @@
             font-size: 0.8rem;
             color: var(--gray-light);
         }
+
+        /* NEW STYLES FOR SUPADEMO */
+        .supademo-wrapper {
+            max-width: 900px; 
+            margin: 0 auto; /* Centering the block */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden; /* Ensures the border-radius is applied to the iframe */
+        }
         
         /* How It Works */
         .how-it-works {
@@ -742,7 +755,6 @@
 </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="logo">
@@ -757,7 +769,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container" style="display: flex; align-items: center;">
             <div class="hero-content">
@@ -965,7 +976,6 @@
     margin: 0 auto;
   }
 }</style>
-    <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
@@ -982,24 +992,38 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Ask AI</h3>
+                    <p>Ask about trades, get analysis in simple language, and news on Crypto, Forex, and Stocks with their market impact.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3>AI Trade Suggestions</h3>
-                    <p>Get personalized recommendations based on your trading patterns and market conditions.</p>
+                    <h3>AI Analytics & Suggestions</h3>
+                    <p>Leverage AI to deep dive into performance, identify patterns, and receive personalized suggestions to refine your strategy.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-chart-pie"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Advanced Analytics</h3>
-                    <p>Deep dive into your performance metrics with customizable reports and visualizations.</p>
+                    <h3>Live Market Data & Charts</h3>
+                    <p>Access live market updates, customizable tickers, and advanced charts to analyze assets in real-time.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Multiple Currency Support</h3>
+                    <p>Journal and analyze trades seamlessly across various currencies for a complete view of your global portfolio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask"></i>
                     </div>
                     <h3>Backtesting and Paper Trading</h3>
-                    <p>Backtest your strategies, Paper Trade & Demo Trading to prepare before entering the Market. (Coming Soon).</p>
+                    <p>Backtest strategies, Paper Trade & Demo Trading to prepare before entering the Market. (Coming Soon).</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1019,7 +1043,6 @@
         </div>
     </section>
 
-    <!-- Psychology Focus -->
     <section class="psychology" id="psychology">
         <div class="container">
             <div class="psychology-content">
@@ -1050,35 +1073,42 @@
       </div>
       <div class="chart-bar" style="background: linear-gradient(to top, var(--primary) 0%, var(--primary) 80%, transparent 80%); height: 200px; width: 60px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
         <div class="chart-bar-label" style="margin-top: 10px;">Focused</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-</div>
+
+    <section class="features" style="padding: 6rem 0; background: #0f172a;">
+        <div class="container">
+            <div class="section-title">
+                <h2>See It In Action</h2>
+                <p>Explore how to customize your journal with this interactive demo</p>
+            </div>
+            <div class="supademo-wrapper">
+                <div style="position: relative; box-sizing: content-box; max-height: 80vh; max-height: 80svh; width: 100%; aspect-ratio: 1.7321571772253408; padding: 40px 0 40px 0;"><iframe src="https://app.supademo.com/embed/cme61v0e01wi8h3pylhrahd2p?embed_v=2&utm_source=embed" loading="lazy" title="How to customize TraderLog's Journal theme and settings" allow="clipboard-write" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+            </div>
         </div>
-<section class="features" style="padding: 6rem 0; background: rgba(15, 23, 42, 0.7);">
+    </section>
+    <section class="features" style="padding: 6rem 0; background: rgba(15, 23, 42, 0.7);">
     <div class="container">
         <div class="section-title">
             <h2>What Our Users Say</h2>
             <p>Real feedback from traders who've leveled up with TraderLog</p>
         </div>
         <div class="features-grid">
-            <!-- Testimonial 1 -->
             <div class="feature-card" style="text-align: center;">
                 <img src="Trader Alex.jpg" alt="Alex" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
                 <h3>Alex.</h3>
                 <p>"TraderLog helped me understand my emotions during trades. My confidence is at an all-time high."</p>
             </div>
-            <!-- Testimonial 2 -->
             <div class="feature-card" style="text-align: center;">
                 <img src="Trader Ananya.jpg" alt="Ananya" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
                 <h3>Ananya.</h3>
                 <p>"The AI insights are mind-blowing. I'm now journaling every trade and seeing real progress."</p>
             </div>
-            <!-- Testimonial 3 -->
             <div class="feature-card" style="text-align: center;">
                 <img src="Trader Mohit.jpg" alt="Mohit T." style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
                 <h3>Mohit T.</h3>
@@ -1087,7 +1117,6 @@
         </div>
     </div>
 </section>
-<!-- Users Stats Section -->
 <section class="features" style="padding: 4rem 0 6rem; background: rgba(15, 23, 42, 0.8);">
     <div class="container">
         <div class="section-title">
@@ -1111,7 +1140,6 @@
     </div>
 </section>
 
-    <!-- How It Works -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
             <div class="section-title">
@@ -1147,7 +1175,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section" id="cta">
         <div class="container">
             <div class="cta-content">
@@ -1162,7 +1189,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -1491,7 +1517,6 @@
     </style>
 </head>
 <body>
-    <!-- TraderLog Popup -->
     <div class="traderlog-popup-container" id="traderlog-popup">
         <div class="traderlog-popup-content">
             <div class="traderlog-popup-close" id="traderlog-close-popup">
@@ -1743,8 +1768,15 @@
         }
     </style>
 </head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0KFBLK283C');
+</script>
 <body>
-    <!-- Sticky Offer Bar Container -->
     <div class="offer-container" id="offerContainer">
         <div class="offer-banner">
             ONLY FOR EARLY USERS
@@ -1752,10 +1784,10 @@
         <div class="offer-bar">
             <div class="pricing">
                 <div class="original-price">₹999</div>
-                <div class="discounted-price">₹95</div>
-                <div class="discount-badge">91% OFF</div>
+                <div class="discounted-price">₹199</div>
+                <div class="discount-badge">81% OFF</div>
             </div>
-           
+            
             <div class="avail-btn-container">
     <a href="Rpp1" 
        target="_blank" 
@@ -1798,7 +1830,6 @@
         });
     </script>
 
-    <!-- Affiliate Tracking Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // 1. Get URL parameters
@@ -1849,7 +1880,6 @@
         });
     </script>
 
-    <!-- Razorpay Payment Tracking Script -->
     <script>
         // This would be implemented on your payment page (Rpp1)
         // Here's a template of what you would include there:
@@ -1858,8 +1888,8 @@
             // Get affiliate ID from URL or localStorage
             const urlParams = new URLSearchParams(window.location.search);
             let affiliateId = urlParams.get('affiliate') || 
-                             urlParams.get('utm_source') || 
-                             localStorage.getItem('affiliate_id');
+                              urlParams.get('utm_source') || 
+                              localStorage.getItem('affiliate_id');
             
             // If no affiliate in URL but one in localStorage (from previous visit)
             if (!urlParams.get('affiliate') && localStorage.getItem('affiliate_id')) {
@@ -1871,7 +1901,7 @@
             // Initialize Razorpay with affiliate tracking
             const options = {
                 key: 'YOUR_RAZORPAY_KEY',
-                amount: 9500, // ₹95 in paise
+                amount: 19900, // ₹199 in paise
                 currency: 'INR',
                 name: 'TraderLog',
                 description: 'Premium Subscription',
@@ -1884,7 +1914,7 @@
                     if (affiliateId) {
                         const paymentData = {
                             payment_id: response.razorpay_payment_id,
-                            amount: 95,
+                            amount: 199,
                             affiliate_id: affiliateId,
                             timestamp: new Date().toISOString()
                         };
@@ -1926,20 +1956,5 @@
         */
     </script>
 
-    <!-- Backend Implementation Notes -->
-    <!-- 
-    On your backend (server), you would need to:
-    1. Create an endpoint to record payments (/api/record-payment)
-    2. Store payment data with affiliate IDs in your database
-    3. Create a dashboard for creators to see their referrals
-    4. Implement commission payout logic
-    
-    Example database structure for tracking:
-    - payments: id, user_id, amount, payment_id, status, created_at
-    - affiliates: id, creator_id, affiliate_code, payment_details
-    - referrals: id, affiliate_id, payment_id, commission_amount, status
-    
-    You can use Firebase, MongoDB, or any database you prefer.
-    -->
-</body>
+    </body>
 </html>
