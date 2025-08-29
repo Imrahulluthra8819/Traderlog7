@@ -1084,6 +1084,32 @@
         line-height: 1.6;
     }
     
+    /* Styles for Traditional Journal text */
+    .traditional-text {
+        font-size: 0.85rem !important; /* Reduced text size */
+        opacity: 0.8; /* Slightly faded */
+    }
+
+    /* Styles for TraderLog highlight */
+    .traderlog-highlight {
+        background: rgba(30, 41, 59, 0.7);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 1rem;
+        transform: translateZ(20px); /* 3D effect */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        border: 1px solid var(--border-color);
+        transition: transform 0.3s;
+    }
+    
+    .carousel-card.active .traderlog-highlight {
+        transform: scale(1.03) translateZ(20px);
+    }
+
+    .traderlog-highlight h4 {
+        color: var(--accent) !important;
+    }
+
     .traderlog-insight b {
         color: var(--accent);
         font-weight: 600;
@@ -2320,9 +2346,9 @@
                         <h3>${item.scenario}</h3>
                         <div class="card-section">
                             <h4>Traditional Journal</h4>
-                            <p>${item.traditional}</p>
+                            <p class="traditional-text">${item.traditional}</p>
                         </div>
-                        <div class="card-section">
+                        <div class="card-section traderlog-highlight">
                             <h4>TraderLog</h4>
                             <p class="traderlog-insight">${item.traderlog}</p>
                         </div>
@@ -2361,7 +2387,7 @@
 
             function startAutoSlide() {
                 stopAutoSlide(); // Prevent multiple intervals
-                autoSlideInterval = setInterval(showNextCard, 2000);
+                autoSlideInterval = setInterval(showNextCard, 3000); // CHANGED TO 3 SECONDS
             }
 
             function stopAutoSlide() {
