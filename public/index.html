@@ -24,7 +24,7 @@
             --light: #f8fafc;
             --gray: #64748b;
             --gray-light: #cbd5e1;
-            --border-color: #334155; /* A subtle border color */
+            --border-color: #334155; 
         }
         
         * {
@@ -934,18 +934,19 @@
         margin: 0 auto;
         border: 1px solid var(--border-color);
         border-radius: 8px;
-        overflow: hidden;
+        overflow-x: auto; /* Allows horizontal scroll on small screens */
     }
 
     .comparison-table {
         width: 100%;
+        min-width: 800px; /* Prevents table from becoming too squished */
         border-collapse: collapse;
         background-color: var(--darker);
     }
 
     .comparison-table th,
     .comparison-table td {
-        padding: 1.25rem;
+        padding: 0.75rem 1rem; /* Reduced padding */
         text-align: left;
         vertical-align: top;
         border-bottom: 1px solid var(--border-color);
@@ -961,113 +962,26 @@
 
     .comparison-table th {
         font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
+        font-size: 0.9rem; /* Reduced font size */
         font-weight: 600;
         color: var(--light);
     }
     
     .comparison-table td {
-        font-size: 0.95rem;
+        font-size: 0.85rem; /* Reduced font size */
         color: var(--gray-light);
+        line-height: 1.5;
     }
 
-    .col-scenario { width: 22%; font-weight: 600; color: white; }
-    .col-traditional { width: 38%; }
-    .col-traderlog { width: 40%; border-left: 1px solid var(--border-color); }
-
-    .traditional-data {
-        line-height: 1.7;
-    }
-    .traditional-data b {
-        color: white;
-        font-weight: 500;
-    }
-    .traditional-data .comment {
-        font-size: 0.85rem;
-        color: var(--gray);
-        margin-top: 0.25rem;
-        display: block;
-    }
-
-    .traderlog-insight .insight-title {
-        background-color: var(--dark);
-        color: white;
-        padding: 0.4rem 0.8rem;
-        border-radius: 6px;
+    .col-scenario { width: 20%; font-weight: 600; color: white; }
+    .col-traditional { width: 35%; }
+    .col-traderlog { width: 45%; border-left: 1px solid var(--border-color); }
+    
+    .traderlog-insight b {
         font-weight: 600;
-        display: inline-block;
-        margin-bottom: 0.75rem;
-        font-size: 0.9rem;
+        color: white;
     }
 
-    .traderlog-insight .insight-text {
-        margin-bottom: 0.75rem;
-        line-height: 1.6;
-    }
-    
-    .traderlog-insight .insight-actions {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-
-    .traderlog-insight .action-btn {
-        background-color: var(--dark);
-        border: 1px solid var(--border-color);
-        color: var(--gray-light);
-        padding: 0.25rem 0.6rem;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        font-weight: 500;
-    }
-    
-    /* Mobile Responsive Styles */
-    @media (max-width: 900px) {
-        .comparison-table thead {
-            display: none;
-        }
-        .comparison-table,
-        .comparison-table tbody,
-        .comparison-table tr,
-        .comparison-table td {
-            display: block;
-            width: 100%;
-        }
-        .comparison-table tr {
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .comparison-table tr:last-child {
-            margin-bottom: 0;
-        }
-        .comparison-table td {
-            border: none;
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem;
-        }
-        .comparison-table td:last-child {
-            border-bottom: none;
-        }
-        .col-traderlog {
-            border-left: none;
-        }
-        .col-scenario {
-            background-color: var(--dark);
-            font-size: 1.1rem;
-        }
-        .comparison-table td[data-label]::before {
-            content: attr(data-label);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            color: white;
-            display: block;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-    }
     /* END: NEW COMPACT COMPARISON TABLE STYLES */
 </style>
 </head>
@@ -1710,38 +1624,28 @@
             const comparisonData = [
                 {
                     scenario: "Win Rate & RR",
-                    traditional: "Win rate: <b>43.27%</b><br>Avg RR: <b>0.82</b><br>Std Dev RR: <b>0.36</b><br>Skew: <b>-0.12</b><span class='comment'>(stats only — no guidance)</span>",
-                    insightTitle: "Losses are 2x your wins",
-                    insightText: "Cut losses sooner or target higher RR.",
-                    actions: ["Action: tighter stops", "Goal: RR ≥ 1.5"]
+                    traditional: "- Win rate: 43.27% - Avg RR: 0.82 - Std Dev RR: 0.36",
+                    traderlog: "<b>Losses are 2x your wins</b> Cut losses sooner or target higher RR. Action: tighter stops | Goal: RR ≥ 1.5"
                 },
                 {
                     scenario: "Lot Size Behavior",
-                    traditional: "Avg lot: <b>1.27</b><br>Max lot: <b>3.54</b><br>Variance: <b>1.73</b><br>Growth after wins: <b>+32%</b><span class='comment'>(data-heavy — pattern hidden)</span>",
-                    insightTitle: "You upsize after wins",
-                    insightText: "Use fixed lot or capped scaling to limit drawdown.",
-                    actions: []
+                    traditional: "- Avg lot: 1.27 - Max lot: 3.54 - Variance: 1.73",
+                    traderlog: "<b>You upsize after wins</b> Use fixed lot or capped scaling to limit drawdown."
                 },
                 {
                     scenario: "Strategy Success",
-                    traditional: "SR WR: <b>70.18%</b><br>Breakout WR: <b>19.84%</b><br>Avg RR (all): <b>0.65</b><br>Trades: <b>128</b><span class='comment'>(numbers only — no allocation advice)</span>",
-                    insightTitle: "SR wins 70% — Breakout wins 20%",
-                    insightText: "Shift allocation to SR; pause Breakouts until fixed.",
-                    actions: []
+                    traditional: "- SR WR: 70.18% - Breakout WR: 19.84% - Avg RR (all): 0.65.",
+                    traderlog: "<b>SR wins 70% — Breakout wins 20%</b> Shift allocation to SR; pause Breakouts until fixed."
                 },
                 {
                     scenario: "Profit Factor",
-                    traditional: "Profit factor: <b>0.84</b><br>Gross profit: <b>$2,356</b><br>Gross loss: <b>$2,804</b><br>Expectancy: <b>-0.06</b><span class='comment'>(needs interpretation)</span>",
-                    insightTitle: "You lose more than you make",
-                    insightText: "Stop low-edge setups; tighten exits & sizing.",
-                    actions: []
+                    traditional: "- Profit factor: 0.84 - Gross profit: $2,356 - Gross loss: $2,804.",
+                    traderlog: "<b>You lose more than you make</b> Stop low-edge setups; tighten exits & sizing."
                 },
                 {
                     scenario: "Behavioral Pattern",
-                    traditional: "Max DD: <b>-12.43%</b><br>Recovery trades: <b>18</b><br>Avg hold: <b>14m 22s</b><br>Avg emotion score: <b>0.62</b><span class='comment'>(raw metrics — no coaching)</span>",
-                    insightTitle: "You chase losses after drawdowns",
-                    insightText: "Auto-pause after big loss; review plan before next trade.",
-                    actions: []
+                    traditional: "- Max DD: -12.43% - Recovery trades: 18 - Avg hold: 14m 22s.",
+                    traderlog: "<b>You chase losses after drawdowns</b> Auto-pause after big loss; review plan before next trade."
                 }
             ];
 
@@ -1751,25 +1655,10 @@
             comparisonData.forEach(item => {
                 const row = document.createElement('tr');
                 
-                let actionsHtml = '';
-                if (item.actions && item.actions.length > 0) {
-                    actionsHtml = `<div class="insight-actions">${item.actions.map(action => `<span class="action-btn">${action}</span>`).join('')}</div>`;
-                }
-
                 row.innerHTML = `
-                    <td class="col-scenario" data-label="${item.scenario}">
-                        ${item.scenario}
-                    </td>
-                    <td class="col-traditional" data-label="Traditional Journal">
-                        <div class="traditional-data">${item.traditional}</div>
-                    </td>
-                    <td class="col-traderlog" data-label="TraderLog">
-                        <div class="traderlog-insight">
-                            <div class="insight-title">${item.insightTitle}</div>
-                            <div class="insight-text">${item.insightText}</div>
-                            ${actionsHtml}
-                        </div>
-                    </td>
+                    <td class="col-scenario">${item.scenario}</td>
+                    <td class="col-traditional">${item.traditional}</td>
+                    <td class="col-traderlog"><div class="traderlog-insight">${item.traderlog}</div></td>
                 `;
                 tableBody.appendChild(row);
             });
