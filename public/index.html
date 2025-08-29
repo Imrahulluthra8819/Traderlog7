@@ -199,7 +199,7 @@
         .hero p {
             font-size: 1.2rem;
             color: var(--gray-light);
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
             max-width: 90%;
         }
         
@@ -676,7 +676,7 @@
             }
             
             .hero p {
-                margin: 0 auto 2.5rem;
+                margin: 0 auto 1.5rem;
             }
             
             .stats-container {
@@ -922,6 +922,41 @@
     }
 
 </style>
+<style>
+    .ai-examples {
+        margin-top: 2rem;
+        margin-bottom: 2.5rem;
+        max-width: 90%;
+    }
+    .example-item {
+        background: rgba(30, 41, 59, 0.6);
+        border-left: 4px solid var(--accent);
+        padding: 0.8rem 1.2rem;
+        border-radius: 0 8px 8px 0;
+        font-family: 'Roboto', sans-serif;
+        font-style: italic;
+        color: var(--gray-light);
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        backdrop-filter: blur(5px);
+        position: relative;
+    }
+    .example-item:before {
+        content: "\f2dc"; /* Font Awesome lightbulb icon */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: var(--accent);
+        margin-right: 0.75rem;
+        font-style: normal;
+    }
+
+    @media (max-width: 992px) {
+        .ai-examples {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+</style>
 </head>
 <body>
     <nav id="navbar">
@@ -942,7 +977,13 @@
         <div class="container" style="display: flex; align-items: center;">
             <div class="hero-content">
                 <h1>Master Your Trading <span>Psychology & Strategy</span></h1>
-                <p>TraderLog helps new traders accelerate their growth through AI-powered journaling, psychological insights, and actionable analytics.</p>
+                
+                <p>Unlike others, we don’t drown you in complex charts and useless numbers. Traderlog.in gives you only what matters—AI-powered insights explained in simple language—so you actually understand your trading strengths and weaknesses and improve faster.</p>
+                <div class="ai-examples">
+                    <div class="example-item">“You lost 7 out of 10 trades when you enter trades in FOMO.”</div>
+                    <div class="example-item">“Your SR strategy works well with 70% wins.”</div>
+                    <div class="example-item">“Your Breakout strategy has only 20% wins, avoid it.”</div>
+                </div>
                 <div class="button-group" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
                     <a href="Rpp1" class="cta-button tracked-payment-link">Start Journaling Now</a>
                     <a href="#features" class="cta-button" style="background: transparent; border: 2px solid var(--primary);">View Features</a>
