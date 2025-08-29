@@ -1042,8 +1042,8 @@
 
     .card-content {
         background: transparent;
-        border-radius: 15px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(2,6,23,0.6);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: none;
@@ -1051,61 +1051,76 @@
     }
 
     .carousel-card.active .card-content {
-        transform: scale(1.05);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(139, 92, 246, 0.2);
+        transform: scale(1.02);
     }
     
     .top-card-section {
-        background-color: #192a41;
-        padding: 1.5rem;
+        background-color: #0b2133;
+        padding: 32px 32px 40px;
         color: white;
-        border-radius: 15px 15px 0 0;
+        border-radius: 20px 20px 0 0;
     }
 
     .top-card-section h3 {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.3rem;
-        color: var(--light);
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid var(--accent);
+        font-family: 'Inter', sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        color: #FFFFFF;
+        margin-bottom: 18px;
+        padding-bottom: 18px;
+        border-bottom: 3px solid #9b6bff;
         text-align: center;
     }
 
     .top-card-section h4 {
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #e6eef6;
         margin-bottom: 0.5rem;
     }
 
     .top-card-section p {
-        font-size: 0.9rem;
-        color: var(--gray-light);
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        color: #cfe7ff;
+        line-height: 1.4;
     }
 
     .bottom-card-section {
-        background-color: #007bff;
-        padding: 1.5rem;
-        border-radius: 0 0 15px 15px;
+        background-color: #071B2B;
+        padding: 22px;
+        border-radius: 22px;
+        margin: -48px auto 0;
+        width: 300px;
         position: relative;
+        border: 6px solid #12B6FF;
+        box-shadow: 0 6px 20px rgba(18,182,255,0.12);
     }
 
     .bottom-card-section h4 {
-        font-size: 1.2rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 22px;
         font-weight: 700;
-        color: #1a2a41;
+        color: #e6eef6;
         margin-bottom: 0.75rem;
     }
 
     .bottom-card-section p {
-        font-size: 1.05rem;
-        color: var(--light);
-        line-height: 1.6;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        color: #cfe7ff;
+        line-height: 1.45;
     }
 
     .bottom-card-section .traderlog-insight b {
-        color: #ade8ff;
-        font-size: 1.15rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #0EB7FF;
         display: block;
         margin-bottom: 0.5rem;
     }
@@ -2382,7 +2397,7 @@
 
             function startAutoSlide() {
                 stopAutoSlide(); // Prevent multiple intervals
-                autoSlideInterval = setInterval(showNextCard, 3000); // CHANGED TO 3 SECONDS
+                autoSlideInterval = setInterval(showNextCard, 4500);
             }
 
             function stopAutoSlide() {
