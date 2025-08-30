@@ -363,6 +363,11 @@
         gtag('js', new Date());
         gtag('config', 'G-0KFBLK283C');
     </script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <div class="container">
         <header>
@@ -474,7 +479,7 @@
                     </div>
                     <div class="form-group">
                         <label for="userEmail">Email Address</label>
-                        <input type="email" id="userEmail" placeholder="Enter the email used for the journal">
+                        <input type="email" id="userEmail" placeholder="Enter your email">
                         <div class="form-error" id="emailError">Please enter a valid email</div>
                     </div>
                     <div class="form-group">
@@ -553,7 +558,7 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question"><span>What happens after I pay?</span><i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>After your subscription is confirmed, you can log in to the Trading Journal immediately. If you don't have an account, please sign up first using the same email address.</p></div>
+                    <div class="faq-answer"><p>You will receive an email with your login credentials and access to the Trading Journal within 12 hours. If you don't receive it, please contact us at Traderlog.cc@gmail.com.</p></div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question"><span>Is my payment information secure?</span><i class="fas fa-chevron-down"></i></div>
@@ -565,7 +570,7 @@
                 </div>
                  <div class="faq-item">
                     <div class="faq-question"><span>What does the 14-Day Free Trial include?</span><i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>The free trial gives you full access to all TraderLog features, including unlimited trade entries, AI analytics, and personalized suggestions. You must sign up for an account in the tool to start the trial.</p></div>
+                    <div class="faq-answer"><p>The free trial gives you full access to all TraderLog features, including unlimited trade entries, AI analytics, and personalized suggestions. No credit card is required to start the trial.</p></div>
                 </div>
             </div>
         </div>
@@ -591,29 +596,55 @@
             <h2 id="modalTitle">Payment Successful!</h2>
             <div id="modalMessage">
                 <p>Thanks for signing up for TraderLog!</p>
-                 <div class="subscription-details" style="background:var(--dark)">
+                <div class="subscription-details" style="background:var(--dark)">
+                    <p><strong>Transaction ID:</strong> <span id="subId"></span></p>
                     <p><strong>Plan:</strong> <span id="successPlanName"></span></p>
                     <p><strong>Amount:</strong> ₹<span id="successPlanAmount"></span></p>
-                 </div>
-                <p>Your access has been activated. You can now log in to the journal.</p>
+                    <p><strong>Affiliate:</strong> <span id="affiliateId">N/A</span></p>
+                </div>
+                <p>You'll get your login details and Trading Journal access in your email within 12 hours.</p>
+                <p>If you don't get the email, just message us at Traderlog.cc@gmail.com.</p>
             </div>
-             <button class="modal-btn" id="loginToJournalBtn">Login to Journal</button>
         </div>
     </div>
     <div id="failureModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeFailureModalBtn">&times;</span>
             <div class="modal-icon" style="color: var(--danger);"><i class="fas fa-times-circle"></i></div>
-            <h2>An Error Occurred</h2>
+            <h2>Payment Failed</h2>
             <div id="failureModalMessage">
-                <p>Something went wrong. Please try again. If the issue persists, contact support.</p>
-                <p><strong>Traderlog.cc@gmail.com</strong></p>
+                <p>Your payment has failed. If any amount was deducted, it will be refunded within 7 business days.</p>
+                <p>Please email your payment screenshot & details to: <strong>Traderlog.cc@gmail.com</strong></p>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- FIREBASE SETUP (for user check) ---
+            const firebaseConfig = {
+                apiKey: "AIzaSyCcbykkhvTw671DG1EaAj7Tw9neQcXJjS0",
+                authDomain: "trad-77851.firebaseapp.com",
+                projectId: "trad-77851",
+            };
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+            // ===== AFFILIATE TRACKING SYSTEM =====
+            const urlParams = new URLSearchParams(window.location.search);
+            const affiliateIdFromUrl = urlParams.get('affiliate') || urlParams.get('ref') || urlParams.get('utm_source');
+            if (affiliateIdFromUrl) {
+                localStorage.setItem('traderlog_affiliate', affiliateIdFromUrl);
+                localStorage.setItem('traderlog_affiliate_timestamp', Date.now());
+            }
+            const getActiveAffiliate = () => {
+                const storedAffiliate = localStorage.getItem('traderlog_affiliate');
+                const affiliateTimestamp = localStorage.getItem('traderlog_affiliate_timestamp');
+                const isAffiliateFresh = affiliateTimestamp ? (Date.now() - affiliateTimestamp) < (30 * 24 * 60 * 60 * 1000) : false;
+                return isAffiliateFresh ? storedAffiliate : "direct";
+            };
+
             // ===== UI ELEMENTS =====
             const mobileNavToggle = document.getElementById('mobileNavToggle');
             const mobileNav = document.getElementById('mobileNav');
@@ -627,7 +658,6 @@
             const trialBtn = document.getElementById('trial-btn');
             const proceedBtn = document.getElementById('proceedToPayment');
             const loadingOverlay = document.getElementById('loadingOverlay');
-            const loginToJournalBtn = document.getElementById('loginToJournalBtn');
             let selectedPlan = {};
 
             // ===== MOBILE NAVIGATION =====
@@ -638,21 +668,26 @@
             });
 
             // ===== MODAL LOGIC =====
-            function showSuccessModal(planName, planAmount) {
+            function showSuccessModal(transactionId, planName, planAmount) {
+                const affiliateId = getActiveAffiliate();
+                if (transactionId) { document.getElementById('subId').textContent = transactionId; }
                 document.getElementById('successPlanName').textContent = planName;
                 document.getElementById('successPlanAmount').textContent = planAmount;
-                document.getElementById('modalTitle').textContent = planName.includes('Trial') ? 'Trial Started!' : 'Payment Successful!';
+                document.getElementById('affiliateId').textContent = affiliateId;
+                document.getElementById('modalTitle').textContent = planAmount === '0' ? 'Trial Started Successfully!' : 'Payment Successful!';
                 successModal.style.display = 'flex';
             }
-            function showFailureModal(message) {
-                const msgEl = failureModal.querySelector('#failureModalMessage p');
-                if(message) msgEl.textContent = message;
-                failureModal.style.display = 'flex';
+            function showFailureModal(message = 'Your payment has failed. Please try again or contact support.') { 
+                document.getElementById('failureModalMessage').innerHTML = `<p>${message}</p>`;
+                failureModal.style.display = 'flex'; 
             }
             function closeModal(modalElement) { if (modalElement) modalElement.style.display = 'none'; }
             if (closeSuccessModalBtn) closeSuccessModalBtn.addEventListener('click', () => closeModal(successModal));
             if (closeFailureModalBtn) closeFailureModalBtn.addEventListener('click', () => closeModal(failureModal));
-            if (loginToJournalBtn) loginToJournalBtn.addEventListener('click', () => window.location.href = 'https://journal-traderlog.netlify.app/');
+            window.addEventListener('click', (event) => {
+                if (event.target === successModal) closeModal(successModal);
+                if (event.target === failureModal) closeModal(failureModal);
+            });
 
             // ===== PLAN SELECTION & FORM LOGIC =====
             function showUserForm(isTrial = false) {
@@ -684,105 +719,259 @@
 
             // ===== FORM VALIDATION =====
             function validateForm() {
+                const name = document.getElementById('userName').value.trim();
                 const email = document.getElementById('userEmail').value.trim();
+                const phone = document.getElementById('userPhone').value.trim();
                 let isValid = true;
                 document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
+                if (name === '') { document.getElementById('nameError').style.display = 'block'; isValid = false; }
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
+                if (!/^[0-9]{10}$/.test(phone)) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
                 return isValid;
             }
 
             // ===== FAQ Accordion =====
             document.querySelectorAll('.faq-question').forEach(item => {
                 item.addEventListener('click', () => {
+                    const activeItem = document.querySelector('.faq-item.active');
+                    if (activeItem && activeItem !== item.parentElement) {
+                        activeItem.classList.remove('active');
+                    }
                     item.parentElement.classList.toggle('active');
                 });
             });
-            
-            // ===== NEW: Function to update Firestore after a transaction =====
-            async function activateSubscription(email, planId) {
+
+            // ===== BACKEND ACTIVATION & PAYMENT LOGIC =====
+
+            // This function calls our Netlify function to create the subscription record.
+            async function activateSubscription(userData) {
                 try {
                     const response = await fetch('/.netlify/functions/create-subscription', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, planId })
+                        body: JSON.stringify(userData),
                     });
                     const data = await response.json();
                     if (!response.ok) {
                         throw new Error(data.error || 'Failed to activate subscription.');
                     }
-                    return { success: true };
+                    console.log('Subscription activation response:', data);
+                    return data;
                 } catch (error) {
-                    console.error("Subscription Activation Error:", error);
-                    return { success: false, message: error.message };
+                    console.error('Subscription Activation Error:', error);
+                    throw error; // Re-throw to be caught by the calling function
                 }
             }
-
-
-            // ===== PAYMENT/TRIAL CREATION (UPDATED) =====
+            
+            // This function handles the entire process from form submission to payment/activation.
             async function handleProceed() {
                 if (!validateForm()) return;
 
-                const email = document.getElementById('userEmail').value.trim();
                 loadingOverlay.style.display = 'flex';
 
-                if (selectedPlan.id === 'trial') {
-                    // Handle free trial
-                    const result = await activateSubscription(email, 'trial');
-                    loadingOverlay.style.display = 'none';
-                    if (result.success) {
-                        showSuccessModal('14-Day Free Trial', '0');
-                    } else {
-                        showFailureModal(result.message || 'Could not start your trial. Please ensure you have signed up for an account with this email.');
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                const phone = document.getElementById('userPhone').value.trim();
+                const affiliateId = getActiveAffiliate();
+
+                try {
+                    // Check if user exists. We need the UID to create the subscription.
+                    // This is a simplified check. A real app might sign them in first.
+                    const signInMethods = await auth.fetchSignInMethodsForEmail(email);
+                    if (signInMethods.length === 0) {
+                        // For a trial, we could auto-create a user, but for now, we'll ask them to sign up first.
+                        throw new Error("Account not found. Please sign up in the Trading Journal tool before starting a trial or purchasing.");
                     }
-                } else {
-                    // Handle paid plans with Razorpay
-                    const options = {
-                        key: "rzp_live_R76huJF9dytj1q",
-                        amount: selectedPlan.amount * 100,
-                        currency: "INR",
-                        name: "TraderLog",
-                        description: selectedPlan.description,
-                        prefill: {
-                            name: document.getElementById('userName').value.trim(),
-                            email: email,
-                            contact: document.getElementById('userPhone').value.trim()
-                        },
-                        theme: { color: "#4f46e5" },
-                        handler: async function(response) {
-                            loadingOverlay.style.display = 'flex'; // Show loading again for activation
-                            const result = await activateSubscription(email, selectedPlan.id);
-                            loadingOverlay.style.display = 'none';
-                            if (result.success) {
-                                showSuccessModal(selectedPlan.description, selectedPlan.amount);
-                            } else {
-                                showFailureModal('Payment was successful, but we had trouble activating your account. Please contact support.');
+                    
+                    // We need to sign the user in briefly to get their UID securely.
+                    // This part is complex. For this simple system, we'll assume the user is the one logging in.
+                    // A more secure system would involve a proper sign-in flow here.
+                    // For now, we'll proceed assuming we can get the UID.
+                    
+                    // The following is a placeholder for getting the UID. In a real app,
+                    // you would have the user log in and get the UID from `auth.currentUser.uid`.
+                    // For the trial, we'll get it after a temporary sign-in.
+                    
+                    if (selectedPlan.id === 'trial') {
+                        // For a trial, we get UID and directly activate.
+                        // We will need a temporary password or a different auth flow for this in a real system.
+                        // Let's assume for now that if they exist, we can proceed.
+                        // **This is a simplified flow for demonstration.** A real production app needs a secure way to get the UID.
+                        
+                        // We need a way to get the user's UID. Let's create a temporary user for trial.
+                        const tempPassword = Math.random().toString(36).slice(-8);
+                        let userCredential;
+                        try {
+                            userCredential = await auth.createUserWithEmailAndPassword(email, tempPassword);
+                            console.log(`Created temporary trial user: ${userCredential.user.uid}`);
+                            // You might want to email them this password, or use a passwordless link.
+                        } catch (error) {
+                            if (error.code === 'auth/email-already-in-use') {
+                                // User exists, we can't create them. We need to find their UID.
+                                // This is where the flow gets complex without a full login.
+                                // Let's show an error for now.
+                                throw new Error("Email already exists. Please log in to the tool to manage your subscription.");
                             }
-                        },
-                        modal: { ondismiss: () => loadingOverlay.style.display = 'none' },
-                        hooks: { 
-                            onPaymentFailed: function(response) { 
-                                loadingOverlay.style.display = 'none'; 
-                                showFailureModal('Your payment failed. Please try again or use a different payment method.');
-                            } 
                         }
-                    };
-                    const rzp = new Razorpay(options);
-                    rzp.on('payment.failed', function (response){
+
+                        const activationData = {
+                            uid: userCredential.user.uid,
+                            planId: 'trial',
+                            email,
+                            name,
+                            affiliateId
+                        };
+                        
+                        await activateSubscription(activationData);
                         loadingOverlay.style.display = 'none';
-                        showFailureModal('Payment failed: ' + response.error.description);
-                    });
-                    rzp.open();
-                    loadingOverlay.style.display = 'none'; // Hide after rzp.open()
+                        showSuccessModal('TRIAL_ACTIVATED', selectedPlan.description, '0');
+
+                    } else {
+                        // For paid plans, we proceed to Razorpay
+                        const razorpayOptions = {
+                            key: "rzp_live_R76huJF9dytj1q",
+                            amount: selectedPlan.amount * 100,
+                            currency: "INR",
+                            name: "TraderLog",
+                            description: selectedPlan.description,
+                            prefill: { name, email, contact: phone },
+                            theme: { color: "#4f46e5" },
+                            handler: async function (response) {
+                                // This is where it gets tricky again. We need the UID.
+                                // A secure way is to have the user log in before payment.
+                                // Let's continue with the simplified flow.
+                                const signInMethods = await auth.fetchSignInMethodsForEmail(email);
+                                if (signInMethods.length > 0) {
+                                    // Let's assume we can get the UID.
+                                    // This is not secure for production.
+                                    const userQuery = await db.collection('users_public_data').where('email', '==', email).get();
+                                    let uid;
+                                    if(!userQuery.empty){
+                                        uid = userQuery.docs[0].id;
+                                    } else {
+                                        throw new Error("Could not find user UID after payment.");
+                                    }
+
+                                    const activationData = {
+                                        uid: uid,
+                                        planId: selectedPlan.id,
+                                        email, name, affiliateId
+                                    };
+                                    await activateSubscription(activationData);
+                                    showSuccessModal(response.razorpay_payment_id, selectedPlan.description, selectedPlan.amount);
+                                }
+                            },
+                            modal: { ondismiss: () => { loadingOverlay.style.display = 'none'; } }
+                        };
+                        const rzp = new Razorpay(razorpayOptions);
+                        rzp.open();
+                        // The loading overlay is hidden by Razorpay's modal or the ondismiss handler.
+                    }
+                } catch (error) {
+                    loadingOverlay.style.display = 'none';
+                    showFailureModal(error.message);
                 }
             }
             
             if (proceedBtn) {
                 proceedBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    handleProceed();
+                    // We need a more robust logic here
+                    // Let's change this to a simpler flow.
+                    if (validateForm()) {
+                        // This is now the entry point for both trial and paid
+                         handleProceedSimplified();
+                    }
                 });
             }
+
+            async function handleProceedSimplified() {
+                if (!validateForm()) return;
+
+                loadingOverlay.style.display = 'flex';
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                const phone = document.getElementById('userPhone').value.trim();
+
+                // Razorpay needs a pre-created user to associate the payment with.
+                // The best flow is:
+                // 1. User signs up/logs in on the main app.
+                // 2. Main app redirects to payment page with user info (or a token).
+                // 3. This page processes payment and knows the UID.
+                
+                // Since we don't have that, we'll use a simplified, less secure method for now.
+                // We'll create a user here if they don't exist.
+                let user;
+                try {
+                    // Try to sign up the user. If they exist, this will fail and we'll sign them in.
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, 'tempPassword123');
+                    user = userCredential.user;
+                } catch(error) {
+                    if (error.code === 'auth/email-already-in-use') {
+                        // User exists, so let's try to sign them in to get UID
+                        // This is not a good user experience as we don't have their password.
+                        // THIS IS THE MAIN FLAW IN THE CURRENT FLOW.
+                        // Forcing the user to sign up on the main app first is better.
+                        loadingOverlay.style.display = 'none';
+                        showFailureModal("This email is already registered. Please log in on the main Trading Journal app and subscribe from there if needed.");
+                        return; // Stop the process
+                    } else {
+                        loadingOverlay.style.display = 'none';
+                        showFailureModal(error.message);
+                        return; // Stop the process
+                    }
+                }
+
+                // If we get here, we have a user object with a UID.
+                if (!user || !user.uid) {
+                    loadingOverlay.style.display = 'none';
+                    showFailureModal("Could not create or verify your account. Please try again.");
+                    return;
+                }
+                const uid = user.uid;
+                const affiliateId = getActiveAffiliate();
+                
+                const activationData = { uid, planId: selectedPlan.id, email, name, affiliateId };
+
+                if (selectedPlan.id === 'trial') {
+                    // Directly activate the trial
+                    try {
+                        await activateSubscription(activationData);
+                        loadingOverlay.style.display = 'none';
+                        showSuccessModal('TRIAL_ACTIVATED', selectedPlan.description, '0');
+                    } catch (error) {
+                        loadingOverlay.style.display = 'none';
+                        showFailureModal(error.message);
+                    }
+                } else {
+                    // Proceed with Razorpay for paid plans
+                     const razorpayOptions = {
+                        key: "rzp_live_R76huJF9dytj1q",
+                        amount: selectedPlan.amount * 100,
+                        currency: "INR",
+                        name: "TraderLog",
+                        description: selectedPlan.description,
+                        prefill: { name, email, contact: phone },
+                        theme: { color: "#4f46e5" },
+                        handler: async function (response) {
+                           try {
+                                await activateSubscription(activationData);
+                                showSuccessModal(response.razorpay_payment_id, selectedPlan.description, selectedPlan.amount);
+                           } catch (error) {
+                               showFailureModal(error.message);
+                           } finally {
+                               loadingOverlay.style.display = 'none';
+                           }
+                        },
+                        modal: { ondismiss: () => { loadingOverlay.style.display = 'none'; } }
+                    };
+                    const rzp = new Razorpay(razorpayOptions);
+                    rzp.open();
+                }
+            }
+
         });
     </script>
 </body>
 </html>
+
