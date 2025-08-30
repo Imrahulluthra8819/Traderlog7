@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraderLog - Secure Payment</title>
+    <title>TraderLog - Unlock Your Trading Potential</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,9 +19,8 @@
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --dark: #111827;
-            --dark-light: #1f2937;
-            --darker: #0f172a;
+            --dark: #0f172a; /* Darker base */
+            --dark-light: #1e293b; /* Lighter card background */
             --light: #f9fafb;
             --gray: #9ca3af;
             --gray-light: #d1d5db;
@@ -36,6 +35,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark);
+            background-image: radial-gradient(ellipse at top, #1e293b, var(--dark) 60%);
             color: var(--light);
             min-height: 100vh;
             line-height: 1.6;
@@ -54,11 +54,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            background: var(--dark);
+            background: transparent;
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
         }
 
         .logo a {
@@ -97,16 +98,19 @@
         /* Centered Hero Section */
         .hero-section {
             text-align: center;
-            padding: 80px 0;
+            padding: 80px 0 60px;
         }
         .hero-section h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 800;
             margin-bottom: 20px;
             line-height: 1.2;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            background: linear-gradient(90deg, #fff, var(--gray-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .hero-section .subtitle {
             font-size: 1.2rem;
@@ -114,6 +118,35 @@
             max-width: 700px;
             margin: 0 auto 40px;
         }
+        
+        /* Universal Features */
+        .universal-features {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .universal-features h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--light);
+        }
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: var(--gray-light);
+        }
+        .feature-item i {
+            color: var(--primary);
+        }
+
 
         /* Pricing Section */
         .pricing-section {
@@ -137,7 +170,7 @@
         .pricing-card.popular {
             border-color: var(--primary);
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 0 35px rgba(79, 70, 229, 0.5), 0 0 15px rgba(79, 70, 229, 0.3);
         }
         .popular-badge {
             position: absolute;
@@ -179,15 +212,17 @@
             list-style: none;
             margin: 30px 0;
             text-align: left;
+            min-height: 200px;
         }
         .features-list li {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             margin-bottom: 15px;
         }
         .features-list i {
             color: var(--success);
+            margin-top: 5px;
         }
 
         .btn {
@@ -207,10 +242,11 @@
         }
         .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
         .pricing-card .btn-secondary {
-            background: var(--dark);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .pricing-card .btn-secondary:hover {
-            background: #2a3447;
+            background: rgba(255,255,255,0.1);
         }
         
         .trial-section {
@@ -226,9 +262,9 @@
             color: var(--primary);
             display: inline-block;
             width: 100%;
-            max-width: 450px; /* Increased width */
-            padding: 16px 30px; /* Increased padding */
-            font-size: 1.2rem; /* Increased font size */
+            max-width: 450px;
+            padding: 16px 30px;
+            font-size: 1.2rem;
         }
         .btn-trial:hover { background: rgba(79, 70, 229, 0.1); }
         
@@ -271,7 +307,7 @@
         .demo-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .testimonial-card { background: var(--dark-light); border-radius: 16px; padding: 30px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .testimonial-content { font-style: italic; color: var(--light); margin-bottom: 20px; }
+        .testimonial-content { font-style: italic; color: var(--light); margin-bottom: 20px; font-size: 1.1rem; }
         .testimonial-author { display: flex; align-items: center; gap: 15px; }
         .author-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
         .author-name { font-weight: 600; }
@@ -305,15 +341,16 @@
         /* Responsive */
         @media (max-width: 992px) {
             .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
-            .pricing-card.popular { transform: scale(1); }
+            .pricing-card.popular { transform: scale(1); order: -1; /* Move popular card to top on mobile */ }
             .pricing-card { max-width: 400px; margin: 0 auto; }
-            .hero-section h1 { font-size: 2.5rem; }
+            .hero-section h1 { font-size: 2.8rem; }
         }
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
             .mobile-nav-toggle { display: block; }
             .hero-section h1 { font-size: 2.2rem; }
             .section-header h2 { font-size: 2rem; }
+            .features-grid { flex-direction: column; align-items: center; gap: 20px;}
         }
     </style>
 </head>
@@ -359,11 +396,21 @@
 
         <main>
             <section class="hero-section">
-                <h1>Simple, Transparent Pricing</h1>
-                <p class="subtitle">Choose the plan that's right for your trading journey. All plans include our full suite of AI-powered tools and features.</p>
+                <h1>Unlock Your Full Trading Potential</h1>
+                <p class="subtitle">Stop guessing, start winning. Our AI-powered tools give you the edge you need to trade smarter. Choose your plan and elevate your strategy today.</p>
             </section>
             
             <section class="pricing-section">
+
+                <div class="universal-features">
+                    <h2>Every Plan Includes Full Access To:</h2>
+                    <div class="features-grid">
+                        <div class="feature-item"><i class="fas fa-infinity"></i> Unlimited Trade Journaling</div>
+                        <div class="feature-item"><i class="fas fa-brain"></i> AI Performance Analytics</div>
+                        <div class="feature-item"><i class="fas fa-lightbulb"></i> Actionable Insights</div>
+                    </div>
+                </div>
+
                 <div class="pricing-grid">
                     <!-- Monthly Plan -->
                     <div class="pricing-card">
@@ -372,14 +419,12 @@
                             <span class="new-price">₹199</span>
                             <span class="old-price">₹499</span>
                         </div>
-                        <p class="price-description">Per Month</p>
+                        <p class="price-description">Flexibility First</p>
                         <ul class="features-list">
-                            <li><i class="fas fa-check-circle"></i> Unlimited Trade Entries</li>
-                            <li><i class="fas fa-check-circle"></i> Advanced AI Analytics</li>
-                            <li><i class="fas fa-check-circle"></i> Behavior Suggestions</li>
-                            <li><i class="fas fa-check-circle"></i> Email Support</li>
+                            <li><i class="fas fa-check"></i><span><strong>Log Every Trade</strong> without limits to build a complete picture of your performance.</span></li>
+                             <li><i class="fas fa-check"></i><span><strong>Standard Email Support</strong> to help with your questions.</span></li>
                         </ul>
-                        <button class="btn btn-secondary plan-btn" data-plan="monthly" data-amount="199" data-desc="Monthly Subscription">Get Started</button>
+                        <button class="btn btn-secondary plan-btn" data-plan="monthly" data-amount="199" data-desc="Monthly Subscription">Choose Monthly</button>
                     </div>
 
                     <!-- 6 Months Plan (Most Popular) -->
@@ -390,15 +435,13 @@
                             <span class="new-price">₹999</span>
                             <span class="old-price">₹2994</span>
                         </div>
-                        <p class="price-description">~₹167 per month</p>
+                        <p class="price-description">Best Value & Commitment</p>
                         <ul class="features-list">
-                           <li><i class="fas fa-check-circle"></i> Unlimited Trade Entries</li>
-                            <li><i class="fas fa-check-circle"></i> Advanced AI Analytics</li>
-                            <li><i class="fas fa-check-circle"></i> Behavior Suggestions</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>Priority</strong> Email Support</li>
-                            <li><i class="fas fa-check-circle"></i> Early Access to New Features</li>
+                           <li><i class="fas fa-check"></i><span><strong>Everything in Monthly, plus:</strong></span></li>
+                           <li><i class="fas fa-star"></i><span><strong>Priority Support</strong> to get your questions answered faster.</span></li>
+                           <li><i class="fas fa-rocket"></i><span><strong>Early Access to New Features</strong> before anyone else.</span></li>
                         </ul>
-                        <button class="btn plan-btn" data-plan="six-months" data-amount="999" data-desc="6 Months Access">Get Started</button>
+                        <button class="btn plan-btn" data-plan="six-months" data-amount="999" data-desc="6 Months Access">Choose 6 Months</button>
                     </div>
 
                     <!-- 1 Year Plan -->
@@ -408,19 +451,17 @@
                             <span class="new-price">₹1899</span>
                             <span class="old-price">₹5988</span>
                         </div>
-                        <p class="price-description">~₹158 per month</p>
+                        <p class="price-description">Long-Term Growth</p>
                          <ul class="features-list">
-                            <li><i class="fas fa-check-circle"></i> Unlimited Trade Entries</li>
-                            <li><i class="fas fa-check-circle"></i> Advanced AI Analytics</li>
-                            <li><i class="fas fa-check-circle"></i> Behavior Suggestions</li>
-                            <li><i class="fas fa-check-circle"></i> Email Support</li>
+                            <li><i class="fas fa-check"></i><span><strong>Lock in the best rate</strong> for a full year of analysis and improvement.</span></li>
+                            <li><i class="fas fa-check"></i><span><strong>Standard Email Support</strong> to help with your questions.</span></li>
                         </ul>
-                        <button class="btn btn-secondary plan-btn" data-plan="yearly" data-amount="1899" data-desc="1 Year Access">Get Started</button>
+                        <button class="btn btn-secondary plan-btn" data-plan="yearly" data-amount="1899" data-desc="1 Year Access">Choose Yearly</button>
                     </div>
                 </div>
 
                 <div class="trial-section">
-                     <p class="subtitle">Not sure yet? Try all features for free.</p>
+                     <p class="subtitle">Ready to see the difference? No commitment, no risk. <br>Start your free trial and get instant access to every feature.</p>
                     <a href="#" class="btn btn-trial" id="trial-btn"><i class="far fa-calendar-check"></i> Start 14-Day Free Trial</a>
                 </div>
 
@@ -466,36 +507,36 @@
     <section class="section" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>What Our Traders Say</h2>
-                <p>Real results from traders who have transformed their performance with TraderLog.</p>
+                <h2>Join Traders Who Transformed Their Results</h2>
+                <p>Don't just take our word for it. Here's how TraderLog is creating more disciplined, profitable traders.</p>
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-content">"TraderLog's analytics helped me identify my emotional trading patterns. I've become consistently profitable and increased my returns by 35% in just 3 months."</p>
+                    <p class="testimonial-content">"I was stuck in a break-even loop. TraderLog's AI finally showed me the emotional mistakes I was blind to. My win rate jumped from 52% to over 65% in two months."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">RK</div>
                         <div>
-                            <div class="author-name">Rajesh Kumar</div>
+                            <div class="author-name">Rajesh K.</div>
                             <div class="author-location">Mumbai, India</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-content">"The AI insights pointed out weaknesses I never noticed. My win rate improved from 52% to 68% after implementing TraderLog's suggestions."</p>
+                    <p class="testimonial-content">"This is the first journal that doesn't feel like a chore. The insights are brilliant. I finally have a clear roadmap of what to work on to improve my strategy."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">PS</div>
                         <div>
-                            <div class="author-name">Priya Sharma</div>
+                            <div class="author-name">Priya S.</div>
                             <div class="author-location">Delhi, India</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-content">"As a full-time trader, TraderLog saves me hours of journaling. The behavioral insights transformed my trading discipline and increased my profits."</p>
+                    <p class="testimonial-content">"The discipline TraderLog enforces is priceless. Seeing my progress quantified every week has been a game-changer for my confidence and my bottom line."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">MJ</div>
                         <div>
-                            <div class="author-name">Michael Johnson</div>
+                            <div class="author-name">Michael J.</div>
                             <div class="author-location">New York, USA</div>
                         </div>
                     </div>
@@ -738,7 +779,8 @@
                         hooks: { onPaymentFailed: function(response) { loadingOverlay.style.display = 'none'; showFailureModal(); } }
                     };
                     if (selectedPlan.id === 'monthly') { options.subscription_id = data.id; } else { options.order_id = data.id; options.amount = data.amount; }
-                    new Razorpay(options).open();
+                    const rzp = new Razorpay(options);
+                    rzp.open();
                 } catch (error) {
                     console.error("Payment error:", error);
                     loadingOverlay.style.display = 'none';
