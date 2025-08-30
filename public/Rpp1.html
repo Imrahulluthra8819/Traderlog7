@@ -685,7 +685,11 @@
 
             // ----- CORE LOGIC: ACTIVATING THE SUBSCRIPTION -----
             async function activateSubscription(userData) {
-                const response = await fetch('/.netlify/functions/create-subscription', {
+                // --- MAJOR FIX: Use the ABSOLUTE URL of your Trading Journal's Netlify function ---
+                // IMPORTANT: Replace the placeholder below with the real URL of your live Trading Journal site.
+                const journalAppUrl = 'https://journaltesting.netlify.app/'; 
+                
+                const response = await fetch(`${journalAppUrl}/.netlify/functions/create-subscription`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData),
