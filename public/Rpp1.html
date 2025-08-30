@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraderLog - AI-Powered Trading Journal</title>
+    <title>TraderLog - Choose Your Subscription Plan</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -29,6 +30,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: linear-gradient(135deg, var(--darker), var(--dark));
             color: var(--light);
@@ -44,8 +49,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1620476214170-1d6800d1c9e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-            opacity: 0.05;
+            background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.1), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.1), transparent 40%);
             z-index: -1;
         }
         
@@ -83,6 +88,14 @@
             background: rgba(139, 92, 246, 0.1);
             padding: 10px;
             border-radius: 12px;
+        }
+        
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         /* Desktop Navigation */
@@ -192,13 +205,13 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 80px 20px 60px;
             max-width: 900px;
             margin: 0 auto;
         }
         
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 20px;
             line-height: 1.2;
             background: linear-gradient(to right, var(--light), var(--secondary));
@@ -213,77 +226,92 @@
             margin: 0 auto 30px;
             line-height: 1.6;
         }
-        
-        .offer-card {
+
+        /* NEW PRICING SECTION */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+        }
+        .pricing-card {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 30px 20px;
-            max-width: 500px;
-            margin: 0 auto 40px;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 30px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
-        }
-        
-        .offer-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--primary));
-        }
-        
-        /* Offer Badge */
-        .offer-badge {
-            position: absolute;
-            top: 15px;
-            right: -35px;
-            background: var(--danger);
-            color: white;
-            font-weight: 700;
-            font-size: 10px;
-            transform: rotate(45deg);
-            z-index: 10;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            text-align: center;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 150px;
-            height: 32px;
-            padding: 0 10px;
-        }
-        
-        .price-tag {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 35px 0 10px;
-            color: var(--light);
             display: flex;
             flex-direction: column;
-            align-items: center;
+            transition: all 0.3s ease;
         }
-        
-        .price-tag .original {
-            font-size: 1.1rem;
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .pricing-card.recommended {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2);
+        }
+        .recommend-badge {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 6px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 0 0 10px 10px;
+            text-transform: uppercase;
+        }
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 10px;
+            color: var(--light);
+        }
+        .plan-description {
+            color: var(--gray-light);
+            margin: 5px 0 20px;
+        }
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .price .original {
+            font-size: 1.2rem;
             text-decoration: line-through;
             color: var(--gray);
-            margin-top: 5px;
+            margin-left: 10px;
         }
-        
-        .offer-duration {
+        .price-per-month {
             color: var(--gray-light);
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 30px;
         }
-        
-        .subscription-btn {
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--gray-light);
+        }
+        .feature-list i {
+            color: var(--success);
+        }
+        .subscribe-btn {
             display: block;
             width: 100%;
             background: linear-gradient(90deg, var(--accent), var(--primary));
@@ -296,29 +324,32 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
-            margin-top: 15px;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .subscription-btn:hover {
+        .pricing-card.recommended .subscribe-btn {
+            animation: pulse 2s infinite;
+        }
+        .subscribe-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
         }
-        
+
         /* User Info Form */
-        .user-form {
+        .user-form-section {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 25px;
-            max-width: 500px;
-            margin: 0 auto 30px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 60px auto 30px;
             border: 1px solid rgba(139, 92, 246, 0.3);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            display: none;
+            display: none; /* Initially hidden */
         }
-        
+        .user-form-section h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -354,6 +385,110 @@
             display: none;
         }
         
+        /* Testimonials Section */
+        .testimonials {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .testimonial-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            color: var(--light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--light);
+        }
+        
+        .author-location {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Video Section Styles */
+        .video-section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .video-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
         /* Loading State */
         .loading-overlay {
             position: fixed;
@@ -387,96 +522,6 @@
             margin-top: 20px;
             font-size: 18px;
             text-align: center;
-        }
-        
-        /* Features Section */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 60px 0;
-        }
-        
-        .feature-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 25px 20px;
-            border: 1px solid rgba(100, 116, 139, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .feature-card i {
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-            background: rgba(139, 92, 246, 0.1);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 14px;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: var(--light);
-        }
-        
-        .feature-card p {
-            color: var(--gray-light);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-        
-        /* Buttons Section */
-        .buttons-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin: 40px 0;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(30, 41, 59, 0.7);
-            color: var(--light);
-            padding: 14px 30px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 280px;
-            gap: 10px;
-        }
-        
-        .btn:hover {
-            background: rgba(37, 99, 235, 0.2);
-            border-color: rgba(37, 99, 235, 0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        
-        .btn i {
-            color: var(--accent);
         }
         
         /* Payment Modal */
@@ -605,6 +650,15 @@
             }
         }
         
+        @media (max-width: 992px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.recommended {
+                transform: scale(1);
+            }
+        }
+
         @media (max-width: 768px) {
             .desktop-nav {
                 display: none;
@@ -625,22 +679,9 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
-            .offer-card {
-                padding: 25px 15px;
-            }
-            
-            .price-tag {
-                font-size: 2rem;
-                margin: 30px 0 8px;
-            }
-            
-            .offer-badge {
-                font-size: 10px;
-                width: 130px;
-                height: 28px;
-                top: 12px;
-                right: -30px;
+                        
+            .testimonial-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -656,11 +697,7 @@
             .hero p {
                 font-size: 1rem;
             }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
+                        
             .modal-content {
                 padding: 25px 20px;
             }
@@ -672,32 +709,11 @@
         
         /* Animation for buttons */
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
-            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+            0% { transform: scale(1); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
         }
         
-        .subscription-btn.pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Status indicator */
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        
-        .status-active {
-            background-color: var(--success);
-            box-shadow: 0 0 8px var(--success);
-        }
-        
-        .status-inactive {
-            background-color: var(--danger);
-        }
         
         /* Error Message */
         .error-message {
@@ -709,23 +725,55 @@
             border: 1px solid var(--danger);
             display: none;
         }
+
+        /* NEW VIDEO WRAPPER */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 2rem auto 0;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
     </style>
 </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0KFBLK283C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0KFBLK283C');
+</script>
 <body>
     <div class="container">
         <header>
             <div class="logo">
-                <i class="fas fa-chart-line"></i>
-                <span>TraderLog</span>
+                <a href="index.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>TraderLog</span>
+                </a>
             </div>
             
             <!-- Desktop Navigation -->
             <nav class="desktop-nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#" id="pricing-nav">Pricing</a></li>
-                    <li><a href="#">Resources</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="https://topmate.io/rahul_luthra/1377078">Resources</a></li>
                     <li><a href="https://wa.link/1nycuf" target="_blank">Contact</a></li>
                 </ul>
             </nav>
@@ -741,109 +789,155 @@
                     <i class="fas fa-times"></i>
                 </button>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#" id="mobile-pricing-nav">Pricing</a></li>
-                    <li><a href="#">Resources</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="https://topmate.io/rahul_luthra/1377078">Resources</a></li>
                     <li><a href="https://wa.link/1nycuf" target="_blank">Contact</a></li>
                 </ul>
             </div>
         </header>
         
         <section class="hero">
-            <h1>Elevate Your Trading with AI-Powered Insights</h1>
-            <p>TraderLog helps you analyze your trades, identify patterns, and improve your strategy with advanced analytics and personalized suggestions.</p>
-            
-            <div class="offer-card">
-                <div class="offer-badge">LIMITED TIME OFFER</div>
-                <h2>Early User Special</h2>
-                <div class="price-tag">
-                    <span>₹95</span>
-                    <span class="original">₹999</span>
+            <h1>Unlock Your Trading Potential</h1>
+            <p>Choose the plan that's right for you and gain access to AI-powered insights, advanced analytics, and personalized feedback to elevate your trading performance.</p>
+        </section>
+
+        <section class="pricing-section">
+            <div class="pricing-grid">
+                <!-- Monthly Plan -->
+                <div class="pricing-card" data-plan="monthly" data-amount="199" data-desc="Monthly Subscription">
+                    <h3 class="plan-name">Monthly</h3>
+                    <p class="plan-description">Perfect for getting started.</p>
+                    <div class="price">₹199</div>
+                    <p class="price-per-month">per month</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Unlimited Trade Entries</li>
+                        <li><i class="fas fa-check-circle"></i> AI-Powered Analytics</li>
+                        <li><i class="fas fa-check-circle"></i> Psychology Insights</li>
+                        <li><i class="fas fa-check-circle"></i> Email Support</li>
+                    </ul>
+                    <button class="subscribe-btn">Choose Plan</button>
                 </div>
-                <div class="offer-duration">per month (Save 91%)</div>
-                <p>Get full access to all premium features at an exclusive early user price</p>
-                
-                <button class="subscription-btn pulse" id="offer-btn">
-                    <i class="fas fa-bolt"></i> Subscribe Now
-                </button>
-                
-                <div style="margin-top: 15px; font-size: 0.9rem; color: var(--gray-light);">
-                    <span class="status-indicator status-active"></span>
-                    Payment gateway is active and ready
+
+                <!-- 1 Year Plan (Recommended) -->
+                <div class="pricing-card recommended" data-plan="yearly" data-amount="1899" data-desc="1 Year Access">
+                    <div class="recommend-badge">Best Value</div>
+                    <h3 class="plan-name">1 Year</h3>
+                    <p class="plan-description">Commit to your growth.</p>
+                    <div class="price">₹1899 <span class="original">₹2388</span></div>
+                    <p class="price-per-month">~₹158 per month</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> All Monthly Features</li>
+                        <li><i class="fas fa-check-circle"></i> **Save 21% Annually**</li>
+                        <li><i class="fas fa-check-circle"></i> Priority Email Support</li>
+                        <li><i class="fas fa-check-circle"></i> Early Access to New Features</li>
+                    </ul>
+                    <button class="subscribe-btn">Choose Plan</button>
                 </div>
-            </div>
-            
-            <!-- User Information Form -->
-            <div class="user-form" id="userForm">
-                <h3>Complete Your Subscription</h3>
-                <div class="error-message" id="formError"></div>
-                
-                <div class="form-group">
-                    <label for="userName">Full Name</label>
-                    <input type="text" id="userName" placeholder="Enter your full name">
-                    <div class="form-error" id="nameError">Please enter your name</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userEmail">Email Address</label>
-                    <input type="email" id="userEmail" placeholder="Enter your email">
-                    <div class="form-error" id="emailError">Please enter a valid email</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userPhone">Phone Number</label>
-                    <input type="tel" id="userPhone" placeholder="Enter your phone number">
-                    <div class="form-error" id="phoneError">Please enter a 10-digit phone number</div>
-                </div>
-                
-                <button class="subscription-btn" id="proceedToPayment">
-                    <i class="fas fa-lock"></i> Proceed to Payment
-                </button>
-            </div>
-            
-            <div class="features">
-                <div class="feature-card">
-                    <i class="fas fa-infinity"></i>
-                    <h3>Unlimited Trade Entries</h3>
-                    <p>Record every trade without limitations and build a comprehensive trading history.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Advanced AI Analytics</h3>
-                    <p>Get deep insights into your trading patterns, performance metrics, and profitability.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Behavior Suggestions</h3>
-                    <p>Receive personalized recommendations to improve your trading psychology and decision-making.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <i class="fas fa-forward"></i>
-                    <h3>Upcoming Features</h3>
-                    <p>Access to copy trading, backtesting, and demo trading modules as they launch.</p>
-                </div>
-            </div>
-            
-            <div class="buttons-section">
-                <div class="buttons-section">
-                    <button class="btn" id="start-journaling">
-                        <i class="fas fa-book"></i> Start Journaling Now
-                    </button>
-                    
-                    <button class="btn" id="avail-now">
-                        <i class="fas fa-gem"></i> AVAIL NOW
-                    </button>
-                    
-                    <button class="btn" id="start-now">
-                        <i class="fas fa-play-circle"></i> Start Now
-                    </button>
+
+                <!-- 6 Months Plan -->
+                <div class="pricing-card" data-plan="six-months" data-amount="999" data-desc="6 Months Access">
+                    <h3 class="plan-name">6 Months</h3>
+                    <p class="plan-description">Great value for medium term.</p>
+                    <div class="price">₹999 <span class="original">₹1194</span></div>
+                    <p class="price-per-month">~₹166 per month</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> All Monthly Features</li>
+                        <li><i class="fas fa-check-circle"></i> Save 16%</li>
+                        <li><i class="fas fa-check-circle"></i> Email Support</li>
+                        <li><i class="fas fa-times-circle" style="color:var(--gray)"></i> <span style="text-decoration: line-through;">Early Access</span></li>
+                    </ul>
+                    <button class="subscribe-btn">Choose Plan</button>
                 </div>
             </div>
         </section>
+
+        <!-- User Information Form -->
+        <section class="user-form-section" id="userForm">
+            <h3>Complete Your Subscription</h3>
+            <div class="error-message" id="formError"></div>
+            
+            <div class="form-group">
+                <label for="userName">Full Name</label>
+                <input type="text" id="userName" placeholder="Enter your full name">
+                <div class="form-error" id="nameError">Please enter your name</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="userEmail">Email Address</label>
+                <input type="email" id="userEmail" placeholder="Enter your email">
+                <div class="form-error" id="emailError">Please enter a valid email</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="userPhone">Phone Number</label>
+                <input type="tel" id="userPhone" placeholder="Enter your phone number">
+                <div class="form-error" id="phoneError">Please enter a 10-digit phone number</div>
+            </div>
+            
+            <div class="selected-plan-info">
+                <div class="subscription-details">
+                    <p><strong>Selected Plan:</strong> <span id="selectedPlanName"></span></p>
+                    <p><strong>Amount:</strong> ₹<span id="selectedPlanAmount"></span></p>
+                </div>
+            </div>
+            
+            <button class="subscribe-btn" id="proceedToPayment">
+                <i class="fas fa-lock"></i> Proceed to Secure Payment
+            </button>
+        </section>
+        
+        <!-- Video Section -->
+        <section class="video-section">
+            <h2>See TraderLog in Action</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/sMC2QRZTV8Q" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+            
+        <!-- Testimonials Section -->
+        <div class="testimonials">
+            <h2>What Our Traders Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"TraderLog's analytics helped me identify my emotional trading patterns. I've become consistently profitable and increased my returns by 35% in just 3 months."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <span class="author-name">Rajesh Kumar</span>
+                            <span class="author-location">Mumbai, India</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"The AI insights pointed out weaknesses I never noticed. My win rate improved from 52% to 68% after implementing TraderLog's suggestions."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <span class="author-name">Priya Sharma</span>
+                            <span class="author-location">Delhi, India</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"As a full-time trader, TraderLog saves me hours of journaling. The behavioral insights transformed my trading discipline and increased my profits."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <span class="author-name">Michael Johnson</span>
+                            <span class="author-location">New York, USA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <footer>
             <p>© 2023 TraderLog. All rights reserved.</p>
@@ -858,7 +952,7 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div>
             <div class="loading-spinner"></div>
-            <div class="loading-text">Processing your subscription...</div>
+            <div class="loading-text">Processing your payment...</div>
         </div>
     </div>
     
@@ -869,13 +963,13 @@
             <div class="modal-icon">
                 <i class="fas fa-check-circle"></i>
             </div>
-            <h2 id="modalTitle">Subscription Successful!</h2>
+            <h2 id="modalTitle">Payment Successful!</h2>
             <div id="modalMessage">
                 <p>Thanks for signing up for TraderLog!</p>
                 <div class="subscription-details" id="subscriptionDetails">
-                    <p><strong>Subscription ID:</strong> <span id="subId"></span></p>
-                    <p><strong>Plan:</strong> Early User Special</p>
-                    <p><strong>Amount:</strong> ₹95/month</p>
+                    <p><strong>Transaction ID:</strong> <span id="subId"></span></p>
+                    <p><strong>Plan:</strong> <span id="successPlanName"></span></p>
+                    <p><strong>Amount:</strong> ₹<span id="successPlanAmount"></span></p>
                     <p><strong>Affiliate:</strong> <span id="affiliateId"></span></p>
                 </div>
                 <p>You'll get your login details and Trading Journal access in your email within 12 hours.</p>
@@ -887,257 +981,280 @@
         </div>
     </div>
 
+    <!-- NEW: Failure Modal -->
+    <div id="failureModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeFailureModalBtn">&times;</span>
+            <div class="modal-icon" style="color: var(--danger);">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h2>Payment Failed</h2>
+            <div id="failureModalMessage">
+                <p>Your payment has failed. If any amount was deducted, it will be refunded within 7 business days.</p>
+                <p>If you do not receive the refund, please email your payment screenshot & details to: <strong>Traderlog.cc@gmail.com</strong></p>
+            </div>
+            <button class="modal-btn" id="failureModalCloseBtn" style="background: var(--gray);">
+                Close
+            </button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ===== AFFILIATE TRACKING SYSTEM =====
-            // 1. Get affiliate ID from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const affiliateId = urlParams.get('affiliate') || urlParams.get('ref') || urlParams.get('utm_source');
             
-            // 2. Store affiliate ID in localStorage (expires in 30 days)
             if (affiliateId) {
                 localStorage.setItem('traderlog_affiliate', affiliateId);
                 localStorage.setItem('traderlog_affiliate_timestamp', Date.now());
                 console.log('Affiliate stored:', affiliateId);
             }
             
-            // 3. Get stored affiliate ID if exists
             const storedAffiliate = localStorage.getItem('traderlog_affiliate');
             const affiliateTimestamp = localStorage.getItem('traderlog_affiliate_timestamp');
             
-            // Check if stored affiliate is still valid (within 30 days)
             const affiliateAge = affiliateTimestamp ? (Date.now() - affiliateTimestamp) : 0;
             const validAffiliate = storedAffiliate && affiliateAge < (30 * 24 * 60 * 60 * 1000);
             
-            // The affiliate to use for this transaction
             const activeAffiliate = validAffiliate ? storedAffiliate : affiliateId;
             
-            // Display affiliate in success modal if exists
             if (activeAffiliate) {
                 document.getElementById('affiliateId').textContent = activeAffiliate;
             } else {
                 document.querySelector('#affiliateId').closest('p').style.display = 'none';
             }
             
-            // ===== EXISTING FUNCTIONALITY =====
-            // Mobile navigation toggle
+            // ===== UI ELEMENTS =====
             const mobileNavToggle = document.getElementById('mobileNavToggle');
             const mobileNav = document.getElementById('mobileNav');
             const mobileNavClose = document.getElementById('mobileNavClose');
-            
-            if (mobileNavToggle && mobileNav) {
-                mobileNavToggle.addEventListener('click', function() {
-                    mobileNav.classList.add('active');
-                });
-            }
-            
-            if (mobileNavClose) {
-                mobileNavClose.addEventListener('click', function() {
-                    mobileNav.classList.remove('active');
-                });
-            }
-            
-            // Modal functionality
-            const modal = document.getElementById('successModal');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const modalActionBtn = document.getElementById('modalActionBtn');
-            
-            function showSuccessModal(subscriptionId) {
-                if (subscriptionId) {
-                    document.getElementById('subId').textContent = subscriptionId;
-                }
-                modal.style.display = 'flex';
-            }
-            
-            function closeModal() {
-                modal.style.display = 'none';
-            }
-            
-            if (closeModalBtn) {
-                closeModalBtn.addEventListener('click', closeModal);
-            }
-            
-            if (modalActionBtn) {
-                modalActionBtn.addEventListener('click', closeModal);
-            }
-            
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            // Form elements
+            const successModal = document.getElementById('successModal');
+            const closeSuccessModalBtn = document.getElementById('closeModalBtn');
+            const successModalActionBtn = document.getElementById('modalActionBtn');
+            const failureModal = document.getElementById('failureModal');
+            const closeFailureModalBtn = document.getElementById('closeFailureModalBtn');
+            const failureModalCloseBtn = document.getElementById('failureModalCloseBtn');
             const userForm = document.getElementById('userForm');
-            const offerBtn = document.getElementById('offer-btn');
             const proceedBtn = document.getElementById('proceedToPayment');
             const formError = document.getElementById('formError');
             const loadingOverlay = document.getElementById('loadingOverlay');
             
-            // Show user form when payment button is clicked
+            // ===== MOBILE NAVIGATION =====
+            if (mobileNavToggle && mobileNav) {
+                mobileNavToggle.addEventListener('click', () => {
+                    mobileNav.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            if (mobileNavClose) {
+                mobileNavClose.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // ===== MODAL LOGIC =====
+            function showSuccessModal(transactionId, planName, planAmount) {
+                if (transactionId) {
+                    document.getElementById('subId').textContent = transactionId;
+                }
+                document.getElementById('successPlanName').textContent = planName;
+                document.getElementById('successPlanAmount').textContent = planAmount;
+                successModal.style.display = 'flex';
+
+                const modalMessage = document.getElementById('modalMessage');
+                successModalActionBtn.style.display = 'none';
+
+                const redirectMessage = document.createElement('p');
+                redirectMessage.id = 'redirect-message';
+                redirectMessage.style.marginTop = '20px';
+                redirectMessage.style.fontSize = '1rem';
+                redirectMessage.innerHTML = 'You will be redirected to the login page in <span id="redirect-timer">3</span> seconds...';
+                
+                const existingRedirectMsg = document.getElementById('redirect-message');
+                if (existingRedirectMsg) existingRedirectMsg.remove();
+                
+                modalMessage.appendChild(redirectMessage);
+
+                const timerSpan = document.getElementById('redirect-timer');
+                let countdown = 3;
+
+                const timerInterval = setInterval(() => {
+                    countdown--;
+                    if (timerSpan) timerSpan.textContent = countdown;
+                    if (countdown <= 0) clearInterval(timerInterval);
+                }, 1000);
+
+                setTimeout(() => {
+                    window.location.href = 'https://journal-traderlog.netlify.app/';
+                }, 3000);
+            }
+
+            function showFailureModal() {
+                failureModal.style.display = 'flex';
+            }
+            
+            function closeModal(modalElement) {
+                if (modalElement) {
+                    modalElement.style.display = 'none';
+                }
+            }
+
+            if (closeSuccessModalBtn) closeSuccessModalBtn.addEventListener('click', () => closeModal(successModal));
+            if (successModalActionBtn) successModalActionBtn.addEventListener('click', () => closeModal(successModal));
+            if (closeFailureModalBtn) closeFailureModalBtn.addEventListener('click', () => closeModal(failureModal));
+            if (failureModalCloseBtn) failureModalCloseBtn.addEventListener('click', () => closeModal(failureModal));
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === successModal) closeModal(successModal);
+                if (event.target === failureModal) closeModal(failureModal);
+            });
+
+            // ===== PLAN SELECTION & FORM LOGIC =====
+            let selectedPlan = null;
+            
+            const pricingCards = document.querySelectorAll('.pricing-card');
+            pricingCards.forEach(card => {
+                card.querySelector('.subscribe-btn').addEventListener('click', function() {
+                    selectedPlan = {
+                        id: card.dataset.plan,
+                        amount: parseInt(card.dataset.amount),
+                        description: card.dataset.desc
+                    };
+                    showUserForm();
+                });
+            });
+            
             function showUserForm() {
+                if (!selectedPlan) {
+                    alert("Please select a plan first.");
+                    return;
+                }
+                document.getElementById('selectedPlanName').textContent = selectedPlan.description;
+                document.getElementById('selectedPlanAmount').textContent = selectedPlan.amount;
                 userForm.style.display = 'block';
                 userForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             
-            // Payment buttons
-            const paymentButtons = [
-                document.getElementById('offer-btn'),
-                document.getElementById('start-journaling'),
-                document.getElementById('avail-now'),
-                document.getElementById('start-now')
-            ];
-            
-            paymentButtons.forEach(button => {
-                if (button) {
-                    button.addEventListener('click', showUserForm);
-                }
-            });
-            
-            // Form validation
+            // ===== FORM VALIDATION =====
             function validateForm() {
                 const name = document.getElementById('userName').value.trim();
                 const email = document.getElementById('userEmail').value.trim();
                 const phone = document.getElementById('userPhone').value.trim();
-                
-                // Reset errors
-                document.querySelectorAll('.form-error').forEach(el => {
-                    el.style.display = 'none';
-                });
-                formError.style.display = 'none';
-                
                 let isValid = true;
+
+                document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
                 
-                // Validate name
                 if (name === '') {
                     document.getElementById('nameError').style.display = 'block';
                     isValid = false;
                 }
-                
-                // Validate email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                     document.getElementById('emailError').style.display = 'block';
                     isValid = false;
                 }
-                
-                // Validate phone
-                const phoneRegex = /^[0-9]{10}$/;
-                if (!phoneRegex.test(phone)) {
+                if (!/^[0-9]{10}$/.test(phone)) {
                     document.getElementById('phoneError').style.display = 'block';
                     isValid = false;
                 }
-                
                 return isValid;
             }
-            
-            // Create subscription via Netlify function
-            async function createSubscription() {
+
+            // ===== PAYMENT CREATION =====
+            async function createPayment() {
                 try {
-                    // Show loading overlay
                     loadingOverlay.style.display = 'flex';
                     
-                    // Get user info
-                    const name = document.getElementById('userName').value.trim();
-                    const email = document.getElementById('userEmail').value.trim();
-                    const phone = document.getElementById('userPhone').value.trim();
-                    
-                    // Include affiliate ID in the request
                     const requestData = {
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        plan_id: "plan_R0lfqw7y18smql",
-                        affiliate_id: activeAffiliate || "direct"
+                        name: document.getElementById('userName').value.trim(),
+                        email: document.getElementById('userEmail').value.trim(),
+                        phone: document.getElementById('userPhone').value.trim(),
+                        affiliate_id: activeAffiliate || "direct",
+                        plan_id: selectedPlan.id === 'monthly' ? "plan_R76nWkRQGGkReO" : undefined,
+                        amount: selectedPlan.amount * 100,
+                        description: selectedPlan.description
                     };
                     
-                    // Log for debugging
-                    console.log("Sending subscription request:", requestData);
+                    const endpoint = selectedPlan.id === 'monthly' 
+                        ? '/.netlify/functions/create-subscription' 
+                        : '/.netlify/functions/create-order';
                     
-                    // Call Netlify function
-                    const response = await fetch('/.netlify/functions/create-subscription', {
+                    const response = await fetch(endpoint, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(requestData)
                     });
                     
                     const data = await response.json();
+                    if (!response.ok) throw new Error(data.error || 'Failed to create payment');
                     
-                    if (!response.ok) {
-                        throw new Error(data.error || 'Failed to create subscription');
-                    }
-                    
-                    // Initialize Razorpay with the new subscription ID
                     const options = {
-                        key: "rzp_live_7oJpadczIYphAM",
-                        subscription_id: data.id,
+                        key: "rzp_live_R76huJF9dytj1q",
                         name: "TraderLog",
-                        description: "Early User Subscription (₹95/month)",
-                        currency: "INR",
+                        description: selectedPlan.description,
                         prefill: {
-                            name: name,
-                            email: email,
-                            contact: phone
+                            name: requestData.name,
+                            email: requestData.email,
+                            contact: requestData.phone
                         },
-                        theme: {
-                            color: "#8b5cf6"
-                        },
-                        // Include affiliate ID in payment notes
+                        theme: { color: "#8b5cf6" },
                         notes: {
                             affiliate_id: activeAffiliate || "direct",
-                          user_name: name,
-                          user_email: email,
-                          user_phone: phone
+                            user_name: requestData.name,
+                            user_email: requestData.email,
+                            user_phone: requestData.phone,
+                            plan_id: selectedPlan.id
                         },
                         handler: function(response) {
-                            // Hide loading overlay immediately when payment succeeds
                             loadingOverlay.style.display = 'none';
-                            
-                            // Show success modal with subscription details
-                            document.getElementById('subId').textContent = response.razorpay_subscription_id;
-                            showSuccessModal(response.razorpay_subscription_id);
+                            const transactionId = selectedPlan.id === 'monthly' 
+                                ? response.razorpay_subscription_id 
+                                : response.razorpay_payment_id;
+                            showSuccessModal(transactionId, selectedPlan.description, selectedPlan.amount);
                         },
-                        modal: {
-                            ondismiss: function() {
-                                // Hide loading if user closes Razorpay modal
-                                loadingOverlay.style.display = 'none';
-                            }
-                        },
+                        modal: { ondismiss: () => loadingOverlay.style.display = 'none' },
                         hooks: {
                             onPaymentFailed: function(response) {
                                 loadingOverlay.style.display = 'none';
-                                formError.textContent = "Payment failed: " + 
-                                    (response.error.description || "Please try again");
-                                formError.style.display = 'block';
+                                showFailureModal();
                             }
                         }
                     };
+                    
+                    if (selectedPlan.id === 'monthly') {
+                        options.subscription_id = data.id;
+                    } else {
+                        options.order_id = data.id;
+                        options.amount = data.amount;
+                    }
                     
                     const rzp = new Razorpay(options);
                     rzp.open();
                     
                 } catch (error) {
-                    console.error("Subscription error:", error);
+                    console.error("Payment error:", error);
                     formError.textContent = error.message || 'An error occurred. Please try again.';
                     formError.style.display = 'block';
                     loadingOverlay.style.display = 'none';
                 }
             }
             
-            // Proceed to payment button
             if (proceedBtn) {
-                proceedBtn.addEventListener('click', function(e) {
+                proceedBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    
-                    if (validateForm()) {
-                        createSubscription();
-                    }
+                    if (validateForm()) createPayment();
                 });
             }
         });
     </script>
 </body>
-
 </html>
