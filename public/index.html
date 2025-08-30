@@ -35,11 +35,11 @@
         
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background-color: var(--darker);
+            background-image: radial-gradient(ellipse at top, var(--dark), var(--darker) 60%);
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
-            background-attachment: fixed;
         }
         
         h1, h2, h3, h4, h5 {
@@ -430,25 +430,13 @@
             color: var(--gray-light);
         }
 
-        /* NEW STYLES FOR YOUTUBE VIDEO */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            overflow: hidden;
-            max-width: 900px;
-            margin: 2rem auto 0;
+        /* NEW STYLES FOR SUPADEMO */
+        .supademo-wrapper {
+            max-width: 900px; 
+            margin: 0 auto; /* Centering the block */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+            overflow: hidden; /* Ensures the border-radius is applied to the iframe */
         }
         
         /* How It Works */
@@ -2058,15 +2046,10 @@
         <div class="container">
             <div class="section-title">
                 <h2>See It In Action</h2>
-                <p>Watch a quick overview of how TraderLog helps you improve.</p>
+                <p>Explore how to customize your journal with this interactive demo</p>
             </div>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/sMC2QRZTV8Q" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                </iframe>
+            <div class="supademo-wrapper">
+                <div style="position: relative; box-sizing: content-box; max-height: 80vh; max-height: 80svh; width: 100%; aspect-ratio: 1.7321571772253408; padding: 40px 0 40px 0;"><iframe src="https://app.supademo.com/embed/cme61v0e01wi8h3pylhrahd2p?embed_v=2&utm_source=embed" loading="lazy" title="How to customize TraderLog's Journal theme and settings" allow="clipboard-write" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
             </div>
         </div>
     </section>
@@ -2365,27 +2348,27 @@
             const comparisonData = [
                 {
                     scenario: "Win Rate & RR",
-                    traditional: "- Win rate: 43.27% - Avg RR: 0.82 - Std Dev RR: 0.36",
+                    traditional: "Win rate: 43.27% - Avg RR: 0.82 - Std Dev RR: 0.36",
                     traderlog: "<b>Losses are 2x your wins</b> Cut losses sooner or target higher RR. Action: tighter stops | Goal: RR ≥ 1.5"
                 },
                 {
                     scenario: "Lot Size Behavior",
-                    traditional: "- Avg lot: 1.27 - Max lot: 3.54 - Variance: 1.73",
+                    traditional: "Avg lot: 1.27 - Max lot: 3.54 - Variance: 1.73",
                     traderlog: "<b>You upsize after wins</b> Use fixed lot or capped scaling to limit drawdown."
                 },
                 {
                     scenario: "Strategy Success",
-                    traditional: "- SR WR: 70.18% - Breakout WR: 19.84% - Avg RR (all): 0.65.",
+                    traditional: "SR WR: 70.18% - Breakout WR: 19.84% - Avg RR (all): 0.65.",
                     traderlog: "<b>SR wins 70% — Breakout wins 20%</b> Shift allocation to SR; pause Breakouts until fixed."
                 },
                 {
                     scenario: "Profit Factor",
-                    traditional: "- Profit factor: 0.84 - Gross profit: $2,356 - Gross loss: $2,804.",
+                    traditional: "Profit factor: 0.84 - Gross profit: $2,356 - Gross loss: $2,804.",
                     traderlog: "<b>You lose more than you make</b> Stop low-edge setups; tighten exits & sizing."
                 },
                 {
                     scenario: "Behavioral Pattern",
-                    traditional: "- Max DD: -12.43% - Recovery trades: 18 - Avg hold: 14m 22s.",
+                    traditional: "Max DD: -12.43% - Recovery trades: 18 - Avg hold: 14m 22s.",
                     traderlog: "<b>You chase losses after drawdowns</b> Auto-pause after big loss; review plan before next trade."
                 }
             ];
@@ -2580,4 +2563,3 @@
     </script>
     </body>
 </html>
-
