@@ -670,8 +670,8 @@
             async function activateSubscription(userData) {
                 // *** FIX: The fetch URL has been changed from a relative path to the absolute URL of the Journaling Tool's backend function.
                 // *** This ensures the free trial request is sent to the correct service that handles Firebase user creation.
-                // *** Replace <YOUR_JOURNAL_APP_NETLIFY_URL> with the actual deployed URL of your Journaltesting-main application.
-                const correctEndpoint = 'https:https://journaltesting.netlify.app/.netlify/functions/create-subscription';
+                // *** The URL below should be the live URL for your Journaling Tool's Netlify deployment.
+                const correctEndpoint = 'https://journaltesting.netlify.app/.netlify/functions/create-subscription';
                 
                 const response = await fetch(correctEndpoint, {
                     method: 'POST',
@@ -757,3 +757,4 @@
     </script>
 </body>
 </html>
+
