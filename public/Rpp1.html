@@ -291,7 +291,7 @@
         }
         .form-group input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
         .form-error { color: var(--danger); font-size: 14px; margin-top: 5px; display: none; }
-        .form-help-text { font-size: 13px; color: var(--gray); margin-top: 6px; } /* NEW STYLE */
+        .form-help-text { font-size: 13px; color: var(--gray); margin-top: 6px; }
         .subscription-details { background: var(--dark); padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: left; font-size: 0.9rem; }
         .subscription-details p { margin: 0; }
         .subscription-details strong { color: var(--light); }
@@ -338,12 +338,12 @@
         .modal p { margin-bottom: 20px; color: var(--gray-light); }
         .modal-btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
         .modal-btn:hover { background: var(--primary-dark); }
-        #redirect-message { font-size: 1rem; color: var(--gray-light); margin-top: 20px; } /* MODIFIED: Style for redirection message */
+        #redirect-message { font-size: 1rem; color: var(--gray-light); margin-top: 20px; }
         
         /* Responsive */
         @media (max-width: 992px) {
             .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
-            .pricing-card.popular { transform: scale(1); order: -1; /* Move popular card to top on mobile */ }
+            .pricing-card.popular { transform: scale(1); order: -1; }
             .pricing-card { max-width: 400px; margin: 0 auto; }
             .hero-section h1 { font-size: 2.8rem; }
         }
@@ -405,7 +405,6 @@
                 </div>
 
                 <div class="pricing-grid">
-                    <!-- Monthly Plan -->
                     <div class="pricing-card">
                         <h3>Monthly</h3>
                         <div class="price">
@@ -420,7 +419,6 @@
                         <button class="btn btn-secondary plan-btn" data-plan="monthly" data-amount="199" data-desc="Monthly Subscription">Choose Monthly</button>
                     </div>
 
-                    <!-- 6 Months Plan (Most Popular) -->
                     <div class="pricing-card popular">
                         <div class="popular-badge">Most Popular</div>
                         <h3>6 Months</h3>
@@ -437,7 +435,6 @@
                         <button class="btn plan-btn" data-plan="six-months" data-amount="999" data-desc="6 Months Access">Choose 6 Months</button>
                     </div>
 
-                    <!-- 1 Year Plan -->
                     <div class="pricing-card">
                         <h3>1 Year</h3>
                         <div class="price">
@@ -468,7 +465,6 @@
                     <div class="form-group">
                         <label for="userEmail">Email Address</label>
                         <input type="email" id="userEmail" placeholder="Enter your email">
-                        <!-- MODIFICATION: Added email usage message -->
                         <p class="form-help-text">This email will be used for logging in to access the Journal.</p>
                         <div class="form-error" id="emailError">Please enter a valid email</div>
                     </div>
@@ -487,7 +483,7 @@
         </main>
     </div>
 
-    <!-- Video Section -->
+    <!-- Other Sections (Unchanged) -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -499,8 +495,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
     <section class="section" id="features">
         <div class="container">
             <div class="section-header">
@@ -541,8 +535,6 @@
             </div>
         </div>
     </section>
-    
-    <!-- FAQ Section -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -588,8 +580,7 @@
             <h2 id="modalTitle">Payment Successful!</h2>
             <div id="modalMessage">
                 <p>Thanks for signing up! Check your email for a magic link to log in.</p>
-                <!-- MODIFICATION: Added countdown and redirection message -->
-                <p id="redirect-message">Redirecting to the login page in <span id="countdown">4</span> seconds...</p>
+                <p id="redirect-message">You can now close this page and log in to the journal.</p>
             </div>
         </div>
     </div>
@@ -624,24 +615,17 @@
             const failureModal = document.getElementById('failureModal');
             let selectedPlan = {};
             
-            // ----- MODAL & REDIRECT LOGIC (MODIFIED) -----
+            // ----- MODAL LOGIC -----
             function showSuccessModal(transactionId, planName, planAmount) {
                 document.getElementById('modalTitle').textContent = planAmount === 0 ? 'Trial Started Successfully!' : 'Payment Successful!';
+                
+                // *** FIX: REMOVED AUTOMATIC REDIRECT AND UPDATED MESSAGE FOR CLARITY ***
+                const redirectMessage = document.getElementById('redirect-message');
+                if (redirectMessage) {
+                    redirectMessage.innerHTML = `You can now close this tab and log in to the journal app. If you're not logged in automatically, please refresh the journal page.`;
+                }
+
                 successModal.style.display = 'flex';
-
-                let countdown = 4; // Countdown from 4 seconds
-                const countdownElement = document.getElementById('countdown');
-                countdownElement.textContent = countdown;
-
-                const interval = setInterval(() => {
-                    countdown--;
-                    countdownElement.textContent = countdown;
-                    if (countdown <= 0) {
-                        clearInterval(interval);
-                        // Redirect to the trading journal login page
-                        window.location.href = 'https://journaltesting.netlify.app/';
-                    }
-                }, 1000);
             }
 
             function showFailureModal(message = 'An unknown error occurred. Please contact support.') { 
@@ -685,8 +669,8 @@
 
             // ----- CORE LOGIC: ACTIVATING THE SUBSCRIPTION -----
             async function activateSubscription(userData) {
-                const journalAppUrl = 'https://journaltesting.netlify.app'; 
-                const response = await fetch(`${journalAppUrl}/.netlify/functions/create-subscription`, {
+                // *** FIX: Using a relative path for Netlify Functions for portability ***
+                const response = await fetch(`/.netlify/functions/create-subscription`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData),
@@ -747,7 +731,7 @@
                 rzp.open();
             });
             
-             // ----- Other UI Listeners (unchanged) -----
+             // ----- Other UI Listeners (Unchanged) -----
             document.querySelectorAll('.faq-question').forEach(item => {
                 item.addEventListener('click', () => {
                     const activeItem = document.querySelector('.faq-item.active');
@@ -766,3 +750,4 @@
     </script>
 </body>
 </html>
+
