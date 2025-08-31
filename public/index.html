@@ -2214,7 +2214,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 TraderLog. All rights reserved. Designed for new traders to master their craft.</p>
+                <p>&copy; 2025 TraderLog. All rights reserved. Designed for new traders to master their craft.</p>
             </div>
         </div>
     </footer>
@@ -2544,19 +2544,23 @@
                 if(offerContainer) offerContainer.classList.remove('active');
             });
 
-            // Affiliate Tracking Script
+            // =============================================================
+            // ===== AFFILIATE TRACKING SCRIPT (FIXED) =====
+            // =============================================================
             const urlParams = new URLSearchParams(window.location.search);
             const affiliateId = urlParams.get('affiliate') || urlParams.get('ref') || urlParams.get('utm_source');
             
             if (affiliateId) {
-                localStorage.setItem('affiliate_id', affiliateId);
-                localStorage.setItem('affiliate_timestamp', Date.now());
+                // FIX: Standardize localStorage key to 'traderlog_affiliate'
+                localStorage.setItem('traderlog_affiliate', affiliateId);
+                localStorage.setItem('traderlog_affiliate_timestamp', Date.now());
             }
             
             document.querySelectorAll('.tracked-payment-link').forEach(link => {
                 try {
                     const url = new URL(link.href, window.location.origin);
-                    const storedAffiliateId = localStorage.getItem('affiliate_id');
+                    // FIX: Read from the standardized localStorage key
+                    const storedAffiliateId = localStorage.getItem('traderlog_affiliate');
                     
                     if (storedAffiliateId) {
                         url.searchParams.set('affiliate', storedAffiliateId);
@@ -2580,4 +2584,3 @@
     </script>
     </body>
 </html>
-
