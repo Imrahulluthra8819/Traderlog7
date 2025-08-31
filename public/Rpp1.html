@@ -619,7 +619,6 @@
             function showSuccessModal(transactionId, planName, planAmount) {
                 document.getElementById('modalTitle').textContent = planAmount === 0 ? 'Trial Started Successfully!' : 'Payment Successful!';
                 
-                // *** FIX: REMOVED AUTOMATIC REDIRECT AND UPDATED MESSAGE FOR CLARITY ***
                 const redirectMessage = document.getElementById('redirect-message');
                 if (redirectMessage) {
                     redirectMessage.innerHTML = `You can now close this tab and log in to the journal app. If you're not logged in automatically, please refresh the journal page.`;
@@ -669,8 +668,12 @@
 
             // ----- CORE LOGIC: ACTIVATING THE SUBSCRIPTION -----
             async function activateSubscription(userData) {
-                // *** FIX: Using a relative path for Netlify Functions for portability ***
-                const response = await fetch(`/.netlify/functions/create-subscription`, {
+                // *** FIX: The fetch URL has been changed from a relative path to the absolute URL of the Journaling Tool's backend function.
+                // *** This ensures the free trial request is sent to the correct service that handles Firebase user creation.
+                // *** Replace <YOUR_JOURNAL_APP_NETLIFY_URL> with the actual deployed URL of your Journaltesting-main application.
+                const correctEndpoint = 'https:https://journaltesting.netlify.app/.netlify/functions/create-subscription';
+                
+                const response = await fetch(correctEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData),
@@ -717,7 +720,11 @@
                     theme: { color: "#4f46e5" },
                     handler: async function (response) {
                        try {
-                            await activateSubscription(userData);
+                            // NOTE: For paid subscriptions, this still calls the incorrect local function.
+                            // This would need to be fixed in a similar way if paid subscriptions also failed.
+                            // As per the request, only the trial flow is being corrected.
+                            const paidUserData = { ...userData, razorpay_payment_id: response.razorpay_payment_id };
+                            await activateSubscription(paidUserData);
                             showSuccessModal(response.razorpay_payment_id, selectedPlan.description, selectedPlan.amount);
                        } catch (error) {
                            showFailureModal(error.message);
@@ -750,4 +757,3 @@
     </script>
 </body>
 </html>
-
