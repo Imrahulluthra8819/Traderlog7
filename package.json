@@ -1,7 +1,6 @@
 {
-  "name": "traderlog",
-  "version": "1.0.0",
   "dependencies": {
+    "firebase-admin": "^12.1.1",
     "razorpay": "^2.8.6"
   }
 }
