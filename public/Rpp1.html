@@ -749,7 +749,7 @@
                         email: document.getElementById('userEmail').value.trim(),
                         phone: document.getElementById('userPhone').value.trim(),
                         affiliate_id: activeAffiliate || "direct",
-                        plan_id: selectedPlan.id, // FIX: This now sends the plan ID for ALL plans.
+                        plan_id: selectedPlan.id === 'monthly' ? "plan_R76nWkRQGGkReO" : selectedPlan.id,
                         amount: selectedPlan.amount * 100,
                         description: selectedPlan.description
                     };
