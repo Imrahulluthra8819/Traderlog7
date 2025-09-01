@@ -1,9 +1,23 @@
 [build]
-  functions = "netlify/functions"
   publish = "public"
-  command = "npm install"
+  functions = "netlify/functions"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[functions]
+  # This tells Netlify to install dependencies from the package.json
+  # inside the functions directory.
+  node_bundler = "esbuild"
+  included_files = ["node_modules/**"]
+
+# This command ensures dependencies are installed in the right place before building.
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+[build.processing.images]
+  compress = true
